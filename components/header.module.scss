@@ -1,0 +1,51 @@
+@import "../styles/variables.module";
+
+.navbar {
+    background-color: $color-black;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    padding-top: $size-22;
+    padding-bottom: $size-22;
+
+    &__links {
+        color: $color-white;
+        text-transform: uppercase;
+        font-weight: lighter;
+        display: grid;
+        grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
+        grid-gap: 4.2rem;
+        margin: 0 auto;
+    }
+
+    &__text {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        img:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__search {
+        margin: auto auto;
+    }
+
+    &__search:hover {
+        cursor: pointer;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%);
+        grid-column-gap: 12rem;
+    }
+
+    &__button {
+        justify-self: flex-end;
+    }
+
+}
+
