@@ -1,4 +1,21 @@
 @import "../styles/variables.module";
+$grid-gap: 4.2rem;
+
+@media (max-width: $cellphone) {
+    $grid-gap: 4.2rem;
+}
+
+@media (max-width: $tablet) and (min-width: $cellphone) {
+    $grid-gap: 4.2rem;
+}
+
+@media (max-width: $laptop) and (min-width: $tablet) {
+    $grid-gap: 3.2rem;
+}
+
+@media (max-width: $desktop) and (min-width: $laptop) {
+    $grid-gap: 3.2rem;
+}
 
 .navbar {
     position: sticky;
@@ -18,8 +35,14 @@
         font-weight: lighter;
         display: grid;
         grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
-        grid-gap: 4.2rem;
+        grid-gap: $grid-gap;
         margin: 0 auto;
+
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 
     &__text {
@@ -42,7 +65,7 @@
 
     &__container {
         display: grid;
-        grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%);
+        grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
         grid-column-gap: 12rem;
     }
 

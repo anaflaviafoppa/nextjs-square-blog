@@ -5,14 +5,26 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    screens: {
+      'cell': '576px',
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
     container: {
       padding: {
         DEFAULT: '1.6rem',
-        sm: '1.6rem',
-        lg: '8rem',
-        xl: '8rem',
+        'cell': '1.6rem',
+        'laptop': '8rem',
+        'desktop':'8rem',
         '2xl': '10rem',
       },
+      gap: {
+        'cell': '576px',
+        'tablet': '3rem',
+        'laptop': '3.2rem',
+        'desktop': '4.2rem',
+      }
     },
     extend: {
       colors: {
