@@ -1,13 +1,16 @@
 @import "../styles/variables.module";
 
 .navbar {
-    background-color: $color-black;
-    display: flex;
-    justify-content: space-between;
     position: sticky;
     top: 0;
-    padding-top: $size-22;
-    padding-bottom: $size-22;
+
+    &__fixed {
+        background-color: $color-black;
+        display: flex;
+        justify-content: space-between;
+        padding-top: $size-22;
+        padding-bottom: $size-22;
+    }
 
     &__links {
         color: $color-white;
@@ -46,6 +49,33 @@
     &__button {
         justify-self: flex-end;
     }
+
+    &__extra {
+        background-color: $color-white;
+    }
+
+    &__list {
+        display: flex;
+        justify-content: center;
+
+        p {
+            font-weight: 300;
+            transition: $transition;
+        }
+
+        p:hover {
+            cursor: pointer;
+            font-weight: normal;
+        }
+    }
+
+    &__input {
+
+    }
+
+
+
+
 
 }
 

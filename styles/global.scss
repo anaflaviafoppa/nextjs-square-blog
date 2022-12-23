@@ -1,8 +1,10 @@
 @import "variables.module";
 @import "buttons.module";
+@import "inputs.module";
 
 html {
   font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 .container {

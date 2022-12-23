@@ -1,0 +1,48 @@
+@import "variables.module";
+
+input {
+  padding-bottom: $size-8;
+  background-color: $color-transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+
+}
+
+
+.input__primary {
+  border-bottom: 1px solid $color-black;
+  color: $color-black;
+}
+
+.input__primary::placeholder {
+  color: $color-balance-gray;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.input__primary[type=search] {
+  background: url('../public/images/search-icon-grey.png') top left no-repeat;
+  background-size: 2rem;
+  padding-left: 3.6rem;
+}
+
+.input__primary[type=search]::-webkit-search-cancel-button{
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  background: url('../public/images/xbutton.png') no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input__primary[type=search]::-webkit-search-cancel-button:hover{
+  cursor: pointer;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: .3;
+  pointer-events: all;
+}
+
