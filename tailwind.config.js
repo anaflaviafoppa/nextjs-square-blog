@@ -5,12 +5,18 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    screens: {
+      'cell': '576px',
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
     container: {
       padding: {
         DEFAULT: '1.6rem',
-        sm: '1.6rem',
-        lg: '8rem',
-        xl: '8rem',
+        'cell': '1.6rem',
+        'laptop': '8rem',
+        'desktop':'8rem',
         '2xl': '10rem',
       },
     },
@@ -32,10 +38,12 @@ module.exports = {
         tight: 1.2,
       },
       fontSize: {
-        '5xl': '2.5rem',
-        '6xl': '2.75rem',
-        '7xl': '4.5rem',
-        '8xl': '6.25rem',
+        sm: '1.2rem',
+        base: '1.6rem',
+        '5xl': '1.8rem',
+        '6xl': '2.4rem',
+        '7xl': '4.8rem',
+        '8xl': '4.8rem',
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',

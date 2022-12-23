@@ -1,3 +1,8 @@
+//BR:
+$cellphone: '640px';
+$tablet: '768px';
+$laptop: '1024px';
+$desktop: '1480px';
 
 // color
 $color-yellow: #FEBD1D;
@@ -11,5 +16,18 @@ $color-transparent: rgba(0,0,0,0);
 
 
 // sizes:
-$size-80: 80px;
-$size-32: 32px;
+$size-80: 8rem;
+$size-52: 5.2rem;
+$size-32: 3.2rem;
+$size-22: 2.2rem;
+$size-16: 1.6rem;
+$size-8: 0.8rem;
+
+
+//Transitions
+$transition: all ease-in-out 0.3s;
+
+
+//border
+$border: solid 1px $color-yellow;
+$border-gray: solid 1px $color-light-gray;

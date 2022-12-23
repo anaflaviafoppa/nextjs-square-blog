@@ -1,0 +1,64 @@
+@import "variables.module";
+
+button {
+  outline: none;
+  border: none;
+  height: $size-52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  padding: 0 $size-16;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+button a {
+  text-decoration: none;
+}
+
+button:hover {
+  border: none;
+  cursor: pointer;
+  transition: $transition;
+}
+
+.button__primary,.button__secondary:hover {
+  padding-left: $size-16;
+  padding-right: $size-16;
+  background-color: $color-yellow;
+  color: $color-black;
+}
+
+.button__secondary {
+  border: $border;
+  color: $color-yellow;
+  background-color: $color-transparent;
+}
+
+.button__primary-dark {
+  color: $color-yellow;
+  background-color: $color-black;
+}
+
+.button__primary-rounded {
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius: $size-8;
+  color: $color-black;
+}
+
+// HOVER
+.button__primary:hover,
+.button__primary-rounded:hover,
+.button__primary-dark:hover  {
+  background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+}
+
+.button__icon {
+  margin-right: $size-16;
+  min-width: fit-content;
+}
