@@ -12,7 +12,7 @@ export const CarouselUnit = ({posts}) => {
             <Carousel>
                 {posts.map(({node}, index) => (
                     <Carousel.Item
-                        interval={15000}
+                        interval={30000}
                     >
                         <CarouselItem
                             key={node.slug}
