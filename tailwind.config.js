@@ -42,7 +42,7 @@ module.exports = {
         base: '1.6rem',
         '5xl': '1.8rem',
         '6xl': '2.4rem',
-        '7xl': '4.8rem',
+        '7xl': '4rem',
         '8xl': '4.8rem',
       },
       boxShadow: {

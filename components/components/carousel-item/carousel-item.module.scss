@@ -1,0 +1,12 @@
+@import '../styles/variables.module';
+
+.carousel__slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 65rem;
+
+  &_title {
+    color: $color-yellow;
+  }
+
+}

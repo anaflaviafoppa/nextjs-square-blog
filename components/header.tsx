@@ -69,19 +69,19 @@ export default function Header() {
                         </div>
                     </Container>
                     </div>
-                    <div className={styles.navbar__extra}>
+                    {/*<div className={styles.navbar__extra}>
                         <Container>
-                            {/*<div className={'py-5 ' + styles.navbar__list}>
+                            <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
                                         <p className="text-base mr-52" key={index}>{tag}</p>
                                     )
                                 )}
-                            </div>*/}
+                            </div>
                             <div className="py-16 px-96">
                                 <input type="search" className="text-base input__primary" required name="search" placeholder="Encontre no blog"/>
                             </div>
                         </Container>
-                    </div>
+                    </div>*/}
 
             </nav>
         </>

@@ -1,4 +1,5 @@
-import { AppProps } from 'next/app'
+import { AppProps } from 'next/app';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/index.css'
 import '../styles/global.scss';
 

@@ -5,16 +5,20 @@ import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
 import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
+import {CarouselUnit} from '../components/widgets/carousel/carouselUnit';
 
 export default function Index({ allPosts: { edges }, preview }) {
   const heroPost = edges[0]?.node
-  const morePosts = edges.slice(1)
+    const carouselPost = edges.slice(0,3);
+  const morePosts = edges.slice(3);
+
 
   return (
     <Layout preview={preview}>
       <Head>
         <title>Bom de Beer Blog</title>
       </Head>
+        <CarouselUnit posts={carouselPost}></CarouselUnit>
       <Container>
         {heroPost && (
           <HeroPost
