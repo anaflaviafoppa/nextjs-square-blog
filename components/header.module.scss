@@ -1,21 +1,6 @@
 @import "../styles/variables.module";
 $grid-gap: 4.2rem;
-
-@media (max-width: $cellphone) {
-    $grid-gap: 4.2rem;
-}
-
-@media (max-width: $tablet) and (min-width: $cellphone) {
-    $grid-gap: 4.2rem;
-}
-
-@media (max-width: $laptop) and (min-width: $tablet) {
-    $grid-gap: 3.2rem;
-}
-
-@media (max-width: $desktop) and (min-width: $laptop) {
-    $grid-gap: 3.2rem;
-}
+$grid-column-gap: 12rem;
 
 .navbar {
     position: sticky;
@@ -23,8 +8,6 @@ $grid-gap: 4.2rem;
 
     &__fixed {
         background-color: $color-black;
-        display: flex;
-        justify-content: space-between;
         padding-top: $size-22;
         padding-bottom: $size-22;
     }
@@ -57,6 +40,7 @@ $grid-gap: 4.2rem;
 
     &__search {
         margin: auto auto;
+        min-width: fit-content;
     }
 
     &__search:hover {
@@ -64,9 +48,9 @@ $grid-gap: 4.2rem;
     }
 
     &__container {
-        display: grid;
-        grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
-        grid-column-gap: 12rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     &__button {
@@ -92,7 +76,20 @@ $grid-gap: 4.2rem;
         }
     }
 
-    &__input {
+    @media (max-width: $cellphone) {
+
+    }
+
+    @media (max-width: $tablet) and (min-width: $cellphone) {
+
+    }
+
+    @media (max-width: $laptop) and (min-width: $tablet) {
+
+    }
+
+
+    @media (max-width: $desktop) and (min-width: $laptop) {
 
     }
 

@@ -9,6 +9,11 @@ button {
   justify-content: center;
   font-weight: lighter;
   padding: 0 $size-16;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 button a {
@@ -22,6 +27,8 @@ button:hover {
 }
 
 .button__primary,.button__secondary:hover {
+  padding-left: $size-16;
+  padding-right: $size-16;
   background-color: $color-yellow;
   color: $color-black;
 }
@@ -53,4 +60,5 @@ button:hover {
 
 .button__icon {
   margin-right: $size-16;
+  min-width: fit-content;
 }

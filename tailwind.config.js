@@ -19,12 +19,6 @@ module.exports = {
         'desktop':'8rem',
         '2xl': '10rem',
       },
-      gap: {
-        'cell': '576px',
-        'tablet': '3rem',
-        'laptop': '3.2rem',
-        'desktop': '4.2rem',
-      }
     },
     extend: {
       colors: {
