@@ -10,12 +10,14 @@ export default function Header() {
     const styleTop = {
         background: backgroundGradient,
         position: 'fixed',
-        width: '100vw'
+        width: '100vw',
+        transition: 'all 0.5s ease'
     };
 
     const styleConsistent = {
         background: backgroundConsistent,
         position: 'sticky',
+        transition: 'all 0.5s ease',
         top: 0
     };
 
@@ -25,7 +27,7 @@ export default function Header() {
     useEffect(() => {
         changeBackground();
         window.addEventListener("scroll", changeBackground)
-    })
+    }, [])
 
     const changeBackground = () => {
         if (window.scrollY <= 600) {

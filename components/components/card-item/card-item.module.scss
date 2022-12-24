@@ -1,0 +1,18 @@
+@import '../styles/variables.module';
+
+
+.item {
+
+  &__image {
+    background-color: lightgoldenrodyellow;
+    height: $size-268;
+  }
+
+  &__description {
+    padding: $size-24;
+    height:  $size-268;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+}
