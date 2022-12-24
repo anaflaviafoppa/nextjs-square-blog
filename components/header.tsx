@@ -6,8 +6,21 @@ import {useEffect, useState} from 'react';
 export default function Header() {
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
+
+    const styleTop = {
+        background: backgroundGradient,
+        position: 'fixed',
+        width: '100vw'
+    };
+
+    const styleConsistent = {
+        background: backgroundConsistent,
+        position: 'sticky',
+        top: 0
+    };
+
     const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
-    const [background, setBackground] = useState(backgroundGradient);
+    const [styleHeader, setStyleHeader] = useState<any>(styleTop);
 
     useEffect(() => {
         changeBackground();
@@ -16,16 +29,16 @@ export default function Header() {
 
     const changeBackground = () => {
         if (window.scrollY <= 600) {
-            setBackground(backgroundGradient)
+            setStyleHeader(styleTop)
         } else {
-            setBackground(backgroundConsistent)
+            setStyleHeader(styleConsistent)
         }
     }
 
     return (
         <>
             <nav className={styles.navbar}>
-                <div className={styles.navbar__fixed} style={{background: background}}>
+                <div className={styles.navbar__fixed} style={styleHeader}>
                     <Container>
                         <div className={styles.navbar__container}>
                             <Image

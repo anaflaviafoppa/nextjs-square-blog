@@ -1,5 +1,5 @@
 import Alert from './alert'
-import Footer from './footer'
+import Footer from './components/footer/footer'
 import Meta from './meta'
 import Header from './header';
 
