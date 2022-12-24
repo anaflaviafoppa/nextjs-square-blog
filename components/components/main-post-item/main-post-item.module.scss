@@ -1,0 +1,44 @@
+@import "./../styles/variables.module";
+
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: $size-560;
+
+
+  &__revert {
+    grid-row: 1;
+  }
+
+  &__content {
+    padding-top: $size-32;
+    padding-bottom: $size-32;
+  }
+
+  &__content h2 {
+    text-transform: uppercase;
+    display: flex;
+    grid-column: auto;
+    align-items: baseline;
+  }
+
+  &__image {
+    background-color: lightgoldenrodyellow;
+  }
+
+  &__revert &__image {
+    grid-row: 1;
+  }
+
+  &__description {
+    margin-top: $size-40;
+    margin-bottom: $size-40;
+  }
+
+  &__description h2 {
+    margin-bottom: $size-40;
+  }
+
+
+}

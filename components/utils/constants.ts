@@ -8,3 +8,8 @@ export enum Alignment {
     START = 'start',
     END = 'end'
 }
+
+export enum Order {
+    REVERT= 'revert',
+    NORMAL = 'normal'
+}

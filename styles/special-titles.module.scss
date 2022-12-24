@@ -1,0 +1,19 @@
+@import "variables.module";
+
+.title__border {
+  border-bottom: $border;
+  padding-bottom: $size-8;
+  max-width: $size-560;
+  margin-bottom: $size-8;
+
+  h3 {
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &_container span {
+    font-size: $size-14;
+    color: $color-gray;
+    font-weight: bold;
+  }
+}
