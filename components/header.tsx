@@ -1,13 +1,31 @@
 import Image from 'next/image';
 import Container from './container';
 import styles from './header.module.scss';
+import {useEffect, useState} from 'react';
 
 export default function Header() {
+    const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
+    const backgroundConsistent = '#2A2A2A';
     const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
+    const [background, setBackground] = useState(backgroundGradient);
+
+    useEffect(() => {
+        changeBackground();
+        window.addEventListener("scroll", changeBackground)
+    })
+
+    const changeBackground = () => {
+        if (window.scrollY <= 600) {
+            setBackground(backgroundGradient)
+        } else {
+            setBackground(backgroundConsistent)
+        }
+    }
+
     return (
         <>
             <nav className={styles.navbar}>
-                <div className={styles.navbar__fixed}>
+                <div className={styles.navbar__fixed} style={{background: background}}>
                     <Container>
                         <div className={styles.navbar__container}>
                             <Image

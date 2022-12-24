@@ -13,6 +13,7 @@ export const CarouselUnit = ({posts}) => {
                 {posts.map(({node}, index) => (
                     <Carousel.Item
                         interval={30000}
+                        key={node.slug}
                     >
                         <CarouselItem
                             key={node.slug}

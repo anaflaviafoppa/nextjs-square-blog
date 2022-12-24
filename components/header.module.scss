@@ -11,7 +11,7 @@ $grid-column-gap: 12rem;
         /*background-color: $color-black;*/
         padding-top: $size-22;
         padding-bottom: $size-22;
-        background: linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%);
+        transition: $transition;
     }
 
     &__links {
