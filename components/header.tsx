@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from './container';
+import Container from './containers/container/container';
 import styles from './header.module.scss';
 import {useEffect, useState} from 'react';
 

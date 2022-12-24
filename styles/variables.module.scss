@@ -15,13 +15,17 @@ $color-balance-gray: #898989;
 $color-transparent: rgba(0,0,0,0);
 $color-black-transparent: rgba(255, 255, 255, 0.5);
 
+$line-height-multiplier: 1.25;
 
 // sizes:
+$size-120: 12rem;
+$size-100: 10rem;
 $size-80: 8rem;
 $size-52: 5.2rem;
 $size-32: 3.2rem;
 $size-22: 2.2rem;
 $size-16: 1.6rem;
+$size-12: 1.2rem;
 $size-8: 0.8rem;
 
 
@@ -32,3 +36,6 @@ $transition: all ease-in-out 0.3s;
 //border
 $border: solid 1px $color-yellow;
 $border-gray: solid 1px $color-light-gray;
+
+//Hover effect:
+$hover-effect: linear-gradient(rgb(0 0 0/20%) 0 0);

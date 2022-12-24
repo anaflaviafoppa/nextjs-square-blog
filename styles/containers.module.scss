@@ -1,0 +1,27 @@
+//Container
+.container {
+  max-width: 100vw;
+  padding-right: 8rem;
+  padding-left: 8rem;
+}
+
+//Tag Container
+.tag__container {
+  display: flex;
+  align-items: center;
+
+  &-center {
+    @extend .tag__container;
+    justify-content: center;
+  }
+
+  &-end {
+    @extend .tag__container;
+    justify-content: flex-end;
+  }
+
+  &-start {
+    @extend .tag__container;
+    justify-content: flex-start;
+  }
+}

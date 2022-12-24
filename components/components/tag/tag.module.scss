@@ -1,0 +1,37 @@
+@import '../styles/variables.module';
+
+
+.tag {
+  padding: $size-8;
+  text-transform: uppercase;
+  margin-right: $size-16;
+
+  &__primary, &__secondary:hover {
+    background: $color-light-gray;
+    color: $color-black;
+  }
+
+  &__secondary {
+    background: $color-transparent;
+    border: $border-gray;
+    color: $color-balance-gray;
+  }
+
+  &__selected {
+    background: $color-yellow;
+    border: $border;
+    color: $color-black;
+  }
+
+  &__clickable:hover,
+  &__clickable:hover {
+    background-image: $hover-effect;
+    cursor: pointer;
+    transition: $transition;
+  }
+
+  &__selected:hover {
+    background: $color-yellow;
+    border: $border;
+  }
+}

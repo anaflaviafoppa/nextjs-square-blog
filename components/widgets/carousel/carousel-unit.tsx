@@ -22,12 +22,6 @@ export const CarouselUnit = ({posts}) => {
                             slug={node.slug}
                             index={index}
                         />
-                        {/*key={node.slug}
-                        title={node.title}
-                        coverImage={node.featuredImage}
-                        slug={node.slug}
-                        index={index}*/}
-
                     </Carousel.Item>
                 ))}
 

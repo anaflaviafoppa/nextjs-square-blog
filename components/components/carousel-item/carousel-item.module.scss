@@ -9,4 +9,13 @@
     color: $color-yellow;
   }
 
+  &__container {
+    padding-left: calc(($size-80 * 2) + $size-32);
+    padding-right: $size-120;
+  }
+
+  &__container_button {
+    padding-right: $size-100;
+  }
+
 }
