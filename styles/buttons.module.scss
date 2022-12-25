@@ -7,13 +7,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: lighter;
   padding: 0 $size-16;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  font-weight: 300;
 }
 
 button a {

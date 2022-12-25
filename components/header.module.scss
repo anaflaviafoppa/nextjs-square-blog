@@ -5,11 +5,13 @@ $grid-column-gap: 12rem;
 .navbar {
     position: sticky;
     top: 0;
+    z-index: 9999;
 
     &__fixed {
-        background-color: $color-black;
+        /*background-color: $color-black;*/
         padding-top: $size-22;
         padding-bottom: $size-22;
+        transition: $transition;
     }
 
     &__links {

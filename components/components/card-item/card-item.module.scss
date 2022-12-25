@@ -1,0 +1,26 @@
+@import '../styles/variables.module';
+
+
+.item {
+
+  &__image {
+    background-color: lightgoldenrodyellow;
+    height: $size-268;
+  }
+
+  &__description {
+    padding: $size-24;
+    min-height:  $size-268;
+    display: flex;
+    flex-flow: row wrap;
+
+    p {
+      color: $color-gray;
+    }
+
+    span {
+      color: $color-balance-gray;
+    }
+  }
+
+}
