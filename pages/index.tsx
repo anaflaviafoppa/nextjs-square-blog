@@ -39,7 +39,6 @@ export default function Index({allPosts: {edges}, preview}) {
                         })}
                     </TagContainer>
                 </div>
-                <Cards items={morePosts} />
 
                 {/*{heroPost && (
           <HeroPost

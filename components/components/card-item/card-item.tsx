@@ -5,6 +5,7 @@ import Tag from '../tag/tag';
 import {Priority} from '../../utils/constants';
 import Date from '../../date';
 
+
 function CardItem({title, excerpt, date, slug, category}) {
     return (
         <div>
@@ -14,12 +15,11 @@ function CardItem({title, excerpt, date, slug, category}) {
                 </TagContainer>
             </div>
             <div className={style.item__description}>
-                <h2>{title}</h2>
+                <h3>{title}</h3>
                 <div dangerouslySetInnerHTML={{__html: excerpt}}/>
                 <span>
-                            <Date dateString={date}/>
-                        </span>
-
+                    <Date dateString={date}/>
+                </span>
             </div>
         </div>
     );
