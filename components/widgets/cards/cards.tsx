@@ -41,7 +41,7 @@ function Cards({items}) {
                 </div>
 
                 { countItems < items.length &&
-                    (<button onClick={() => addItems()} className="button__primary-dark">Veja Mais</button>)
+                    (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
                 }
             </Container>
 

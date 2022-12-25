@@ -10,6 +10,7 @@ import {Alignment, Priority} from '../components/utils/constants';
 import TagContainer from '../components/containers/tag-container/tag-container';
 import MainPosts from '../components/widgets/main-posts/main-posts';
 import Cards from '../components/widgets/cards/cards';
+import ImageSection from '../components/components/image-section/image-section';
 
 export default function Index({allPosts: {edges}, preview}) {
     const heroPost = edges[0]?.node
@@ -53,6 +54,7 @@ export default function Index({allPosts: {edges}, preview}) {
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
             </Container>
             <MainPosts items={mainPosts}/>
+            <ImageSection />
             <Cards items={morePosts} />
         </Layout>
     )

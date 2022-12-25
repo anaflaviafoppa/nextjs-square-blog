@@ -12,7 +12,8 @@
     padding: $size-24;
     min-height:  $size-268;
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
+    justify-content: space-between;
 
     p {
       color: $color-gray;
@@ -20,6 +21,7 @@
 
     span {
       color: $color-balance-gray;
+      font-weight: bold;
     }
   }
 

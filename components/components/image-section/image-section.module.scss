@@ -1,0 +1,13 @@
+.images {
+ &__container {
+   padding: 0 2rem;
+   display: grid;
+   grid-template-columns: repeat(9,1fr);
+   grid-gap: 4.3rem;
+
+   img {
+     max-height: 10rem;
+   }
+
+ }
+}

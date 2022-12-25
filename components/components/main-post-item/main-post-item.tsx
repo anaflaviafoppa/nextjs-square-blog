@@ -10,7 +10,7 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order}) {
     const className = order === Order.NORMAL ? '' : `${style.item__revert}`;
 
     return (
-        <section className={`${style.item} ${className}`}>
+        <div className={`${style.item} ${className}`}>
             <Container>
             <div className={style.item__content}>
                 <div>
@@ -39,7 +39,7 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order}) {
             <div className={style.item__image}>
 
             </div>
-        </section>
+        </div>
     );
 }
 

@@ -55,8 +55,16 @@ p{
 
 span {
   font-size: $size-12;
-  font-weight: bold;
+  font-weight: 300;
   line-height: calc($size-12 * $line-height-multiplier);
+}
+
+section {
+  margin-top: 4rem;
+}
+
+section:first-of-type {
+  margin-top: 0rem;
 }
 
 @media (min-width: 576px) {
