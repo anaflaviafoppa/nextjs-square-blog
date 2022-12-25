@@ -6,6 +6,8 @@ input {
   outline: none;
   border: none;
   width: 100%;
+  font-size: 1.6rem;
+  font-weight: lighter;
 
 }
 
@@ -19,6 +21,15 @@ input {
   color: $color-balance-gray;
   text-transform: uppercase;
   font-weight: 300;
+}
+
+.input__secondary {
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+}
+
+.input__secondary::placeholder {
+  color: $color-white;
 }
 
 .input__primary[type=search] {

@@ -11,7 +11,7 @@ function Cards({items}) {
     }
 
     return (
-        <section className={'mt-16 mb-16' + styles.cards}>
+        <section className={'mt-16 mb-16 ' + styles.cards}>
 
             <Container>
 

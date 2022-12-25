@@ -24,6 +24,10 @@ ol, li {
   padding: 0;
 }
 
+*:hover {
+  transition: $transition;
+}
+
 // Fonts:
 
 h1 {
@@ -44,7 +48,9 @@ h3 {
 }
 
 h4 {
-
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 2.2rem;
 }
 
 p{
