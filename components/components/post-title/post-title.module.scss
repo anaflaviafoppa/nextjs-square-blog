@@ -1,0 +1,11 @@
+@import "./../styles/variables.module";
+
+
+.post__title {
+  color: $color-yellow;
+  font-size: 6rem;
+  font-weight: 600;
+  line-height: 7.3rem;
+  letter-spacing: 0em;
+  margin: 0 auto;
+}

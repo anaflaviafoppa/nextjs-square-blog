@@ -55,14 +55,14 @@ h4 {
 
 p{
   font-size: $size-16;
-  font-weight: 400;
+  font-weight: lighter;
   line-height: 1.9rem;
 }
 
 span {
   font-size: $size-12;
   font-weight: 300;
-  line-height: calc($size-12 * $line-height-multiplier);
+  line-height: 1.5rem;
 }
 
 section {
