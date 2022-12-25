@@ -4,13 +4,16 @@ import styles from './underlined-title.module.scss';
 
 function UnderlinedTitle({title, date}) {
     return (
-        <div className={styles.title__container}>
+        <div className={'mb-16 ' + styles.title__container}>
             <div className={styles.title__border}>
                 <h3>{title}</h3>
             </div>
-            <span>
+            {
+                date && <span>
                             <Date dateString={date}/>
                         </span>
+            }
+
         </div>
     );
 }

@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import Container from '../../containers/container/container';
 import CardItem from '../../components/card-item/card-item';
 import styles from './cards.module.scss';
+import UnderlinedTitle from '../../components/underlined-title/underlined-title';
 
-function Cards({items}) {
-    const [countItems, setCountItems]  = useState(6);
+function Cards({items, title, maxPosts, isEnabledSeeMore}) {
+    const [countItems, setCountItems]  = useState(maxPosts);
 
     const addItems = (): void => {
         setCountItems(countItems + 3);
@@ -15,11 +16,7 @@ function Cards({items}) {
 
             <Container>
 
-                <div className="title__border_container mb-16">
-                    <div className="title__border">
-                        <h3>Veja Também</h3>
-                    </div>
-                </div>
+                <UnderlinedTitle title={title}  date={''}/>
                 <div className={styles.cards__container}>
                     {items.map(({node}, index) => {
                         if (index + 1 > countItems) {
@@ -40,7 +37,7 @@ function Cards({items}) {
                     })}
                 </div>
 
-                { countItems < items.length &&
+                { isEnabledSeeMore && countItems < items.length &&
                     (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
                 }
             </Container>

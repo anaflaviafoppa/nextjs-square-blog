@@ -55,7 +55,11 @@ export default function Index({allPosts: {edges}, preview}) {
             </Container>
             <MainPosts items={mainPosts}/>
             <ImageSection />
-            <Cards items={morePosts} />
+            <Cards items={morePosts}
+                   title={'Veja Também'}
+                   isEnabledSeeMore={true}
+                   maxPosts={6}
+            />
         </Layout>
     )
 }

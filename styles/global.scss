@@ -19,9 +19,12 @@ body::-webkit-scrollbar {
 }
 
 ol, li {
-  list-style: none;
   margin: 0;
   padding: 0;
+}
+
+* {
+
 }
 
 *:hover {
@@ -36,7 +39,7 @@ h1 {
 
 h2 {
   font-size: 4rem;
-  line-height: 4.8rem;
+  line-height: 150%;
   font-weight: 600;
 }
 
@@ -44,25 +47,25 @@ h3 {
   font-style: normal;
   font-weight: 600;
   font-size: 2.4rem;
-  line-height: 2.9rem;
+  line-height: 150%;
 }
 
 h4 {
   font-size: 1.8rem;
   font-weight: 300;
-  line-height: 2.2rem;
+  line-height: 150%;
 }
 
 p{
   font-size: $size-16;
   font-weight: 400;
-  line-height: 1.9rem;
+  line-height: 150%;
 }
 
 span {
   font-size: $size-12;
   font-weight: 300;
-  line-height: 1.5rem;
+  line-height: 150%;
 }
 
 @media (min-width: 576px) {
