@@ -23,7 +23,7 @@ import Weltenburger from '../../../public/images/brands/weltenburger.png';
 
 function ImageSection() {
     return (
-        <section className={styles.images}>
+        <section className={'section ' + styles.images}>
             <Container>
                 <div className="title__border_container mb-16">
                     <div className="title__border">

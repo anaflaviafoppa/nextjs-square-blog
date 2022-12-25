@@ -8,7 +8,7 @@ import styles from './carousel.module.scss';
 type Props = {};
 export const CarouselUnit = ({posts}) => {
     return (
-        <section className={styles.carousel}>
+        <div className={styles.carousel}>
             <Carousel>
                 {posts.map(({node}, index) => (
                     <Carousel.Item
@@ -26,6 +26,6 @@ export const CarouselUnit = ({posts}) => {
                 ))}
 
             </Carousel>
-        </section>
+        </div>
     );
 };

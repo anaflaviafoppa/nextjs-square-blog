@@ -55,7 +55,7 @@ h4 {
 
 p{
   font-size: $size-16;
-  font-weight: lighter;
+  font-weight: 400;
   line-height: 1.9rem;
 }
 
@@ -63,14 +63,6 @@ span {
   font-size: $size-12;
   font-weight: 300;
   line-height: 1.5rem;
-}
-
-section {
-  margin-top: 4rem;
-}
-
-section:first-of-type {
-  margin-top: 0rem;
 }
 
 @media (min-width: 576px) {
@@ -100,6 +92,7 @@ section:first-of-type {
   }*/
 }
 
+//CAROUSEL:
 .carousel-control-prev, .carousel-control-next {
   width: 11rem;
   justify-content: flex-end;
@@ -147,7 +140,6 @@ section:first-of-type {
   height: 1.6rem;
 }
 
-.container__body {
-  position: absolute;
-  top: 0;
+.section {
+  margin-top: 4rem;
 }

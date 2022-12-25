@@ -1,12 +1,18 @@
-import styles from './post-body.module.css'
+import styles from './post-body.module.scss'
+import PostBanner from './components/post-banner/post-banner';
+import UnderlinedTitle from './components/underlined-title/underlined-title';
 
-export default function PostBody({ content }) {
+
+export default function PostBody({ content,date, category }) {
   return (
-    <div className="max-w-2xl mx-auto">
+    <section className={'section ' + styles.post__body}>
+        <UnderlinedTitle date={date} title={category} />
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </div>
+
+        <PostBanner></PostBanner>
+    </section>
   )
 }

@@ -1,5 +1,9 @@
+@import "../styles/variables.module.scss";
+
 .content {
   @apply text-lg leading-relaxed;
+  max-width: 60%;
+  margin: 0 auto;
 }
 
 .content p,
@@ -60,7 +64,15 @@
 }
 
 .content blockquote {
-  @apply border-l-4 border-gray-500 bg-gray-200 italic ml-0 py-4 px-6;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+.content blockquote h4 span, .content blockquote h4 strong  {
+ /* @apply border-l-4 border-gray-500 bg-gray-200 italic ml-0 py-4 px-6;*/
+  font-size: $size-24;
+  line-height: 2.9rem;
+  font-weight: bold;
 }
 
 .content blockquote p {
@@ -73,4 +85,25 @@
 
 .content audio {
   @apply w-full;
+}
+
+.post__body {
+  padding: 4rem;
+}
+
+.content p {
+  color: $color-gray;
+  font-size: $size-16;
+}
+
+.content p span {
+  font-size: $size-16;
+  line-height: $size-24;
+  font-weight: 700;
+}
+
+.content p b {
+  color: $color-black;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
