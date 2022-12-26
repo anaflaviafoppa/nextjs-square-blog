@@ -3,11 +3,17 @@ import Footer from './components/footer/footer'
 import Meta from './meta'
 import Header from './header';
 
-export default function Layout({ preview, children }) {
+interface Props {
+    labels?: any,
+    preview: any,
+    children: any
+}
+
+export default function Layout({ preview, children, labels}: Props) {
   return (
     <>
       <Meta />
-        <Header />
+        <Header labels={labels} />
       <div>
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>

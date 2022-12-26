@@ -37,8 +37,6 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
     const data = await getAboutUsContent()
     const node = data?.edges[0].node;
 
-    console.log('aqui', node?.featuredImage.node.sourceUrl)
-
     return {
         props: {
             preview,

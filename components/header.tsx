@@ -2,22 +2,22 @@ import Image from 'next/image';
 import Container from './containers/container/container';
 import styles from './header.module.scss';
 import {useEffect, useState} from 'react';
+import {GetStaticProps} from 'next';
+import {getHeaderContent} from '../lib/api';
 
-export default function Header() {
+
+export default function Header({labels}) {
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
 
     const styleTop = {
         background: backgroundGradient,
         position: 'fixed',
-        width: '100vw',
-        transition: 'all 0.5s ease'
     };
 
     const styleConsistent = {
         background: backgroundConsistent,
         position: 'sticky',
-        transition: 'all 0.5s ease',
         top: 0
     };
 
@@ -37,6 +37,10 @@ export default function Header() {
         }
     }
 
+    const openCategories = (id: string) => {
+      console.log(id);
+    }
+
     return (
         <>
             <nav className={styles.navbar}>
@@ -51,31 +55,25 @@ export default function Header() {
                             />
 
                             <div className={styles.navbar__links}>
-                                <div className={styles.navbar__text}>
-                                    <p className="text-base mr-7">bom de fazer</p>
-                                    <Image
-                                        width={15.83}
-                                        height={9.17}
-                                        alt={`Arrow`}
-                                        src='/images/arrow.png'
-                                    />
-                                </div>
-                                <div className={styles.navbar__text}>
-                                    <p className="text-base">bom saber</p>
-                                </div>
-                                <div className={styles.navbar__text}>
-                                    <p className="text-base  mr-7">bom de copo</p>
-                                    <Image
-                                        width={15.83}
-                                        height={9.17}
-                                        alt={`Arrow`}
-                                        src='/images/arrow.png'
-                                    />
-                                </div>
-                                <div className={styles.navbar__text}>
-                                    <p className="text-base">bom de assistir</p>
-                                </div>
-
+                                {
+                                    labels?.map((label) => {
+                                        return (
+                                            <div className={styles.navbar__text} key={label.id}>
+                                                <p className="header-labels">{label.label}</p>
+                                                {
+                                                    !!label.children.length &&
+                                                    <Image
+                                                        width={15.83}
+                                                        height={9.17}
+                                                        alt={`Arrow`}
+                                                        src='/images/arrow.png'
+                                                        onClick={() => openCategories(label.id)}
+                                                    />
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
 
                             <div className={styles.navbar__search}>
@@ -106,7 +104,7 @@ export default function Header() {
                         <Container>
                             <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
-                                        <p className="text-base mr-52" key={index}>{tag}</p>
+                                        <p className="header-list " key={index}>{tag}</p>
                                     )
                                 )}
                             </div>
@@ -121,3 +119,5 @@ export default function Header() {
 
     )
 }
+
+

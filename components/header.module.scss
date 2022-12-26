@@ -3,21 +3,21 @@ $grid-gap: 4.2rem;
 $grid-column-gap: 12rem;
 
 .navbar {
+    width: 100vw;
     position: sticky;
     top: 0;
     z-index: 9999;
+    padding: 0;
 
     &__fixed {
         /*background-color: $color-black;*/
         padding-top: $size-22;
         padding-bottom: $size-22;
         transition: $transition;
+        width: inherit;
     }
 
     &__links {
-        color: $color-white;
-        text-transform: uppercase;
-        font-weight: lighter;
         display: grid;
         grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
         grid-gap: $grid-gap;
@@ -27,7 +27,6 @@ $grid-column-gap: 12rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-weight: lighter;
         }
     }
 
@@ -64,6 +63,10 @@ $grid-column-gap: 12rem;
         background-color: $color-white;
     }
 
+    &__logo {
+    }
+
+
     &__list {
         display: flex;
         justify-content: center;
@@ -78,27 +81,6 @@ $grid-column-gap: 12rem;
             font-weight: normal;
         }
     }
-
-    @media (max-width: $cellphone) {
-
-    }
-
-    @media (max-width: $tablet) and (min-width: $cellphone) {
-
-    }
-
-    @media (max-width: $laptop) and (min-width: $tablet) {
-
-    }
-
-
-    @media (max-width: $desktop) and (min-width: $laptop) {
-
-    }
-
-
-
-
 
 }
 

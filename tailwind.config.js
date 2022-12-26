@@ -36,7 +36,7 @@ module.exports = {
         tighter: '-.04em',
       },
       lineHeight: {
-        tight: 1.2,
+        tight: 1.5,
         large: 1.5,
       },
       fontSize: {

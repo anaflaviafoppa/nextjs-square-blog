@@ -1,5 +1,27 @@
+@import "variables.module";
+
+/*********SPECIAL TITLES******************/
 //Big titles
 //Yellow
 .big-title {
   @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-16
 }
+
+//NavBar Fonts:
+.header-labels {
+  @apply text-base text-[#FFFFFF] font-[300] leading-large uppercase mr-7
+}
+
+.header-list {
+  @apply text-base text-[#FFFFFF] font-[300] leading-large uppercase mr-52
+}
+
+/**************TAGS**********/
+h2 {
+  @apply text-7xl font-[600] leading-large mb-16
+}
+
+h3 {
+
+}
+
