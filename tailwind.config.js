@@ -27,6 +27,7 @@ module.exports = {
         'accent-7': '#333',
         success: '#0070f3',
         cyan: '#79FFE1',
+        'main-yellow': '#FEBD1D'
       },
       spacing: {
         28: '7rem',
@@ -36,6 +37,7 @@ module.exports = {
       },
       lineHeight: {
         tight: 1.2,
+        large: 1.5,
       },
       fontSize: {
         sm: '1.2rem',
@@ -44,6 +46,7 @@ module.exports = {
         '6xl': '2.4rem',
         '7xl': '4rem',
         '8xl': '4.8rem',
+        '9xl': '6rem'
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',

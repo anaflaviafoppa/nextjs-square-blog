@@ -1,0 +1,29 @@
+@import "variables.module";
+
+.container-x {
+  @apply px-32
+}
+
+.container-y {
+  @apply py-8
+}
+
+.container {
+  @apply px-32 py-8
+}
+
+.container-x-left {
+  @apply pl-32
+}
+
+.container-x-right {
+  @apply pr-32
+}
+
+.margin-80-bottom {
+  @apply mb-32
+}
+
+.padding-56-y {
+  @apply py-24
+}
