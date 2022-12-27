@@ -5,6 +5,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {GetStaticProps} from 'next';
 import {getHeaderContent} from '../lib/api';
 import {TagsModel} from './models/tags';
+import Link from 'next/link';
 
 
 export default function Header({labels}) {
@@ -130,7 +131,9 @@ export default function Header({labels}) {
                             {
                                 !!openMenu && tags &&  <div className={'py-5 ' + styles.navbar__list}>
                                     {tags.map((tag, index) => (
+                                        <Link href={tag.path}>
                                             <p className="header-list " key={index}>{tag.label}</p>
+                                        </Link>
                                         )
                                     )}
                                 </div>
