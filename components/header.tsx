@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Container from './containers/container/container';
 import styles from './header.module.scss';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {GetStaticProps} from 'next';
 import {getHeaderContent} from '../lib/api';
+import {TagsModel} from './models/tags';
 
 
 export default function Header({labels}) {
@@ -21,9 +22,13 @@ export default function Header({labels}) {
         top: 0
     };
 
-    const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
+    // const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
     const [styleHeader, setStyleHeader] = useState<any>(styleTop);
-
+    const [openMenu, setOpenMenu] = useState<boolean>(false);
+    const [openFilter, setOpenFilter] = useState<boolean>(false);
+    const [tags, setTags ] = useState<Array<TagsModel>>();
+    const [selectedLabelId, setSelectedLabelId] = useState<string>()
+    const categories = {};
     useEffect(() => {
         changeBackground();
         window.addEventListener("scroll", changeBackground)
@@ -37,8 +42,27 @@ export default function Header({labels}) {
         }
     }
 
-    const openCategories = (id: string) => {
-      console.log(id);
+    const getSelectedTags = (id: string) => {
+        if(categories[id]) {
+            setTags(categories[id]);
+        }
+        categories[id] =  labels.find(label => label.id === id)?.children;
+        setTags(categories[id]);
+    }
+
+    const handleClickCategories = (id:string): void => {
+        if(id === selectedLabelId && openMenu) {
+            setOpenMenu(!openMenu);
+        } else if(id !== selectedLabelId && openMenu) {
+            getSelectedTags(id);
+        } else if (id !== selectedLabelId && !openMenu) {
+            getSelectedTags(id);
+            setOpenMenu(!openMenu);
+        } else if(id === selectedLabelId && !openMenu) {
+            setOpenMenu(!openMenu);
+        }
+
+        setSelectedLabelId(id);
     }
 
     return (
@@ -58,17 +82,18 @@ export default function Header({labels}) {
                                 {
                                     labels?.map((label) => {
                                         return (
-                                            <div className={styles.navbar__text} key={label.id}>
-                                                <p className="header-labels">{label.label}</p>
+                                            <div className={styles.navbar__text} key={label.id} selected-label={(label.id === selectedLabelId && openMenu).toString()}>
+                                                <p className="header-labels" selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
                                                 {
                                                     !!label.children.length &&
-                                                    <Image
-                                                        width={15.83}
-                                                        height={9.17}
-                                                        alt={`Arrow`}
-                                                        src='/images/arrow.png'
-                                                        onClick={() => openCategories(label.id)}
-                                                    />
+                                                    <div  onClick={() => handleClickCategories(label.id)}>
+                                                        <Image
+                                                            width={15.83}
+                                                            height={9.17}
+                                                            alt={`Arrow`}
+                                                            src={label.id === selectedLabelId && openMenu ? '/images/arrow_yellow.png' : '/images/arrow.png'}
+                                                        />
+                                                    </div>
                                                 }
                                             </div>
                                         )
@@ -100,19 +125,25 @@ export default function Header({labels}) {
                         </div>
                     </Container>
                     </div>
-                    {/*<div className={styles.navbar__extra}>
-                        <Container>
-                            <div className={'py-5 ' + styles.navbar__list}>
-                                {tags.map((tag, index) => (
-                                        <p className="header-list " key={index}>{tag}</p>
-                                    )
-                                )}
-                            </div>
-                            <div className="py-16 px-96">
-                                <input type="search" className="text-base input__primary" required name="search" placeholder="Encontre no blog"/>
-                            </div>
-                        </Container>
-                    </div>*/}
+                    <div className={styles.navbar__extra}>
+                        <div className="container-x">
+                            {
+                                !!openMenu && tags &&  <div className={'py-5 ' + styles.navbar__list}>
+                                    {tags.map((tag, index) => (
+                                            <p className="header-list " key={index}>{tag.label}</p>
+                                        )
+                                    )}
+                                </div>
+                            }
+
+                            {
+                                !!openFilter &&
+                                <div className="py-16 px-96">
+                                    <input type="search" className="text-base input__primary" required name="search" placeholder="Encontre no blog"/>
+                                </div>
+                            }
+                        </div>
+                    </div>
 
             </nav>
         </>

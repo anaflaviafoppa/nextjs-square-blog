@@ -40,6 +40,12 @@ $grid-column-gap: 12rem;
         }
     }
 
+    &__text[selected-label=true] {
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
     &__search {
         margin: auto auto;
         min-width: fit-content;

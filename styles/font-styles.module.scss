@@ -12,8 +12,12 @@
   @apply text-base text-[#FFFFFF] font-[300] leading-large uppercase mr-7
 }
 
+.header-labels[selected-label=true] {
+  @apply text-[#FEBD1D] underline
+}
+
 .header-list {
-  @apply text-base text-[#FFFFFF] font-[300] leading-large uppercase mr-52
+  @apply text-base text-[#2A2A2A] font-[300] leading-large capitalize mr-52
 }
 
 /**************TAGS**********/
