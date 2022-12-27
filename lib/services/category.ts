@@ -1,6 +1,7 @@
-import CacheData from '../../services/cache-data';
+
 import {CacheLabels} from '../../components/utils/cache';
 import {getPostsByCategory} from '../controllers/category';
+import CacheData from '../cache-data';
 
 export async function getPostsByCategories(slug: string | string[]) {
     const postsCached = CacheData.get(CacheLabels.CATEGORY_POSTS + slug);

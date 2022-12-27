@@ -1,4 +1,4 @@
-import CacheData from '../../services/cache-data';
+import CacheData from '../cache-data';
 import {CacheLabels} from '../../components/utils/cache';
 import {getHeaderContent} from '../controllers/header';
 import {LabelModel} from '../../components/models/LabelModel';
