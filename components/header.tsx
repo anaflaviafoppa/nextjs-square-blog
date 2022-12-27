@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import Container from './containers/container/container';
 import styles from './header.module.scss';
-import {useCallback, useEffect, useState} from 'react';
-import {GetStaticProps} from 'next';
-import {getHeaderContent} from '../lib/api';
+import {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
 
@@ -27,7 +25,7 @@ export default function Header({labels}) {
     const [styleHeader, setStyleHeader] = useState<any>(styleTop);
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [openFilter, setOpenFilter] = useState<boolean>(false);
-    const [tags, setTags ] = useState<Array<TagsModel>>();
+    const [tags, setTags] = useState<Array<TagsModel>>();
     const [selectedLabelId, setSelectedLabelId] = useState<string>()
     const categories = {};
     useEffect(() => {
@@ -44,22 +42,22 @@ export default function Header({labels}) {
     }
 
     const getSelectedTags = (id: string) => {
-        if(categories[id]) {
+        if (categories[id]) {
             setTags(categories[id]);
         }
-        categories[id] =  labels.find(label => label.id === id)?.children;
+        categories[id] = labels.find(label => label.id === id)?.children;
         setTags(categories[id]);
     }
 
-    const handleClickCategories = (id:string): void => {
-        if(id === selectedLabelId && openMenu) {
+    const handleClickCategories = (id: string): void => {
+        if (id === selectedLabelId && openMenu) {
             setOpenMenu(!openMenu);
-        } else if(id !== selectedLabelId && openMenu) {
+        } else if (id !== selectedLabelId && openMenu) {
             getSelectedTags(id);
         } else if (id !== selectedLabelId && !openMenu) {
             getSelectedTags(id);
             setOpenMenu(!openMenu);
-        } else if(id === selectedLabelId && !openMenu) {
+        } else if (id === selectedLabelId && !openMenu) {
             setOpenMenu(!openMenu);
         }
 
@@ -83,11 +81,13 @@ export default function Header({labels}) {
                                 {
                                     labels?.map((label) => {
                                         return (
-                                            <div className={styles.navbar__text} key={label.id} selected-label={(label.id === selectedLabelId && openMenu).toString()}>
-                                                <p className="header-labels" selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
+                                            <div className={styles.navbar__text} key={label.id}
+                                                 selected-label={(label.id === selectedLabelId && openMenu).toString()}>
+                                                <p className="header-labels"
+                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
                                                 {
                                                     !!label.children.length &&
-                                                    <div  onClick={() => handleClickCategories(label.id)}>
+                                                    <div onClick={() => handleClickCategories(label.id)}>
                                                         <Image
                                                             width={15.83}
                                                             height={9.17}
@@ -125,28 +125,29 @@ export default function Header({labels}) {
                             </div>
                         </div>
                     </Container>
-                    </div>
-                    <div className={styles.navbar__extra}>
-                        <div className="container-x">
-                            {
-                                !!openMenu && tags &&  <div className={'py-5 ' + styles.navbar__list}>
-                                    {tags.map((tag, index) => (
+                </div>
+                <div className={styles.navbar__extra}>
+                    <Container>
+                        {
+                            !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
+                                {tags.map((tag, index) => (
                                         <Link href={tag.path}>
                                             <p className="header-list " key={index}>{tag.label}</p>
                                         </Link>
-                                        )
-                                    )}
-                                </div>
-                            }
+                                    )
+                                )}
+                            </div>
+                        }
 
-                            {
-                                !!openFilter &&
-                                <div className="py-16 px-96">
-                                    <input type="search" className="text-base input__primary" required name="search" placeholder="Encontre no blog"/>
-                                </div>
-                            }
-                        </div>
-                    </div>
+                        {
+                            !!openFilter &&
+                            <div className="py-16 px-96">
+                                <input type="search" className="text-base input__primary" required name="search"
+                                       placeholder="Encontre no blog"/>
+                            </div>
+                        }
+                    </Container>
+                </div>
 
             </nav>
         </>

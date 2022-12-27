@@ -76,6 +76,7 @@ $grid-column-gap: 12rem;
     &__list {
         display: flex;
         justify-content: center;
+        align-items: center;
 
         p {
             font-weight: 300;

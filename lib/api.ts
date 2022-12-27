@@ -1,6 +1,6 @@
 const API_URL = process.env.WORDPRESS_API_URL
 
-async function fetchAPI(query = '', {variables}: Record<string, any> = {}) {
+export async function fetchAPI(query = '', {variables}: Record<string, any> = {}) {
     const headers = {'Content-Type': 'application/json', 'Cache-Control': 's-maxage=86400'}
 
     if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
@@ -233,31 +233,3 @@ export async function getAboutUsContent() {
   `)
     return data?.pages
 }
-
-export async function getHeaderContent() {
-    const data = await fetchAPI(`
-    {
-      menus(where: {slug: "header"}) {
-        nodes {
-          id
-          databaseId
-          name
-          slug
-          menuItems(first: 50) {
-            edges {
-              node {
-                id
-                path
-                label
-                parentId
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-    return data?.menus
-}
-
-

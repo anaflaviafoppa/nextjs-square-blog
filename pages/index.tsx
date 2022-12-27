@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import Container from '../components/containers/container/container'
 import Layout from '../components/layout'
-import {getAllPostsForHome, getHeaderContent} from '../lib/api'
+import {getAllPostsForHome} from '../lib/api'
 import {CarouselUnit} from '../components/widgets/carousel/carousel-unit';
 import {useState} from 'react';
 import Tag from '../components/components/tag/tag';
@@ -11,6 +11,7 @@ import TagContainer from '../components/containers/tag-container/tag-container';
 import MainPosts from '../components/widgets/main-posts/main-posts';
 import Cards from '../components/widgets/cards/cards';
 import ImageSection from '../components/components/image-section/image-section';
+import {getLabels} from '../lib/services/header';
 
 export default function Index({allPosts: {edges},labels, preview}) {
     const heroPost = edges[0]?.node
@@ -67,43 +68,7 @@ export default function Index({allPosts: {edges},labels, preview}) {
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
     const allPosts = await getAllPostsForHome(preview);
-    const data = await getHeaderContent();
-
-
-
-    const node = data?.nodes[0];
-
-
-    const structureNavbar = node.menuItems?.edges;
-    console.log(structureNavbar);
-    let labels = [];
-    function addNewMainLabel({label, id}) {
-        labels.push({label, id, children: []});
-    }
-
-    function addCategory({label, parentId, path}) {
-        const parentIndex = labels.findIndex(item => item.id === parentId);
-        const parent = labels[parentIndex];
-        const children = parent.children;
-        children.push({label, path});
-        labels.splice(parentIndex, 1, {label: parent.label, id: parent.id, children});
-    }
-
-    structureNavbar.forEach(({node}) => {
-        const label = node.label;
-        const id = node.id;
-        const parentId = node.parentId;
-        const path = node.path;
-        if(!parentId) {
-            addNewMainLabel({label, id});
-        } else {
-            addCategory({label, path, parentId})
-        }
-    })
-
-
-
-    console.log('labels',labels)
+    const labels = await getLabels();
 
     return {
         props: {allPosts, labels, preview},
