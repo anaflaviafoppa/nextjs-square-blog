@@ -1,6 +1,4 @@
 import {fetchAPI} from '../api';
-import CacheData from '../../services/cache-data';
-import {CacheLabels} from '../../components/utils/cache';
 
 
 export async function getHeaderContent() {
