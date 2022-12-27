@@ -5,7 +5,7 @@ import Header from './header';
 
 interface Props {
     labels?: any,
-    preview: any,
+    preview?: any,
     children: any
 }
 

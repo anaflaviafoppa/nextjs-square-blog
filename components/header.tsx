@@ -4,9 +4,11 @@ import styles from './header.module.scss';
 import {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 
 export default function Header({labels}) {
+    const router = useRouter()
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
 
@@ -26,7 +28,8 @@ export default function Header({labels}) {
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [openFilter, setOpenFilter] = useState<boolean>(false);
     const [tags, setTags] = useState<Array<TagsModel>>();
-    const [selectedLabelId, setSelectedLabelId] = useState<string>()
+    const [selectedLabelId, setSelectedLabelId] = useState<string>();
+    const [findKey, setFindKey] = useState<string>();
     const categories = {};
     useEffect(() => {
         changeBackground();
@@ -65,7 +68,16 @@ export default function Header({labels}) {
     };
 
     const handleOpenFilter = (): void => {
+        setOpenMenu(false);
         setOpenFilter(!openFilter)
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        router.push({
+            pathname: '/search',
+            query: { key: findKey },
+        })
     }
 
     return (
@@ -74,12 +86,14 @@ export default function Header({labels}) {
                 <div className={styles.navbar__fixed} style={styleHeader}>
                     <Container>
                         <div className={styles.navbar__container}>
+                            <Link href='/'>
                             <Image
                                 width={120}
                                 height={52}
                                 alt={`Logo Bom de Beer`}
                                 src='/images/logo.png'
                             />
+                            </Link>
 
                             <div className={styles.navbar__links}>
                                 {
@@ -147,8 +161,13 @@ export default function Header({labels}) {
                         {
                             !!openFilter &&
                             <div className="py-16 px-96">
-                                <input type="search" className="text-base input__primary" required name="search"
+                                <form onSubmit={handleSubmit}>
+                                    <input type="search" className="text-base input__primary"
+                                           required
+                                           name="search"
+                                           onChange={event => setFindKey(event.target.value)}
                                        placeholder="Encontre no blog"/>
+                                </form>
                             </div>
                         }
                     </Container>

@@ -10,14 +10,12 @@ import MainPosts from '../../../components/widgets/main-posts/main-posts';
 
 function Category({labels, posts, preview}) {
     const router = useRouter();
-    debugger;
 
     return(
     <Layout preview={preview} labels={labels}>
         <Container>
             <MainPosts items={posts}/>
         </Container>
-
     </Layout>
 )
 ;
@@ -31,7 +29,6 @@ export const getStaticProps: GetStaticProps = async ({params,
 
 
     const posts = await getPostsByCategories(params.slug);
-
     const labels = await getLabels();
 
     return {
@@ -41,9 +38,6 @@ export const getStaticProps: GetStaticProps = async ({params,
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const allPosts = await getAllPostsWithSlug();
-
-
     return {
         paths: [],
         fallback: true,

@@ -1,11 +1,11 @@
 import {fetchAPI} from '../api';
 
-export async function getPostsByCategory(slug) {
+export async function getFilteredPosts(filterKey) {
     const data = await fetchAPI(`
     {
       posts(
-        where: {categoryName: "${slug}", orderby: {field: DATE, order: DESC}}
-        first: 10
+      where: {search: "${filterKey}", orderby: {field: DATE, order: DESC}}
+      first: 15
       ) {
         edges {
           node {
