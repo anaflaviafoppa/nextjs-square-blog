@@ -16,7 +16,7 @@ function MainPosts({items}) {
     return (
         <>
             {
-                items.map(({ node }, index) => {
+                items?.map(({ node }, index) => {
                     const order = checkOrder(index);
                     const tags = ['aves', 'bom de copo', 'comida de boteco'];
                     const category = 'BOM DE BEER';

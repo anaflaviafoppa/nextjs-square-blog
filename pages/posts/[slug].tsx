@@ -15,8 +15,9 @@ import {CMS_NAME} from '../../lib/constants'
 import TagContainer from '../../components/containers/tag-container/tag-container';
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
+import {getLabels} from '../../lib/services/header';
 
-export default function Post({post, posts, preview}) {
+export default function Post({post, posts, labels, preview}) {
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
@@ -27,7 +28,7 @@ export default function Post({post, posts, preview}) {
     }
 
     return (
-        <Layout preview={preview}>
+        <Layout preview={preview} labels={labels}>
             {router.isFallback ? (
                 <PostTitle>Loading…</PostTitle>
             ) : (
@@ -89,19 +90,22 @@ export const getStaticProps: GetStaticProps = async ({
                                                          previewData,
                                                      }) => {
     const data = await getPostAndMorePosts(params?.slug, preview, previewData)
+    const labels = await getLabels();
 
     return {
         props: {
             preview,
             post: data.post,
             posts: data.posts,
+            labels
         },
         revalidate: 10,
     }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const allPosts = await getAllPostsWithSlug()
+    const allPosts = await getAllPostsWithSlug();
+
 
     return {
         paths: allPosts.edges.map(({node}) => `/posts/${node.slug}`) || [],

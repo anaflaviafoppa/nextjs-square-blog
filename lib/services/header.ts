@@ -14,7 +14,7 @@ export async function getLabels() {
         const parentIndex = labels.findIndex(item => item.id === parentId);
         const parent = labels[parentIndex];
         const children = parent.children;
-        children.push({label, path});
+        children.push({label, path, parentLabel: parent.label});
         labels.splice(parentIndex, 1, {label: parent.label, id: parent.id, children});
     }
 
