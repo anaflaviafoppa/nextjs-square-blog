@@ -62,6 +62,10 @@ export default function Header({labels}) {
         }
 
         setSelectedLabelId(id);
+    };
+
+    const handleOpenFilter = (): void => {
+        setOpenFilter(!openFilter)
     }
 
     return (
@@ -108,6 +112,7 @@ export default function Header({labels}) {
                                     height={20.28}
                                     alt={`Search Icon`}
                                     src='/images/search-icon.png'
+                                    onClick={() => handleOpenFilter()}
                                 />
                             </div>
                             <div className={styles.navbar__button}>
