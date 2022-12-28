@@ -36,3 +36,21 @@ export async function getPostsByCategory(slug) {
 
     return data?.posts;
 }
+
+export async function getTitleFromPage(name: string | string[]) {
+    const data = await fetchAPI(`
+    {
+      pages(where: {name: "${name}"}) {
+        edges {
+          node {
+            slug
+            title
+            content
+          }
+        }
+      }
+    }
+    `);
+
+    return data?.pages;
+}

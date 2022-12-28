@@ -4,7 +4,11 @@
 //Big titles
 //Yellow
 .big-title {
-  @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-16
+  @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-8 uppercase
+}
+
+.big-subtitle {
+  @apply text-2xl text-[#FEBD1D] font-bold leading-[large] uppercase
 }
 
 //NavBar Fonts:

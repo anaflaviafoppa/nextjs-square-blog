@@ -1,0 +1,16 @@
+@import "../styles/variables.module";
+
+
+.layout {
+  &__title {
+    background: $color-brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      @apply text-[#FEBD1D] font-bold leading-[large];
+      font-size: 2rem;
+    }
+  }
+}

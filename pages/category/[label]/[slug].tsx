@@ -1,19 +1,15 @@
 import React from 'react';
 import {GetStaticPaths, GetStaticProps} from 'next';
 import {getLabels} from '../../../lib/services/header';
-import Layout from '../../../components/layout';
-import {getAllPostsWithSlug} from '../../../lib/api';
 import {useRouter} from 'next/router';
-import {getPostsByCategories} from '../../../lib/services/category';
-import Container from '../../../components/containers/container/container';
-import MainPosts from '../../../components/widgets/main-posts/main-posts';
+import {getPostsByCategories, getTitlesFromPage} from '../../../lib/services/category';
 import LayoutCategory from '../../../components/layouts/layout-category';
 
-function CategoryTag({labels, posts, preview}) {
+function CategoryTag({labels, posts,title, preview}) {
     const router = useRouter();
 
     return(
-        <LayoutCategory labels={labels} posts={posts} preview={preview}></LayoutCategory>
+        <LayoutCategory labels={labels} title={title} posts={posts} preview={preview}></LayoutCategory>
     )
 ;
 }
@@ -27,9 +23,10 @@ export const getStaticProps: GetStaticProps = async ({params,
 
     const posts = await getPostsByCategories(params.slug);
     const labels = await getLabels();
+    const title = await getTitlesFromPage(params.slug);
 
     return {
-        props: {labels, preview, posts},
+        props: {labels, preview, posts, title},
         revalidate: 10,
     }
 }
