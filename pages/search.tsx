@@ -15,11 +15,14 @@ const Search: NextPage<Props> = ({labels, posts}) => {
     return (
         <Layout labels={labels}>
             <Container>
-                <Cards items={posts}
-                       title={'Veja Também'}
-                       isEnabledSeeMore={true}
-                       maxPosts={6}
-                />
+                {
+                    !!posts.length && <Cards items={posts}
+                                    title={'Veja Também'}
+                                    isEnabledSeeMore={true}
+                                    maxPosts={6}
+                    />
+                }
+                <h1>No results</h1>
             </Container>
         </Layout>
     );

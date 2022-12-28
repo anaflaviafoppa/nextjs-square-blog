@@ -7,21 +7,18 @@ import {useRouter} from 'next/router';
 import {getPostsByCategories} from '../../../lib/services/category';
 import Container from '../../../components/containers/container/container';
 import MainPosts from '../../../components/widgets/main-posts/main-posts';
+import LayoutCategory from '../../../components/layouts/layout-category';
 
-function Category({labels, posts, preview}) {
+function CategoryTag({labels, posts, preview}) {
     const router = useRouter();
 
     return(
-    <Layout preview={preview} labels={labels}>
-        <Container>
-            <MainPosts items={posts}/>
-        </Container>
-    </Layout>
-)
+        <LayoutCategory labels={labels} posts={posts} preview={preview}></LayoutCategory>
+    )
 ;
 }
 
-export default Category;
+export default CategoryTag;
 
 export const getStaticProps: GetStaticProps = async ({params,
                                                          preview = false,
