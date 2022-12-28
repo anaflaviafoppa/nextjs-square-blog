@@ -17,3 +17,7 @@ export enum Order {
 export enum Pages {
     INITIAL = '/'
 }
+
+export enum TagsLabels {
+    ALL = 'all'
+}

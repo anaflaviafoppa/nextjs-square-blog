@@ -66,6 +66,7 @@ export async function getChildrenCategory(name: string | string[]) {
             nodes {
               name
               uri
+              slug
             }
           }
         }

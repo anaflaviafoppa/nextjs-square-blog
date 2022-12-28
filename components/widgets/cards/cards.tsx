@@ -23,7 +23,9 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
                             return;
                         }
 
-                        const category = 'BOM DE BEER';
+                        const tags = node?.categories?.nodes;
+                        const category = tags?.find(tag => !tag.parentId);
+
                         return (
                             <CardItem
                                 key={index}
@@ -32,6 +34,7 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
                                 date={node.date}
                                 slug={node.slug}
                                 category={category}
+                                featuredImage={node.featuredImage}
                             />
                         )
                     })}

@@ -39,7 +39,9 @@ export default function Header({labels}) {
             window.addEventListener("scroll", changeBackground)
         };
 
-    }, [])
+        console.log('UPDATE')
+
+    }, [findKey,selectedLabelId,openMenu, tags, openFilter ])
 
     const changeBackground = () => {
         if (window.scrollY <= 600) {

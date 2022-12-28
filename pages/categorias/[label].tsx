@@ -5,7 +5,7 @@ import {getLabels} from '../../lib/services/header';
 import styles from '../../components/layouts/layout-category.module.scss';
 import Container from '../../components/containers/container/container';
 import TagContainer from '../../components/containers/tag-container/tag-container';
-import {Alignment, Priority} from '../../components/utils/constants';
+import {Alignment, Priority, TagsLabels} from '../../components/utils/constants';
 import Link from 'next/link';
 import Tag from '../../components/components/tag/tag';
 import MainPosts from '../../components/widgets/main-posts/main-posts';
@@ -16,15 +16,17 @@ interface Props {
     posts: any,
     title: any,
     tags: any,
-    preview: any
+    preview: any,
+    selectedLabel: string
 }
 
-function Category({labels, posts,title, tags, preview}) {
+function Category({labels, posts,title, tags, selectedLabel, preview}) {
     const mainTest = title?.[0].node?.title;
     const content = title?.[0].node?.content;
     const tagsList = tags?.children?.nodes;
 
     const [listPost, setListPosts] = useState(posts);
+    const [selectedTag, setSelectedTag] = useState(selectedLabel);
 
 
     const handleFilterPerTag = async (findKey: string): Promise<void> => {
@@ -49,12 +51,12 @@ function Category({labels, posts,title, tags, preview}) {
                     <TagContainer alignment={Alignment.CENTER}>
                         <Link href={'/'}>
                             <Tag clickable={true} text={'Mostrar Todos'} type={Priority.PRIMARY}
-                                 isSelected={true}/>
+                                 isSelected={selectedLabel === TagsLabels.ALL}/>
                         </Link>
                         {tagsList?.map((tag, index) => {
                             return (
                                     <Tag clickable={true} key={index} text={tag.name} type={Priority.SECONDARY}
-                                         isSelected={false} onClickFunction={handleFilterPerTag} slug={tag.slug}/>
+                                         isSelected={selectedLabel === tag.slug} onClickFunction={handleFilterPerTag} slug={tag.slug}/>
                             )
                         })}
                     </TagContainer>
@@ -69,8 +71,6 @@ function Category({labels, posts,title, tags, preview}) {
 Category.getInitialProps = async ({query}) => {
     const findKey = query.key || query.label;
 
-    console.log('FIND----------------', query.key);
-
     const posts = await getPostsByCategories(findKey);
     const labels = await getLabels();
 
@@ -78,7 +78,9 @@ Category.getInitialProps = async ({query}) => {
 
     const tags = await getChildrenCategories(query.label);
 
-    return {posts, labels, title, tags}
+    const selectedLabel = query.key || TagsLabels.ALL;
+
+    return {posts, labels, title, tags, selectedLabel}
 }
 
 export default Category

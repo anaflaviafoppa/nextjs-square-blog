@@ -3,6 +3,8 @@ import MainPostItem from '../../components/main-post-item/main-post-item';
 import {Order} from '../../utils/constants';
 
 function MainPosts({items}) {
+
+
     function checkOrder(index) {
         const isEven = (index+1)%2 === 0;
         if (isEven) {
@@ -18,8 +20,8 @@ function MainPosts({items}) {
             {
                 items?.map(({ node }, index) => {
                     const order = checkOrder(index);
-                    const tags = ['aves', 'bom de copo', 'comida de boteco'];
-                    const category = 'BOM DE BEER';
+                    const tags = node?.categories?.nodes;
+                    const category = tags?.find(tag => !tag.parentId);
 
                     return (
                         <MainPostItem
@@ -31,6 +33,7 @@ function MainPosts({items}) {
                             tags={tags}
                             slug={node.slug}
                             order={order}
+                            featuredImage={node.featuredImage}
                         />
                     )
                 })

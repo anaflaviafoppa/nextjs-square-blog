@@ -7,15 +7,15 @@ export async function getLabels() {
     const labels: LabelModel[] = [];
 
     function addNewMainLabel({label, id, path}) {
-        labels.push({label, id, path,  children: []});
+        const newPath = '/' + path.split('/')[1];
+        labels.push({label, id, path: newPath,  children: []});
     }
 
     function addCategory({label, parentId, path}) {
         const parentIndex = labels.findIndex(item => item.id === parentId);
         const parent = labels[parentIndex];
         const children = parent.children;
-        const slug = path.split(parent.path)[1].split('/')[0];
-        debugger;
+        const slug = path.split(parent.path)[1].split('/')[1];
         children.push({label, path: parent.path, parentLabel: parent.label, slug});
         labels.splice(parentIndex, 1, {label: parent.label,
             path: parent.path, id: parent.id, children});

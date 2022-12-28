@@ -85,6 +85,12 @@ export async function getAllPostsForHome(preview) {
                 }
               }
             }
+            categories(first: 10) {
+              nodes {
+                name
+                parentId
+              }
+            }
           }
         }
       }

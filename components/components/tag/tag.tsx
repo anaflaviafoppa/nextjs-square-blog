@@ -12,10 +12,6 @@ interface Props {
     slug?: string
 }
 
-
-
-
-
 function Tag({text, type, clickable, isSelected, onClickFunction, slug}: Props) {
     const clickableClass = clickable ? `${styles.tag__clickable} ` : '';
     const priorityClass = type ===  Priority.PRIMARY ? `${styles.tag__primary} ` : `${styles.tag__secondary} `;
