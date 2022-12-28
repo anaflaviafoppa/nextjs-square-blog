@@ -80,13 +80,16 @@ export default function Header({labels}) {
         })
     }
 
-    const getPath = (path:string): string => {
+    const handleRedirectLink = (path:string) => {
         const hasCategory = path.includes('category');
-        if(hasCategory) {
-            return path;
+        let pathname = path;
+        if(!hasCategory) {
+            pathname = '/category' + path;
         }
 
-        return 'category' + path;
+       router.push({
+           pathname
+       });
     }
 
     return (
@@ -110,10 +113,11 @@ export default function Header({labels}) {
                                         return (
                                             <div className={styles.navbar__text} key={label.id}
                                                  selected-label={(label.id === selectedLabelId && openMenu).toString()}>
-                                                <Link href={getPath(label.path)}>
+
                                                     <p className="header-labels"
-                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{getPath(label.path)}  + {label.label}</p>
-                                                </Link>
+                                                       onClick={() => handleRedirectLink(label.path)}
+                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
+
                                                 {
                                                     !!label.children.length &&
                                                     <div onClick={() => handleClickCategories(label.id)}>
