@@ -1,7 +1,7 @@
 import CacheData from '../cache-data';
 import {CacheLabels} from '../../components/utils/cache';
 import {getHeaderContent} from '../controllers/header';
-import {LabelModel} from '../../components/models/LabelModel';
+import {LabelModel} from '../../components/models/label-model';
 
 export async function getLabels() {
     const labels: LabelModel[] = [];

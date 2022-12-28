@@ -24,7 +24,6 @@ export default function Header({labels}) {
         top: 0
     };
 
-    // const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
     const [styleHeader, setStyleHeader] = useState<any>(styleConsistent);
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [openFilter, setOpenFilter] = useState<boolean>(false);
@@ -38,8 +37,6 @@ export default function Header({labels}) {
             changeBackground();
             window.addEventListener("scroll", changeBackground)
         };
-
-        console.log('UPDATE')
 
     }, [findKey,selectedLabelId,openMenu, tags, openFilter ])
 
@@ -79,7 +76,7 @@ export default function Header({labels}) {
         setOpenFilter(!openFilter)
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         router.push({
             pathname: '/search',
@@ -105,11 +102,13 @@ export default function Header({labels}) {
 
     const handleRedirectSubCategory = (path: string, findKey: string) => {
         const pathname = verifyCategory(path);
+
         router.push({
             pathname,
             query: { key: findKey },
         })
     }
+
 
     return (
         <>

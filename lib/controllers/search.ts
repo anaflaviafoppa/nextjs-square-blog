@@ -5,7 +5,7 @@ export async function getFilteredPosts(filterKey) {
     {
       posts(
       where: {search: "${filterKey}", orderby: {field: DATE, order: DESC}}
-      first: 15
+      first: 20
       ) {
         edges {
           node {
@@ -26,6 +26,12 @@ export async function getFilteredPosts(filterKey) {
                 avatar {
                   url
                 }
+              }
+            }
+            categories(first: 10) {
+              nodes {
+                name
+                parentId
               }
             }
           }
