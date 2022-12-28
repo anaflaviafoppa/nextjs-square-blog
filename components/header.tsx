@@ -80,6 +80,15 @@ export default function Header({labels}) {
         })
     }
 
+    const getPath = (path:string): string => {
+        const hasCategory = path.includes('category');
+        if(hasCategory) {
+            return path;
+        }
+
+        return 'category' + path;
+    }
+
     return (
         <>
             <nav className={styles.navbar}>
@@ -101,8 +110,10 @@ export default function Header({labels}) {
                                         return (
                                             <div className={styles.navbar__text} key={label.id}
                                                  selected-label={(label.id === selectedLabelId && openMenu).toString()}>
-                                                <p className="header-labels"
-                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
+                                                <Link href={getPath(label.path)}>
+                                                    <p className="header-labels"
+                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{getPath(label.path)}  + {label.label}</p>
+                                                </Link>
                                                 {
                                                     !!label.children.length &&
                                                     <div onClick={() => handleClickCategories(label.id)}>

@@ -6,8 +6,8 @@ import {LabelModel} from '../../components/models/LabelModel';
 export async function getLabels() {
     const labels: LabelModel[] = [];
 
-    function addNewMainLabel({label, id}) {
-        labels.push({label, id, children: []});
+    function addNewMainLabel({label, id, path}) {
+        labels.push({label, id, path,  children: []});
     }
 
     function addCategory({label, parentId, path}) {
@@ -15,7 +15,7 @@ export async function getLabels() {
         const parent = labels[parentIndex];
         const children = parent.children;
         children.push({label, path, parentLabel: parent.label});
-        labels.splice(parentIndex, 1, {label: parent.label, id: parent.id, children});
+        labels.splice(parentIndex, 1, {label: parent.label, path: parent.path, id: parent.id, children});
     }
 
 
@@ -33,7 +33,7 @@ export async function getLabels() {
         const parentId = node.parentId;
         const path = node.path;
         if (!parentId) {
-            addNewMainLabel({label, id});
+            addNewMainLabel({label, path, id});
         } else {
             addCategory({label, path, parentId})
         }
