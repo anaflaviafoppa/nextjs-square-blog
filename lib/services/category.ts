@@ -1,6 +1,6 @@
 
 import {CacheLabels} from '../../components/utils/cache';
-import {getPostsByCategory, getTitleFromPage} from '../controllers/category';
+import {getChildrenCategory, getPostsByCategory, getTitleFromPage} from '../controllers/category';
 import CacheData from '../cache-data';
 
 export async function getPostsByCategories(slug: string | string[]) {
@@ -23,4 +23,15 @@ export async function getTitlesFromPage(name: string | string[]) {
     const data = await getTitleFromPage(name);
     CacheData.set({key: CacheLabels.TITLE_CATEGORY + name, value: data?.edges});
     return data?.edges;
+}
+
+export async function getChildrenCategories(name: string | string[]) {
+    const category = CacheData.get(CacheLabels.TAGS_CATEGORY + name);
+    if(category) {
+        return category;
+    }
+
+    const data = await getChildrenCategory(name);
+    CacheData.set({key: CacheLabels.TAGS_CATEGORY + name, value: data?.nodes[0]});
+    return data?.nodes[0];
 }

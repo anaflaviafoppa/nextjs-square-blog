@@ -13,3 +13,7 @@ export enum Order {
     REVERT= 'revert',
     NORMAL = 'normal'
 }
+
+export enum Pages {
+    INITIAL = '/'
+}

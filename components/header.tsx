@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+import {Pages} from './utils/constants';
 
 
 export default function Header({labels}) {
@@ -24,7 +25,7 @@ export default function Header({labels}) {
     };
 
     // const tags = ['Aves', 'Bebidas', 'Carnes', 'Comida de Boteco'];
-    const [styleHeader, setStyleHeader] = useState<any>(styleTop);
+    const [styleHeader, setStyleHeader] = useState<any>(styleConsistent);
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [openFilter, setOpenFilter] = useState<boolean>(false);
     const [tags, setTags] = useState<Array<TagsModel>>();
@@ -32,8 +33,12 @@ export default function Header({labels}) {
     const [findKey, setFindKey] = useState<string>();
     const categories = {};
     useEffect(() => {
-        changeBackground();
-        window.addEventListener("scroll", changeBackground)
+        const isInitialPage = router.pathname === Pages.INITIAL;
+        if(isInitialPage) {
+            changeBackground();
+            window.addEventListener("scroll", changeBackground)
+        };
+
     }, [])
 
     const changeBackground = () => {
@@ -80,16 +85,28 @@ export default function Header({labels}) {
         })
     }
 
-    const handleRedirectLink = (path:string) => {
-        const hasCategory = path.includes('category');
-        let pathname = path;
+    const verifyCategory = (path:string): string => {
+        const hasCategory = path.includes('categorias');
         if(!hasCategory) {
-            pathname = '/category' + path;
+            return'/categorias' + path;
         }
 
+        return path;
+    }
+
+    const handleRedirectLink = (path:string) => {
+        const pathname = verifyCategory(path);
        router.push({
            pathname
-       });
+       })
+    }
+
+    const handleRedirectSubCategory = (path: string, findKey: string) => {
+        const pathname = verifyCategory(path);
+        router.push({
+            pathname,
+            query: { key: findKey },
+        })
     }
 
     return (
@@ -165,9 +182,8 @@ export default function Header({labels}) {
                         {
                             !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
-                                        <Link href={tag.path} key={index}>
-                                            <p className="header-list " key={index}>{tag.label}</p>
-                                        </Link>
+                                            <p className="header-list " key={index}
+                                               onClick={() => handleRedirectSubCategory(tag.path, tag.slug)}>{tag.label}</p>
                                     )
                                 )}
                             </div>

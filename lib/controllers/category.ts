@@ -54,3 +54,24 @@ export async function getTitleFromPage(name: string | string[]) {
 
     return data?.pages;
 }
+
+export async function getChildrenCategory(name: string | string[]) {
+    const data = await fetchAPI(`
+    {
+      categories(first: 10, where: {slug: "${name}"}) {
+        nodes {
+          id
+          name
+          children {
+            nodes {
+              name
+              uri
+            }
+          }
+        }
+      }
+    }
+    `)
+
+    return data?.categories;
+}

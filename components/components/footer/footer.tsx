@@ -61,7 +61,7 @@ export default function Footer() {
                 <div className={styles.footer__division}>
                     <h4>Tags</h4>
                     <TagContainer alignment={Alignment.START}>
-                        {tags.map((tag, index) => {
+                        {tags?.map((tag, index) => {
                             return (
                                 <Tag key={index} clickable={false} text={tag} type={Priority.SECONDARY}
                                      isSelected={false}/>
