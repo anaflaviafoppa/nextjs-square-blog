@@ -3,7 +3,7 @@ import PostBanner from './components/post-banner/post-banner';
 import UnderlinedTitle from './components/underlined-title/underlined-title';
 
 
-export default function PostBody({ content,date, category }) {
+export default function PostBody({ content,date, category, banner }) {
   return (
     <section className={'section ' + styles.post__body}>
         <UnderlinedTitle date={date} title={category} />
@@ -12,7 +12,7 @@ export default function PostBody({ content,date, category }) {
         dangerouslySetInnerHTML={{ __html: content }}
       />
 
-        <PostBanner></PostBanner>
+        <PostBanner banner={banner}></PostBanner>
     </section>
   )
 }

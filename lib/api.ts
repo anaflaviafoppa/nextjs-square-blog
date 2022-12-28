@@ -47,7 +47,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
 export async function getAllPostsWithSlug() {
     const data = await fetchAPI(`
     {
-      posts(first: 10000) {
+      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
         edges {
           node {
             slug
@@ -63,7 +63,8 @@ export async function getAllPostsForHome(preview) {
     const data = await fetchAPI(
         `
     query AllPosts {
-      posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 20,
+       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
         edges {
           node {
             title
@@ -183,7 +184,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
                 : ''
         }
       }
-      posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 3, where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
         edges {
           node {
             ...PostFields
@@ -239,4 +240,39 @@ export async function getAboutUsContent() {
     }
   `)
     return data?.pages
+}
+
+export async function getBannerSelected(preview) {
+    const data = await fetchAPI(
+        `
+        query AllPosts {
+          posts(
+            first: 20
+            where: {orderby: {field: DATE, order: DESC}, categoryIn: "[dGVybTo2NDQ=]"}
+          ) {
+            edges {
+              node {
+                title
+                slug
+                date
+                uri
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+              }
+            }
+          }
+        }
+        `,
+        {
+            variables: {
+                onlyEnabled: !preview,
+                preview,
+            },
+        }
+    )
+
+    return data?.posts;
 }

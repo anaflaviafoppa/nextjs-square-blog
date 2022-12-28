@@ -1,16 +1,22 @@
 import React from 'react';
-import TemporaryBanner from '../../../public/images/temporary_banner.png'
 import Image from 'next/image';
 
-function PostBanner(props) {
+function PostBanner({banner: {edges}}) {
+    const title = edges[0].node.title;
+    const featuredImage = edges[0].node.featuredImage;
+    const imageUrl = featuredImage.node.sourceUrl;
+
     return (
         <section className="section">
             <div className="title__border_container mb-16">
                 <div className="title__border">
-                    <h3>Ofertas Exclusivas em nosso site</h3>
+                    <h3>{title}</h3>
                 </div>
             </div>
-            <Image src={TemporaryBanner} alt={'Banner'} />
+            <div>
+                <Image src={imageUrl} alt={'Banner'} width={500} height={250} />
+            </div>
+
         </section>
     );
 }

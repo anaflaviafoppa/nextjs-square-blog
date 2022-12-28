@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import Container from '../components/containers/container/container'
 import Layout from '../components/layout'
-import {getAllPostsForHome} from '../lib/api'
+import {getAllPostsForHome, getBannerSelected} from '../lib/api'
 import {CarouselUnit} from '../components/widgets/carousel/carousel-unit';
 import {useState} from 'react';
 import Tag from '../components/components/tag/tag';
@@ -55,7 +55,7 @@ export default function Index({allPosts: {edges},labels, preview}) {
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
             </Container>
             <MainPosts items={mainPosts}/>
-            <ImageSection />
+            <ImageSection/>
             <Cards items={morePosts}
                    title={'Veja Também'}
                    isEnabledSeeMore={true}
@@ -68,8 +68,8 @@ export default function Index({allPosts: {edges},labels, preview}) {
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
     const allPosts = await getAllPostsForHome(preview);
-    const labels = await getLabels();
 
+    const labels = await getLabels();
     return {
         props: {allPosts, labels, preview},
         revalidate: 10,
