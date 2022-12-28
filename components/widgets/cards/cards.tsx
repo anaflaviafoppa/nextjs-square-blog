@@ -3,6 +3,7 @@ import Container from '../../containers/container/container';
 import CardItem from '../../components/card-item/card-item';
 import styles from './cards.module.scss';
 import UnderlinedTitle from '../../components/underlined-title/underlined-title';
+import Link from 'next/link';
 
 function Cards({items, title, maxPosts, isEnabledSeeMore}) {
     const [countItems, setCountItems]  = useState(maxPosts);
@@ -27,15 +28,17 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
                         const category = tags?.find(tag => !tag.parentId);
 
                         return (
-                            <CardItem
-                                key={index}
-                                title={node.title}
-                                excerpt={node.excerpt}
-                                date={node.date}
-                                slug={node.slug}
-                                category={category}
-                                featuredImage={node.featuredImage}
-                            />
+                            <Link key={index} href={`/posts/${node.slug}`}>
+                                <CardItem
+                                    key={index}
+                                    title={node.title}
+                                    excerpt={node.excerpt}
+                                    date={node.date}
+                                    slug={node.slug}
+                                    category={category}
+                                    featuredImage={node.featuredImage}
+                                />
+                            </Link>
                         )
                     })}
                 </div>

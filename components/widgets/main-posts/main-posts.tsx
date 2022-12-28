@@ -1,6 +1,7 @@
 import React from 'react';
 import MainPostItem from '../../components/main-post-item/main-post-item';
 import {Order} from '../../utils/constants';
+import Link from 'next/link';
 
 function MainPosts({items}) {
 
@@ -24,17 +25,18 @@ function MainPosts({items}) {
                     const category = tags?.find(tag => !tag.parentId);
 
                     return (
-                        <MainPostItem
-                            title={node.title}
-                            key={index}
-                            category={category}
-                            date={node.date}
-                            excerpt={node.excerpt}
-                            tags={tags}
-                            slug={node.slug}
-                            order={order}
-                            featuredImage={node.featuredImage}
-                        />
+                        <Link key={index} href={`/posts/${node.slug}`}>
+                            <MainPostItem
+                                title={node.title}
+                                category={category}
+                                date={node.date}
+                                excerpt={node.excerpt}
+                                tags={tags}
+                                slug={node.slug}
+                                order={order}
+                                featuredImage={node.featuredImage}
+                            />
+                        </Link>
                     )
                 })
             }
