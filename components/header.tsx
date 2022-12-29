@@ -40,7 +40,7 @@ export default function Header({labels, searchKey = ''}) {
         if(isInitialPage) {
             changeBackground();
             window.addEventListener("scroll", changeBackground)
-        };
+        }
 
         verifyRouter();
 
@@ -97,27 +97,6 @@ export default function Header({labels, searchKey = ''}) {
             .then(() => {})
 
     }
-
-    const verifyCategory = (path:string): string => {
-        return '/categorias' + path;
-    }
-
-    const handleRedirectLink = (path:string) => {
-        const pathname = verifyCategory(path);
-       router.push({
-           pathname
-       })
-    }
-
-    const handleRedirectSubCategory = (path: string, findKey: string) => {
-        const pathname = verifyCategory(path);
-
-        router.push({
-            pathname,
-            query: { key: findKey },
-        })
-    }
-
 
     return (
         <>
@@ -191,7 +170,7 @@ export default function Header({labels, searchKey = ''}) {
                         {
                             !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
-                                    <Link href={`/categorias${tag.path}?key=${tag.slug}`} key={index}>
+                                    <Link href={`/categorias${tag.path}/${tag.slug}`} key={index}>
                                             <p className="header-list "
                                                >{tag.label}</p>
                                     </Link>
