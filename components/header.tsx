@@ -180,8 +180,8 @@ export default function Header({labels}) {
                         {
                             !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
-                                    <Link href={`/categorias${tag.path}?key=${tag.slug}`}>
-                                            <p className="header-list " key={index}
+                                    <Link href={`/categorias${tag.path}?key=${tag.slug}`} key={index}>
+                                            <p className="header-list "
                                                >{tag.label}</p>
                                     </Link>
                                     )
