@@ -77,20 +77,12 @@ export default function Header({labels}) {
     }
 
     const handleSubmit = (event) => {
+        router.push(`/search/${findKey}`)
         event.preventDefault();
-        router.push({
-            pathname: '/search',
-            query: { key: findKey },
-        })
     }
 
     const verifyCategory = (path:string): string => {
-        const hasCategory = path.includes('categorias');
-        if(!hasCategory) {
-            return'/categorias' + path;
-        }
-
-        return path;
+        return '/categorias' + path;
     }
 
     const handleRedirectLink = (path:string) => {
@@ -131,11 +123,10 @@ export default function Header({labels}) {
                                         return (
                                             <div className={styles.navbar__text} key={label.id}
                                                  selected-label={(label.id === selectedLabelId && openMenu).toString()}>
-
+                                                                            <Link href={`/categorias${label.path}`}>
                                                     <p className="header-labels"
-                                                       onClick={() => handleRedirectLink(label.path)}
                                                    selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
-
+                                                                            </Link>
                                                 {
                                                     !!label.children.length &&
                                                     <div onClick={() => handleClickCategories(label.id)}>
@@ -183,8 +174,10 @@ export default function Header({labels}) {
                         {
                             !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
                                 {tags.map((tag, index) => (
+                                    <Link href={`/categorias${tag.path}?key=${tag.slug}`}>
                                             <p className="header-list " key={index}
-                                               onClick={() => handleRedirectSubCategory(tag.path, tag.slug)}>{tag.label}</p>
+                                               >{tag.label}</p>
+                                    </Link>
                                     )
                                 )}
                             </div>

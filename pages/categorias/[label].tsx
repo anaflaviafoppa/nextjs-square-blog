@@ -5,11 +5,13 @@ import {getLabels} from '../../lib/services/header';
 import styles from '../../components/layouts/layout-category.module.scss';
 import Container from '../../components/containers/container/container';
 import TagContainer from '../../components/containers/tag-container/tag-container';
-import {Alignment, Priority, TagsLabels} from '../../components/utils/constants';
+import {Alignment, Pages, Priority, TagsLabels} from '../../components/utils/constants';
 import Link from 'next/link';
 import Tag from '../../components/components/tag/tag';
 import MainPosts from '../../components/widgets/main-posts/main-posts';
 import Layout from '../../components/layout';
+import {useRouter} from 'next/router';
+import {update} from 'immutable';
 
 interface Props {
     labels: any,
@@ -21,17 +23,25 @@ interface Props {
 }
 
 function Category({labels, posts,title, tags, selectedLabel, preview}) {
-    const mainTest = title?.[0].node?.title;
-    const content = title?.[0].node?.content;
+    const router = useRouter();
+    const mainTest = title?.[0]?.node?.title;
+    const content = title?.[0]?.node?.content;
     const tagsList = tags?.children?.nodes;
 
-    const [listPost, setListPosts] = useState(posts);
-    const [selectedTag, setSelectedTag] = useState(selectedLabel);
 
+    const handleFilterPerTag = (findKey: string) => {
+        const path = {
+            pathname: '/categorias/' + router.query.label
+        }
 
-    const handleFilterPerTag = async (findKey: string): Promise<void> => {
-        const newPosts = await getPostsByCategories(findKey);
-        setListPosts(newPosts);
+        const isSubCategory = findKey !== TagsLabels.ALL;
+        if(isSubCategory) {
+            path['query'] = {key: findKey}
+        };
+
+        router.replace(path, undefined, {shallow: true}).then(() => {
+            router.reload();
+        })
     }
 
     return(
@@ -46,12 +56,15 @@ function Category({labels, posts,title, tags, selectedLabel, preview}) {
                 </div>
             </div>
             <Container>
-                { tagsList.length > 1 &&
+                { tagsList?.length > 1 &&
                 <div className="container-y">
                     <TagContainer alignment={Alignment.CENTER}>
                         <Link href={'/'}>
                             <Tag clickable={true} text={'Mostrar Todos'} type={Priority.PRIMARY}
-                                 isSelected={selectedLabel === TagsLabels.ALL}/>
+                                 isSelected={selectedLabel === TagsLabels.ALL}
+                                 slug={TagsLabels.ALL}
+                                 onClickFunction={handleFilterPerTag}
+                            />
                         </Link>
                         {tagsList?.map((tag, index) => {
                             return (
@@ -62,7 +75,7 @@ function Category({labels, posts,title, tags, selectedLabel, preview}) {
                     </TagContainer>
                 </div>
                 }
-                <MainPosts items={listPost}/>
+                <MainPosts items={posts}/>
             </Container>
         </Layout>
     )
@@ -83,25 +96,26 @@ Category.getInitialProps = async ({query}) => {
     return {posts, labels, title, tags, selectedLabel}
 }
 
-export default Category
+export default Category;
 
-/*export const getStaticProps: GetStaticProps = async ({params,
+
+/*
+export const getStaticProps: GetStaticProps = async ({params,
                                                          preview = false,
                                                          previewData,}) => {
 
 
-
-    const posts = await getPostsByCategories(params.label);
-
+    const findKey = params.label;
+    const posts = await getPostsByCategories(findKey);
     const labels = await getLabels();
-
     const title = await getTitlesFromPage(params.label);
-
     const tags = await getChildrenCategories(params.label);
-    console.log('TAGS----------', tags)
+   const selectedLabel = findKey || TagsLabels.ALL;
+
+
 
     return {
-        props: {labels, preview, posts, title, tags},
+        props: {labels, preview, posts, title, tags, selectedLabel},
         revalidate: 10,
     }
 }
@@ -111,4 +125,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
         paths: [],
         fallback: true,
     }
-}*/
+}
+*/

@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import Layout from '../components/layout';
-import Container from '../components/containers/container/container';
-import Cards from '../components/widgets/cards/cards';
+import Layout from '../../components/layout';
+import Container from '../../components/containers/container/container';
+import Cards from '../../components/widgets/cards/cards';
 import {NextPage} from 'next';
-import {getLabels} from '../lib/services/header';
-import {getFilteredItems} from '../lib/services/search';
+import {getLabels} from '../../lib/services/header';
+import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
 
 interface Props {
@@ -34,10 +34,9 @@ const Search: NextPage<Props> = ({labels, posts}) => {
     );
 }
 
-Search.getInitialProps = async ({query}) => {
-    console.log('QUERY--------------------',query);
+Search.getInitialProps = async ({query, pathname}) => {
     const labels = await getLabels();
-    const posts = await getFilteredItems(query.key);
+    const posts = await getFilteredItems(query.search);
     return {labels, posts}
 
 }
