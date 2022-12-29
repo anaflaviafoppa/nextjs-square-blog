@@ -18,10 +18,9 @@ $grid-column-gap: 12rem;
     }
 
     &__links {
-        display: grid;
-        grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
-        grid-gap: $grid-gap;
-        margin: 0 auto;
+        float: left;
+        display: flex;
+        min-width: fit-content;
 
         p {
             overflow: hidden;
@@ -30,10 +29,19 @@ $grid-column-gap: 12rem;
         }
     }
 
+    &__container_links_search {
+        margin: 0 auto;
+        display: flex;
+    }
+
     &__text {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
+        img {
+            @apply mr-10
+        }
 
         img:hover {
             cursor: pointer;
@@ -47,8 +55,10 @@ $grid-column-gap: 12rem;
     }
 
     &__search {
-        margin: auto auto;
-        min-width: fit-content;
+        min-width: 15%;
+        img {
+            margin: 0 auto;
+        }
     }
 
     &__search:hover {
@@ -87,6 +97,16 @@ $grid-column-gap: 12rem;
             cursor: pointer;
             font-weight: normal;
         }
+    }
+
+    &__container_search[active=false] {
+     /* animation-direction: ver;*/
+        height: 0rem;
+        transition: all 0.5s ease-in-out;
+    }
+
+    &__container_search[active=true] {
+        height: auto;
     }
 
 }

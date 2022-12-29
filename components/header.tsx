@@ -113,6 +113,8 @@ export default function Header({labels, searchKey = ''}) {
                             />
                             </Link>
 
+                            <div className={styles.navbar__container_links_search}>
+
                             <div className={styles.navbar__links}>
                                 {
                                     labels?.map((label) => {
@@ -149,6 +151,7 @@ export default function Header({labels, searchKey = ''}) {
                                     onClick={() => handleOpenFilter()}
                                 />
                             </div>
+                            </div>
                             <div className={styles.navbar__button}>
                                 <button className='text-base button__primary button__primary-rounded'>
                                     <div className="button__icon">
@@ -179,9 +182,8 @@ export default function Header({labels, searchKey = ''}) {
                             </div>
                         }
 
-                        {
-                            !!openFilter &&
-                            <div className="py-16 px-96">
+
+                            <div className="py-16 px-96" active={openFilter ? 'true' : 'false'}>
                                 <form onSubmit={handleSubmit}>
                                     <input type="search" className="text-base input__primary"
                                            required
@@ -191,7 +193,7 @@ export default function Header({labels, searchKey = ''}) {
                                        placeholder="Encontre no blog"/>
                                 </form>
                             </div>
-                        }
+
 
                         { router.pathname === Pages.SEARCH &&
                             <div>
