@@ -77,13 +77,14 @@ export default function Header({labels}) {
     }
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         router.push(`/search?key=${findKey}`,
             undefined,
             {shallow: true})
             .then(() => {
                 router.reload();
         })
-        event.preventDefault();
+
     }
 
     const verifyCategory = (path:string): string => {
