@@ -16,7 +16,7 @@ export enum Order {
 
 export enum Pages {
     INITIAL = '/',
-    SEARCH = '/search'
+    SEARCH = '/search/[search]'
 }
 
 export enum TagsLabels {

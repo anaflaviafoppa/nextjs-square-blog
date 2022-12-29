@@ -7,8 +7,12 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {Pages} from './utils/constants';
 
+interface Props {
+    labels: any,
+    searchKey?: string,
+}
 
-export default function Header({labels}) {
+export default function Header({labels, searchKey = ''}) {
     const router = useRouter()
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
@@ -29,7 +33,7 @@ export default function Header({labels}) {
     const [openFilter, setOpenFilter] = useState<boolean>(false);
     const [tags, setTags] = useState<Array<TagsModel>>();
     const [selectedLabelId, setSelectedLabelId] = useState<string>();
-    const [findKey, setFindKey] = useState<string>();
+    const [findKey, setFindKey] = useState<string>(searchKey);
     const categories = {};
     useEffect(() => {
         const isInitialPage = router.pathname === Pages.INITIAL;
@@ -38,7 +42,9 @@ export default function Header({labels}) {
             window.addEventListener("scroll", changeBackground)
         };
 
-    }, [findKey,selectedLabelId,openMenu, tags, openFilter ])
+        verifyRouter();
+
+    }, [labels])
 
     const changeBackground = () => {
         if (window.scrollY <= 600) {
@@ -71,6 +77,15 @@ export default function Header({labels}) {
         setSelectedLabelId(id);
     };
 
+    const verifyRouter = () => {
+        const isSearchPath = router.pathname === Pages.SEARCH;
+        if(isSearchPath) {
+            setOpenMenu(false);
+            setOpenFilter(true);
+            setFindKey(searchKey);
+        }
+    }
+
     const handleOpenFilter = (): void => {
         setOpenMenu(false);
         setOpenFilter(!openFilter)
@@ -78,12 +93,8 @@ export default function Header({labels}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        router.push(`/search?key=${findKey}`,
-            undefined,
-            {shallow: true})
-            .then(() => {
-                router.reload();
-        })
+        router.push(`/search/${findKey}`)
+            .then(() => {})
 
     }
 
@@ -196,9 +207,18 @@ export default function Header({labels}) {
                                     <input type="search" className="text-base input__primary"
                                            required
                                            name="search"
+                                           value={findKey}
                                            onChange={event => setFindKey(event.target.value)}
                                        placeholder="Encontre no blog"/>
                                 </form>
+                            </div>
+                        }
+
+                        { router.pathname === Pages.SEARCH &&
+                            <div>
+                                <h2>
+                                    Resultados para: {router.query.search}
+                                </h2>
                             </div>
                         }
                     </Container>

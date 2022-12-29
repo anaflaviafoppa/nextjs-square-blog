@@ -6,14 +6,15 @@ import Header from './header';
 interface Props {
     labels?: any,
     preview?: any,
-    children: any
+    children: any,
+    searchKey?: string
 }
 
-export default function Layout({ preview, children, labels}: Props) {
+export default function Layout({ preview,searchKey, children, labels}: Props) {
   return (
     <>
       <Meta />
-        <Header labels={labels} />
+        <Header searchKey={searchKey} labels={labels} />
       <div>
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>
