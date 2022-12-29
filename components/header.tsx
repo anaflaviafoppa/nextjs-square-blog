@@ -77,7 +77,12 @@ export default function Header({labels}) {
     }
 
     const handleSubmit = (event) => {
-        router.push(`/search/${findKey}`)
+        router.push(`/search?key=${findKey}`,
+            undefined,
+            {shallow: true})
+            .then(() => {
+                router.reload();
+        })
         event.preventDefault();
     }
 
