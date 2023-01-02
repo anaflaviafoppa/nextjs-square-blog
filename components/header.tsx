@@ -8,8 +8,7 @@ import {useRouter} from 'next/router';
 import {IdsName, MenuName, Pages} from './utils/constants';
 import ListCategories from './components/list-categories/list-categories';
 import ListLabels from './components/list-labels/list-labels';
-import {Dropdown} from '@restart/ui';
-import Menu = Dropdown.Menu;
+
 
 interface Props {
     labels: any,
@@ -39,15 +38,18 @@ export default function Header({labels, searchKey = ''}: Props) {
     const [findKey, setFindKey] = useState<string>(searchKey);
     const categories = {};
     useEffect(() => {
+        verifyIsInitialPage();
+        verifyRouter();
+
+    }, [labels])
+
+    const verifyIsInitialPage = () => {
         const isInitialPage = router.pathname === Pages.INITIAL;
         if(isInitialPage) {
             changeBackground();
             window.addEventListener("scroll", changeBackground)
         }
-
-        verifyRouter();
-
-    }, [labels])
+    }
 
     const changeBackground = () => {
         const element = document.getElementById(IdsName.CAROUSEL);
@@ -75,16 +77,16 @@ export default function Header({labels, searchKey = ''}: Props) {
     }
 
     const handleClickCategories = (id: string): void => {
-        const isOpenedMenu = openMenu === MenuName.CATEGORIES_MENU;
+        const isOpenedMenu = openMenu === MenuName.CATEGORIES;
         if (id === selectedLabelId && isOpenedMenu) {
             setOpenMenu('');
         } else if (id !== selectedLabelId && isOpenedMenu) {
             getSelectedTags(id);
         } else if (id !== selectedLabelId && !isOpenedMenu) {
             getSelectedTags(id);
-            setOpenMenu(MenuName.CATEGORIES_MENU);
+            setOpenMenu(MenuName.CATEGORIES);
         } else if (id === selectedLabelId && !isOpenedMenu) {
-            setOpenMenu(MenuName.CATEGORIES_MENU);
+            setOpenMenu(MenuName.CATEGORIES);
         }
 
         setSelectedLabelId(id);
@@ -93,15 +95,14 @@ export default function Header({labels, searchKey = ''}: Props) {
     const verifyRouter = () => {
         const isSearchPath = router.pathname === Pages.SEARCH;
         if(isSearchPath) {
-            setOpenMenu('');
-            setOpenFilter(true);
+            setOpenMenu(MenuName.SEARCH_FILTER);
             setFindKey(searchKey);
         }
     }
 
     const handleOpenFilter = (): void => {
-        setOpenMenu('');
-        setOpenFilter(!openFilter)
+        const isOpenedFilterMenu = openMenu === MenuName.SEARCH_FILTER;
+        setOpenMenu(isOpenedFilterMenu ? '' : MenuName.SEARCH_FILTER);
     }
 
     const handleSubmit = (event) => {
@@ -112,21 +113,24 @@ export default function Header({labels, searchKey = ''}: Props) {
     }
 
     const handleOpenMobileMenu = () => {
-        const isMobileMenuOpen = openMenu === MenuName.MOBILE_MENU;
+        const isMobileMenuOpen = openMenu === MenuName.LABELS_MOBILE;
         if(isMobileMenuOpen) {
-            setOpenMenu('')
+            setOpenMenu('');
+            verifyIsInitialPage();
         } else {
-            setOpenMenu(MenuName.MOBILE_MENU);
+            setOpenMenu(MenuName.LABELS_MOBILE);
+            setBackgroundColor(backgroundConsistent);
+            setStyleHeader(styleConsistent);
         }
     }
 
     const handleClickCategoriesMobile = (id: string): void => {
-        const isMobileCategoriesMenuOpen = openMenu === MenuName.CATEGORIES_MENU_MOBILE;
+        const isMobileCategoriesMenuOpen = openMenu === MenuName.CATEGORIES_MOBILE;
         if(isMobileCategoriesMenuOpen) {
-            setOpenMenu('')
+            setOpenMenu(MenuName.LABELS_MOBILE)
         } else {
             getSelectedTags(id);
-            setOpenMenu(MenuName.CATEGORIES_MENU_MOBILE);
+            setOpenMenu(MenuName.CATEGORIES_MOBILE);
         }
     }
 
@@ -158,7 +162,7 @@ export default function Header({labels, searchKey = ''}: Props) {
                             <div className={styles.navbar__links}>
                                 <ListLabels labels={labels}
                                             selectedLabelId={selectedLabelId}
-                                            isOpenedMenu={openMenu === MenuName.CATEGORIES_MENU}
+                                            isOpenedMenu={openMenu === MenuName.CATEGORIES}
                                             handleClickCategories={handleClickCategories} />
                             </div>
 
@@ -191,13 +195,15 @@ export default function Header({labels, searchKey = ''}: Props) {
                 <div className={styles.navbar__extra}>
                     <Container>
                         {
-                            tags && <div className={openMenu === MenuName.CATEGORIES_MENU ? 'padding-3-y ' + styles.navbar__list  : styles.navbar__list} data-active={openMenu === MenuName.CATEGORIES_MENU}>
+                            tags && <div className={openMenu === MenuName.CATEGORIES ?
+                                'padding-3-y ' + styles.navbar__list  : styles.navbar__list}
+                                         data-active={openMenu === MenuName.CATEGORIES}>
                                 <ListCategories tags={tags} />
                             </div>
                         }
 
 
-                            <div className={openFilter ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}  data-active={openFilter ? 'true' : 'false'}>
+                            <div className={openMenu === MenuName.SEARCH_FILTER ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}  data-active={openMenu === MenuName.SEARCH_FILTER ? 'true' : 'false'}>
                                 <form onSubmit={handleSubmit}>
                                     <input type="search" className="text-base input__primary"
                                            required
@@ -219,9 +225,9 @@ export default function Header({labels, searchKey = ''}: Props) {
                     </Container>
                 </div>
 
-                <div className={styles.navbar__extra_mobile} data-active={openMenu === MenuName.MOBILE_MENU || openMenu === MenuName.CATEGORIES_MENU_MOBILE}>
+                <div className={styles.navbar__extra_mobile} data-active={openMenu === MenuName.LABELS_MOBILE || openMenu === MenuName.CATEGORIES_MOBILE}>
                         <div className={'container-x ' + styles.navbar__extra_first_menu}
-                             data-active={openMenu === MenuName.MOBILE_MENU}>
+                             data-active={openMenu === MenuName.LABELS_MOBILE}>
                             <div className={styles.navbar__extra_labels}>
                                 <ListLabels labels={labels}
                                             selectedLabelId={selectedLabelId}
@@ -244,7 +250,8 @@ export default function Header({labels, searchKey = ''}: Props) {
                             </div>
                         </div>
 
-                        <div className={'container-x ' + styles.navbar__extra_second_menu} data-active={openMenu === MenuName.CATEGORIES_MENU_MOBILE}>
+                        <div className={'container-x ' + styles.navbar__extra_second_menu}
+                             data-active={openMenu === MenuName.CATEGORIES_MOBILE}>
                             <div className={styles.navbar__back} onClick={() => handleClickCategoriesMobile('')}>
                                 <div>
                                     <Image
@@ -257,7 +264,9 @@ export default function Header({labels, searchKey = ''}: Props) {
 
                                 <span>Voltar</span>
                             </div>
+                            <div className={styles.navbar__extra_categories}>
                                 <ListCategories color={'lighter'} tags={tags} />
+                            </div>
 
                         </div>
 
