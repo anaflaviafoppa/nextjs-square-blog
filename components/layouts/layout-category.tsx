@@ -9,7 +9,7 @@ import Tag from '../components/tag/tag';
 import MainPosts from '../widgets/main-posts/main-posts';
 import {useRouter} from 'next/router';
 
-function LayoutCategory({labels, posts, title, tags, selectedLabel, preview}) {
+function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, preview}) {
     const router = useRouter();
     const mainTest = title?.[0]?.node?.title;
     const content = title?.[0]?.node?.content;
@@ -30,7 +30,7 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, preview}) {
     }
 
     return (
-        <Layout preview={preview} labels={labels}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
             <div className={'container-large ' + styles.layout__title}>
                 <div>
                     <h1 className="big-title">{mainTest}</h1>

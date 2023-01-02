@@ -1,14 +1,15 @@
 import CacheData from '../cache-data';
 import {CacheLabels} from '../../components/utils/cache';
-import {getHeaderContent} from '../controllers/header';
+import {getContentCTA, getHeaderContent} from '../controllers/header';
 import {LabelModel} from '../../components/models/label-model';
 
 export async function getLabels() {
     const labels: LabelModel[] = [];
 
     function addNewMainLabel({label, id, path}) {
-        const newPath = extractPath(path);
-        labels.push({label, id, path: newPath,  children: []});
+        const isExternalLink = path.includes('https') || path.includes('www');
+        const newPath = isExternalLink ? path : extractPath(path);
+        labels.push({label, id, path: newPath, isExternalLink,  children: []});
     }
 
     function extractPath(path) {
@@ -26,7 +27,7 @@ export async function getLabels() {
         const slug =  path.split(parent.path)[1].split('/')[1];
         children.push({label, path: parent.path, parentLabel: parent.label, slug});
         labels.splice(parentIndex, 1, {label: parent.label,
-            path: parent.path, id: parent.id, children});
+            path: parent.path, isExternalLink: parent.isExternalLink, id: parent.id, children});
     }
 
 
@@ -52,4 +53,11 @@ export async function getLabels() {
 
     CacheData.set({key: CacheLabels.LABELS, value: labels});
     return labels;
+}
+
+export async function getHeaderCTA() {
+    const data = await getContentCTA();
+    const node = data?.nodes[0];
+    const structureNavbar = node.menuItems?.edges;
+    return structureNavbar[0]?.node;
 }

@@ -6,21 +6,24 @@ import {GetStaticPaths, GetStaticProps, NextPage} from 'next';
 import {getLabels} from '../../lib/services/header';
 import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
+import {getHeaderContent} from '../../lib/controllers/header';
 
 interface Props {
     labels: any,
     posts: any,
-    searchKey: string
+    searchKey: string,
+    preview: any,
+    CTAHeader: any
 }
 
-export default function Search ({labels, posts, searchKey}: Props) {
+export default function Search ({labels, posts, searchKey, preview,CTAHeader }: Props) {
     const router = useRouter()
 
     useEffect(() => {
     }, [router.query.key]);
 
     return (
-        <Layout labels={labels} searchKey={searchKey}>
+        <Layout labels={labels} searchKey={searchKey} preview={preview} CTAHeader={CTAHeader}>
             <Container>
                 {
                     !!posts?.length && <Cards items={posts}
@@ -50,13 +53,15 @@ export const getStaticProps: GetStaticProps = async ({
                                                      }) => {
 
     const labels = await getLabels();
+    const CTAHeader = await getHeaderContent();
     const posts = await getFilteredItems(params.search);
     return {
         props: {
             preview,
             labels,
             posts,
-            searchKey: params.search
+            searchKey: params.search,
+            CTAHeader
         },
         revalidate: 10,
     }

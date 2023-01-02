@@ -2,6 +2,8 @@
 @import "../styles/media-queries";
 $grid-gap: 4.2rem;
 $grid-column-gap: 12rem;
+$height-mobile:  calc(100vh - 94px);
+$height-mobile-children: calc(100vh - 94px - 7rem - 5rem);
 
 .navbar {
     width: 100vw;
@@ -165,9 +167,10 @@ $grid-column-gap: 12rem;
 
     &__extra_mobile[data-active=true] {
         overflow: hidden;
-        height: 100vh;
+        height: $height-mobile;
         width: 100vw;
         padding-top: 7rem;
+        padding-bottom: 5rem;
     }
 
     &__extra_mobile &__extra_labels, &__extra_mobile &__extra_button {
@@ -200,7 +203,7 @@ $grid-column-gap: 12rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: calc(100vh - 16rem);
+        height: $height-mobile-children;
     }
 
     &__extra_second_menu[data-active=true] {

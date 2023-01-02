@@ -11,9 +11,9 @@ import TagContainer from '../components/containers/tag-container/tag-container';
 import MainPosts from '../components/widgets/main-posts/main-posts';
 import Cards from '../components/widgets/cards/cards';
 import ImageSection from '../components/components/image-section/image-section';
-import {getLabels} from '../lib/services/header';
+import {getHeaderCTA, getLabels} from '../lib/services/header';
 
-export default function Index({allPosts: {edges},labels, preview}) {
+export default function Index({allPosts: {edges},labels, CTAHeader, preview}) {
     const heroPost = edges[0]?.node
     const carouselPost = edges.slice(0, 3);
     const mainPosts = edges.slice(3, 5)
@@ -23,7 +23,7 @@ export default function Index({allPosts: {edges},labels, preview}) {
 
 
     return (
-        <Layout preview={preview} labels={labels}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
             <Head>
                 <title>Bom de Beer Blog</title>
             </Head>
@@ -70,8 +70,9 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
     const allPosts = await getAllPostsForHome(preview);
 
     const labels = await getLabels();
+    const CTAHeader = await getHeaderCTA();
     return {
-        props: {allPosts, labels, preview},
+        props: {allPosts, labels, preview, CTAHeader},
         revalidate: 10,
     }
 }

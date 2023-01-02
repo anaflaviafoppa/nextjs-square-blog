@@ -1,8 +1,9 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 import {getChildrenCategories, getPostsByCategories, getTitlesFromPage} from '../../lib/services/category';
-import {getLabels} from '../../lib/services/header';
+import {getHeaderCTA, getLabels} from '../../lib/services/header';
 import {TagsLabels} from '../../components/utils/constants';
 import LayoutCategory from '../../components/layouts/layout-category';
+import {getHeaderContent} from '../../lib/controllers/header';
 
 interface Props {
     labels: any,
@@ -10,15 +11,17 @@ interface Props {
     title: any,
     tags: any,
     preview: any,
-    selectedLabel: string
+    selectedLabel: string,
+    CTAHeader: any
 }
 
-function Category({labels, posts,title, tags, selectedLabel, preview}: Props) {
+function Category({labels, posts,title, tags, selectedLabel, CTAHeader, preview}: Props) {
     return(
        <LayoutCategory labels={labels}
                        posts={posts}
                        title={title}
                        tags={tags}
+                       CTAHeader={CTAHeader}
                        selectedLabel={selectedLabel}
                        preview={preview}/>
     )
@@ -35,13 +38,14 @@ export const getStaticProps: GetStaticProps = async ({params,
     const findKey = params.label;
     const posts = await getPostsByCategories(findKey);
     const labels = await getLabels();
+    const CTAHeader = await getHeaderCTA();
     const title = await getTitlesFromPage(params.label);
     const tags = await getChildrenCategories(params.label);
     const selectedLabel = findKey || TagsLabels.ALL;
 
 
     return {
-        props: {labels, preview, posts, title, tags, selectedLabel},
+        props: {labels, preview, posts, title, tags, selectedLabel, CTAHeader},
         revalidate: 10,
     }
 }

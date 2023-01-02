@@ -7,14 +7,15 @@ interface Props {
     labels?: any,
     preview?: any,
     children: any,
-    searchKey?: string
+    searchKey?: string,
+    CTAHeader: any,
 }
 
-export default function Layout({ preview,searchKey, children, labels}: Props) {
+export default function Layout({ preview,searchKey, children, CTAHeader, labels}: Props) {
   return (
     <>
       <Meta />
-        <Header searchKey={searchKey} labels={labels} />
+        <Header searchKey={searchKey} labels={labels} CTAHeader={CTAHeader} />
       <div>
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>

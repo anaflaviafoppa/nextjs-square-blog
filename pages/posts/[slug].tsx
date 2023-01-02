@@ -15,9 +15,9 @@ import {CMS_NAME} from '../../lib/constants'
 import TagContainer from '../../components/containers/tag-container/tag-container';
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
-import {getLabels} from '../../lib/services/header';
+import {getHeaderCTA, getLabels} from '../../lib/services/header';
 
-export default function Post({post, posts, labels,banner, preview}) {
+export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
@@ -28,7 +28,7 @@ export default function Post({post, posts, labels,banner, preview}) {
     }
 
     return (
-        <Layout preview={preview} labels={labels}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
             {router.isFallback ? (
                 <PostTitle>Loading…</PostTitle>
             ) : (
@@ -91,6 +91,7 @@ export const getStaticProps: GetStaticProps = async ({
                                                      }) => {
     const data = await getPostAndMorePosts(params?.slug, preview, previewData)
     const labels = await getLabels();
+    const CTAHeader = await getHeaderCTA();
     const banner = await getBannerSelected(preview);
 
     return {
@@ -99,7 +100,8 @@ export const getStaticProps: GetStaticProps = async ({
             post: data.post,
             posts: data.posts,
             labels,
-            banner
+            banner,
+            CTAHeader
         },
         revalidate: 10,
     }

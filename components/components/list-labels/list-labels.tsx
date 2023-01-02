@@ -4,6 +4,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 function ListLabels({labels, selectedLabelId, isOpenedMenu, handleClickCategories}) {
+    const realPath = (label):string => {
+      const isExternalLink = label.isExternalLink;
+      if(isExternalLink) {
+          return label.path;
+      }
+
+      return `/categorias${label.path}`;
+    }
+
     return (
         <>
             {
@@ -11,7 +20,7 @@ function ListLabels({labels, selectedLabelId, isOpenedMenu, handleClickCategorie
                     return (
                         <div className={styles.navbar__text} key={label.id}
                              selected-label={(label.id === selectedLabelId && isOpenedMenu).toString()}>
-                            <Link href={`/categorias${label.path}`}>
+                            <Link href={realPath(label)} target={label.isExternalLink ? '_blank' : ''}>
                                 <p className="header-labels"
                                    selected-label={(label.id === selectedLabelId && isOpenedMenu).toString()}>{label.label}</p>
                             </Link>
