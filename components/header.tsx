@@ -5,14 +5,14 @@ import {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {Pages} from './utils/constants';
+import {IdsName, Pages} from './utils/constants';
 
 interface Props {
     labels: any,
     searchKey?: string,
 }
 
-export default function Header({labels, searchKey = ''}) {
+export default function Header({labels, searchKey = ''}: Props) {
     const router = useRouter()
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
@@ -46,7 +46,10 @@ export default function Header({labels, searchKey = ''}) {
     }, [labels])
 
     const changeBackground = () => {
-        if (window.scrollY <= 600) {
+        const element = document.getElementById(IdsName.CAROUSEL);
+        const positions = element?.getBoundingClientRect();
+
+        if (window.scrollY <= positions?.bottom) {
             setStyleHeader(styleTop)
             setBackgroundColor(backgroundGradient);
         } else {

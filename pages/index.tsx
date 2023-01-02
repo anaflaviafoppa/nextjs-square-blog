@@ -2,11 +2,11 @@ import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import Container from '../components/containers/container/container'
 import Layout from '../components/layout'
-import {getAllPostsForHome, getBannerSelected} from '../lib/api'
+import {getAllPostsForHome} from '../lib/api'
 import {CarouselUnit} from '../components/widgets/carousel/carousel-unit';
 import {useState} from 'react';
 import Tag from '../components/components/tag/tag';
-import {Alignment, Priority} from '../components/utils/constants';
+import {Alignment, IdsName, Priority} from '../components/utils/constants';
 import TagContainer from '../components/containers/tag-container/tag-container';
 import MainPosts from '../components/widgets/main-posts/main-posts';
 import Cards from '../components/widgets/cards/cards';
@@ -28,7 +28,7 @@ export default function Index({allPosts: {edges},labels, preview}) {
                 <title>Bom de Beer Blog</title>
             </Head>
 
-            <CarouselUnit posts={carouselPost}></CarouselUnit>
+            <CarouselUnit id={IdsName.CAROUSEL} posts={carouselPost} />
             <Container>
                 <div className="py-16">
                     <TagContainer alignment={Alignment.CENTER}>

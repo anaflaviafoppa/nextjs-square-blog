@@ -22,3 +22,7 @@ export enum Pages {
 export enum TagsLabels {
     ALL = 'all'
 }
+
+export enum IdsName {
+    CAROUSEL = 'carousel'
+}
