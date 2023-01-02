@@ -32,6 +32,8 @@
 }
 
 //PADDING
+
+// PADDING VERTICAL
 .padding-56-y {
   @apply py-24
 }
@@ -40,6 +42,12 @@
   @apply py-16
 }
 
+.padding-3-y {
+  @apply py-10
+}
+
+//PADDING HORIZONTAL
 .padding-24-x {
   @apply px-96
 }
+

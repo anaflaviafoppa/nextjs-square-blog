@@ -87,6 +87,8 @@ $grid-column-gap: 12rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 0;
+        transition: $transition;
 
         p {
             font-weight: 300;
@@ -95,12 +97,21 @@ $grid-column-gap: 12rem;
 
         p:hover {
             cursor: pointer;
-            font-weight: normal;
+            color: $color-yellow;
+        }
+    }
+
+    &__list[data-active=true]{
+        height: auto;
+    }
+
+    &__list[data-active=false]{
+        p {
+            display: none;
         }
     }
 
     &__container_search {
-        animation-direction: revert;
         height: 0;
         transition: $transition;
     }

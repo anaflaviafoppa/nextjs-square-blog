@@ -46,6 +46,10 @@ export default function Header({labels, searchKey = ''}) {
 
     }, [labels])
 
+    const isVisibleTags = () => {
+        return !!openMenu && tags;
+    }
+
     const changeBackground = () => {
         if (window.scrollY <= 600) {
             setStyleHeader(styleTop)
@@ -171,7 +175,7 @@ export default function Header({labels, searchKey = ''}) {
                 <div className={styles.navbar__extra}>
                     <Container>
                         {
-                            !!openMenu && tags && <div className={'py-5 ' + styles.navbar__list}>
+                            tags && <div className={!!openMenu ? 'padding-3-y ' + styles.navbar__list  : styles.navbar__list} data-active={!!openMenu}>
                                 {tags.map((tag, index) => (
                                     <Link href={`/categorias${tag.path}/${tag.slug}`} key={index}>
                                             <p className="header-list "
