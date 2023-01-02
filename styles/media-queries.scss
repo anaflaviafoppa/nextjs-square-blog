@@ -1,17 +1,17 @@
 $breakpoints: (
         'phone': 320px,
-        'tablet': 768px,
-        'desktop': 1024px
+        'tablet': 1200px,
+        'desktop': 1240px
 ) !default;
 
 $phone: 420px;
 $tablet: 768px;
-$desktop: 1024px;
+$desktop: 1240px;
 
 $media_queries : (
         'mobile'    : screen and (max-width: $phone),
-        'tablet'    : screen and (min-width: $phone) and (max-width: $tablet),
-        'desktop'   : screen and (min-width: ($tablet + 1)),
+        'tablet'    : screen and (max-width: $desktop),
+        'desktop'   : screen and (min-width: ($desktop + 1)),
         'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
         'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
         'landscape' : "screen and (orientation:landscape) ",
