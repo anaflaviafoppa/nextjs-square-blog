@@ -4,16 +4,18 @@ import Container from '../components/containers/container/container'
 import Layout from '../components/layout'
 import {getAllPostsForHome, getCategories} from '../lib/api'
 import {CarouselUnit} from '../components/widgets/carousel/carousel-unit';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import Tag from '../components/components/tag/tag';
-import {Alignment, IdsName, Priority} from '../components/utils/constants';
+import {Alignment, IdsName, Priority, TagsLabels} from '../components/utils/constants';
 import TagContainer from '../components/containers/tag-container/tag-container';
 import MainPosts from '../components/widgets/main-posts/main-posts';
 import Cards from '../components/widgets/cards/cards';
 import ImageSection from '../components/components/image-section/image-section';
 import {getHeaderCTA, getLabels} from '../lib/services/header';
+import {getAllCategories} from '../lib/services/category';
+import Link from 'next/link';
 
-export default function Index({allPosts: {edges},labels, CTAHeader, carouselPosts, preview}) {
+export default function Index({allPosts: {edges},labels, CTAHeader, carouselPosts, allCategories, preview}) {
     const heroPost = edges[0]?.node
     const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
@@ -31,15 +33,24 @@ export default function Index({allPosts: {edges},labels, CTAHeader, carouselPost
             <CarouselUnit id={IdsName.CAROUSEL} posts={carouselPost} />
             <Container>
                 <div className="py-16">
-                    <TagContainer alignment={Alignment.CENTER}>
-                        {tags.map((tag, index) => {
-                            const isSelected = tag === tagSelected;
+                    {allCategories && <TagContainer alignment={Alignment.CENTER}>
+
+                        <Link href={'/'}>
+                            <Tag clickable={true} text={'Mostrar Todos'} type={Priority.PRIMARY}
+                                 isSelected={true}
+                                 slug={TagsLabels.ALL}
+                            />
+                        </Link>
+
+                        {allCategories?.map((tag, index) => {
                             return (
-                                <Tag key={index} clickable={true} text={tag} type={Priority.SECONDARY}
-                                     isSelected={isSelected}/>
+                                <Link href={tag.path} key={index}>
+                                    <Tag key={index} clickable={true} text={tag.name} type={Priority.SECONDARY}
+                                         isSelected={false} />
+                                </Link>
                             )
                         })}
-                    </TagContainer>
+                    </TagContainer>}
                 </div>
 
                 {/*{heroPost && (
@@ -69,11 +80,12 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
     const allPosts = await getAllPostsForHome(preview);
     const carouselPosts = await getCategories('carousel', preview);
+    const allCategories = await getAllCategories();
 
     const labels = await getLabels();
     const CTAHeader = await getHeaderCTA();
     return {
-        props: {allPosts, labels, preview, CTAHeader, carouselPosts},
+        props: {allPosts, labels, preview,allCategories, CTAHeader, carouselPosts},
         revalidate: 10,
     }
 }

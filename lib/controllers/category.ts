@@ -55,6 +55,29 @@ export async function getTitleFromPage(name: string | string[]) {
     return data?.pages;
 }
 
+export async function getAllValidCategories() {
+    const data = await fetchAPI(`
+    {
+      categories(first: 10, where: {nameLike: "bom", exclude: "[dGVybToy]"}) {
+        nodes {
+          id
+          name
+          uri
+          children {
+            nodes {
+              name
+              uri
+              slug
+            }
+          }
+        }
+      }
+    }
+    `)
+
+    return data?.categories;
+}
+
 export async function getChildrenCategory(name: string | string[]) {
     const data = await fetchAPI(`
     {

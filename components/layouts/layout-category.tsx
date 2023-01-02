@@ -15,20 +15,6 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, pr
     const content = title?.[0]?.node?.content;
     const tagsList = tags?.children?.nodes;
 
-    const handleFilterPerTag = (findKey: string) => {
-        let pathname = '/categorias/' + router.query.label
-
-
-        const isSubCategory = findKey !== TagsLabels.ALL;
-        if (isSubCategory) {
-            pathname = pathname + '/' + findKey;
-        }
-
-        router.replace({pathname}, undefined, {shallow: true}).then(() => {
-            router.reload();
-        })
-    }
-
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
             <div className={'container-large ' + styles.layout__title}>
@@ -44,18 +30,19 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, pr
                 {tagsList?.length > 1 &&
                     <div className="container-y">
                         <TagContainer alignment={Alignment.CENTER}>
-                            <Link href={'/'}>
+                            <Link href={'/categorias/' + router.query.label}>
                                 <Tag clickable={true} text={'Mostrar Todos'} type={Priority.PRIMARY}
                                      isSelected={selectedLabel === TagsLabels.ALL}
                                      slug={TagsLabels.ALL}
-                                     onClickFunction={handleFilterPerTag}
                                 />
                             </Link>
                             {tagsList?.map((tag, index) => {
                                 return (
-                                    <Tag clickable={true} key={index} text={tag.name} type={Priority.SECONDARY}
-                                         isSelected={selectedLabel === tag.slug} onClickFunction={handleFilterPerTag}
+                                    <Link href={'/categorias/' + router.query.label + '/' + tag.slug}>
+                                        <Tag clickable={true} key={index} text={tag.name} type={Priority.SECONDARY}
+                                         isSelected={selectedLabel === tag.slug}
                                          slug={tag.slug}/>
+                                    </Link>
                                 )
                             })}
                         </TagContainer>

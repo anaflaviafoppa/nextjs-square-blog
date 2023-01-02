@@ -1,6 +1,11 @@
 
 import {CacheLabels} from '../../components/utils/cache';
-import {getChildrenCategory, getPostsByCategory, getTitleFromPage} from '../controllers/category';
+import {
+    getAllValidCategories,
+    getChildrenCategory,
+    getPostsByCategory,
+    getTitleFromPage
+} from '../controllers/category';
 import CacheData from '../cache-data';
 
 export async function getPostsByCategories(slug: string | string[]) {
@@ -34,4 +39,28 @@ export async function getChildrenCategories(name: string | string[]) {
     const data = await getChildrenCategory(name);
     CacheData.set({key: CacheLabels.TAGS_CATEGORY + name, value: data?.nodes[0]});
     return data?.nodes[0];
+}
+
+export async function getAllCategories() {
+    const categories =  CacheData.get(CacheLabels.ALL_TAGS_CATEGORY);
+    console.log('CATEGORIES', categories)
+    if(categories) {
+        return categories;
+    }
+
+    const categoriesMapped = [];
+    function mapCategories(categories) {
+        categories.forEach(parent => {
+            categoriesMapped.push({name: parent.name, path: parent.uri});
+            parent.children.nodes.forEach(children => {
+                categoriesMapped.push({name: children.name, path: children.uri});
+            })
+        })
+    };
+
+    const data = await getAllValidCategories();
+
+    mapCategories(data?.nodes);
+    CacheData.set({key: CacheLabels.ALL_TAGS_CATEGORY, value: categoriesMapped})
+    return  categoriesMapped;
 }

@@ -41,7 +41,13 @@
 
 /**************TAGS**********/
 h2 {
-  @apply text-7xl font-[600] leading-large mb-16
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 4rem;
+  @include for_breakpoint(tablet) {
+    font-size: 3rem;
+  }
 }
 
 h3 {

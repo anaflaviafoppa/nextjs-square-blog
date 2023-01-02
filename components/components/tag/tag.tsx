@@ -8,24 +8,21 @@ interface Props {
     type: string,
     clickable: boolean,
     isSelected: boolean,
-    onClickFunction?: any,
-    slug?: string
+    slug?: string,
 }
 
-function Tag({text, type, clickable, isSelected, onClickFunction, slug}: Props) {
+function Tag({text, type, clickable, isSelected, slug}: Props) {
     const clickableClass = clickable ? `${styles.tag__clickable} ` : '';
     const priorityClass = type ===  Priority.PRIMARY ? `${styles.tag__primary} ` : `${styles.tag__secondary} `;
     const selectedClass = isSelected ? `${styles.tag__selected} ` : '';
 
-    const handleOnClick = () => {
-        onClickFunction(slug)
-    }
 
     return (
-        <div className={`${styles.tag} ${clickableClass} ${priorityClass} ${selectedClass}`}
-             onClick={() => handleOnClick()}>
-            <span>{text}</span>
-        </div>
+
+            <div className={`${styles.tag} ${clickableClass} ${priorityClass} ${selectedClass}`}>
+                <span>{text}</span>
+            </div>
+
     );
 }
 
