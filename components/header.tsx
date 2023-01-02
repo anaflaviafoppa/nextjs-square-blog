@@ -183,7 +183,7 @@ export default function Header({labels, searchKey = ''}) {
                         }
 
 
-                            <div className="py-16 px-96" active={openFilter ? 'true' : 'false'}>
+                            <div className={openFilter ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}  data-active={openFilter ? 'true' : 'false'}>
                                 <form onSubmit={handleSubmit}>
                                     <input type="search" className="text-base input__primary"
                                            required

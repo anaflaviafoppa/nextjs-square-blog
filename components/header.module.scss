@@ -99,14 +99,27 @@ $grid-column-gap: 12rem;
         }
     }
 
-    &__container_search[active=false] {
-     /* animation-direction: ver;*/
-        height: 0rem;
-        transition: all 0.5s ease-in-out;
+    &__container_search {
+        animation-direction: revert;
+        height: 0;
+        transition: $transition;
     }
 
-    &__container_search[active=true] {
+    &__container_search[data-active=false] {
+        form, input {
+            height: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    }
+
+
+    &__container_search[data-active=true] {
         height: auto;
+
+        form, input {
+            height: auto;
+        }
     }
 
 }

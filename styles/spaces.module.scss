@@ -1,5 +1,7 @@
 @import "variables.module";
 
+
+//CONTAINERS
 .container-x {
   @apply px-32
 }
@@ -24,10 +26,20 @@
   @apply p-32
 }
 
+//MARGIN
 .margin-80-bottom {
   @apply mb-32
 }
 
+//PADDING
 .padding-56-y {
   @apply py-24
+}
+
+.padding-4-y {
+  @apply py-16
+}
+
+.padding-24-x {
+  @apply px-96
 }
