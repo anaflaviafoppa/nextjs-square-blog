@@ -1,9 +1,13 @@
 @import "variables.module";
+@import "media-queries";
 
 
 //CONTAINERS
 .container-x {
-  @apply px-32
+  padding: 0 8rem;
+  @include for_breakpoint(tablet) {
+    padding: 0 3rem;
+  }
 }
 
 .container-y {
@@ -39,7 +43,12 @@
 }
 
 .padding-4-y {
-  @apply py-16
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+  @include for_breakpoint(tablet) {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
 }
 
 .padding-3-y {
@@ -48,6 +57,12 @@
 
 //PADDING HORIZONTAL
 .padding-24-x {
-  @apply px-96
+  padding-right: 24rem;
+  padding-left: 24rem;
+
+  @include for_breakpoint(tablet) {
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
 }
 

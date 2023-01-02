@@ -1,4 +1,5 @@
 @import "../styles/variables.module";
+@import "../styles/media-queries";
 $grid-gap: 4.2rem;
 $grid-column-gap: 12rem;
 
@@ -27,11 +28,19 @@ $grid-column-gap: 12rem;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        @include for_breakpoint(tablet) {
+            display: none;
+        }
     }
 
     &__container_links_search {
         margin: 0 auto;
         display: flex;
+
+        @include for_breakpoint(tablet) {
+            margin: 0;
+        }
     }
 
     &__text {
@@ -73,6 +82,10 @@ $grid-column-gap: 12rem;
 
     &__button {
         justify-self: flex-end;
+
+        @include for_breakpoint(tablet) {
+            display: none;
+        }
     }
 
     &__extra {
@@ -133,5 +146,17 @@ $grid-column-gap: 12rem;
         }
     }
 
+    &__icon {
+        display: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        @include for_breakpoint(tablet) {
+            display: block;
+        }
+    }
 }
+
 

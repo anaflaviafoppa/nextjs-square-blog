@@ -33,9 +33,7 @@ input {
 }
 
 .input__primary[type=search] {
-  /*
-  background: url('../public/images/search-icon-grey.png') top left no-repeat;
-  */
+  background: url('/images/search-icon-grey.png') top left no-repeat;
   background-size: 2rem;
   padding-left: 3.6rem;
 }
@@ -44,9 +42,7 @@ input {
   -webkit-appearance: none;
   height: 1em;
   width: 1em;
-  /*
-  background: url('../public/images/xbutton.png') no-repeat 50% 50%;
-  */
+  background: url('/images/xbutton.png') no-repeat 50% 50%;
   background-size: contain;
   opacity: 0;
   pointer-events: none;

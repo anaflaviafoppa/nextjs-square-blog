@@ -108,6 +108,13 @@ export default function Header({labels, searchKey = ''}: Props) {
                 <div className={styles.navbar__fixed} style={{background: backgroundColor}}>
                     <Container>
                         <div className={styles.navbar__container}>
+                            <div className={styles.navbar__icon}>
+                                <Image src={'/images/three-lines.png'}
+                                       alt={'Click to Open the menu'}
+                                       width={32}
+                                       height={32}
+                                />
+                            </div>
                             <Link href='/'>
                             <Image
                                 width={120}
