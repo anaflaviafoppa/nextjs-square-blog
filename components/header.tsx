@@ -32,7 +32,7 @@ export default function Header({labels, searchKey = ''}: Props) {
     const [styleHeader, setStyleHeader] = useState<any>(styleConsistent);
     const [backgroundColor, setBackgroundColor] = useState<string>(backgroundConsistent);
     const [openMenu, setOpenMenu] = useState<string>('');
-    const [openFilter, setOpenFilter] = useState<boolean>(false);
+    const [openMobileMenu, setOpenMobileMenu] = useState<string>('test');
     const [tags, setTags] = useState<Array<TagsModel>>();
     const [selectedLabelId, setSelectedLabelId] = useState<string>();
     const [findKey, setFindKey] = useState<string>(searchKey);
@@ -41,19 +41,27 @@ export default function Header({labels, searchKey = ''}: Props) {
         verifyIsInitialPage();
         verifyRouter();
 
-    }, [labels])
+    }, [openMobileMenu])
 
     const verifyIsInitialPage = () => {
         const isInitialPage = router.pathname === Pages.INITIAL;
-        if(isInitialPage) {
+        const isOpenedMenuMobile = openMobileMenu === MenuName.MOBILE;
+        if(isInitialPage && !isOpenedMenuMobile) {
             changeBackground();
             window.addEventListener("scroll", changeBackground)
         }
     }
 
     const changeBackground = () => {
+        const isOpenedMenuMobile = openMobileMenu === MenuName.MOBILE;
+
+        if(isOpenedMenuMobile) {
+            return;
+        };
+
         const element = document.getElementById(IdsName.CAROUSEL);
         const positions = element?.getBoundingClientRect();
+
 
         if (window.scrollY <= positions?.bottom) {
             setStyleHeader(styleTop)
@@ -103,6 +111,7 @@ export default function Header({labels, searchKey = ''}: Props) {
     const handleOpenFilter = (): void => {
         const isOpenedFilterMenu = openMenu === MenuName.SEARCH_FILTER;
         setOpenMenu(isOpenedFilterMenu ? '' : MenuName.SEARCH_FILTER);
+        setOpenMobileMenu('')
     }
 
     const handleSubmit = (event) => {
@@ -113,11 +122,13 @@ export default function Header({labels, searchKey = ''}: Props) {
     }
 
     const handleOpenMobileMenu = () => {
-        const isMobileMenuOpen = openMenu === MenuName.LABELS_MOBILE;
-        if(isMobileMenuOpen) {
+        const isMobileMenuOpen = openMobileMenu === MenuName.MOBILE;
+        if (isMobileMenuOpen) {
+            setOpenMobileMenu('');
             setOpenMenu('');
             verifyIsInitialPage();
         } else {
+            setOpenMobileMenu(MenuName.MOBILE);
             setOpenMenu(MenuName.LABELS_MOBILE);
             setBackgroundColor(backgroundConsistent);
             setStyleHeader(styleConsistent);
@@ -225,7 +236,10 @@ export default function Header({labels, searchKey = ''}: Props) {
                     </Container>
                 </div>
 
-                <div className={styles.navbar__extra_mobile} data-active={openMenu === MenuName.LABELS_MOBILE || openMenu === MenuName.CATEGORIES_MOBILE}>
+
+
+                <div className={styles.navbar__extra_mobile} data-active={openMobileMenu === MenuName.MOBILE}>
+
                         <div className={'container-x ' + styles.navbar__extra_first_menu}
                              data-active={openMenu === MenuName.LABELS_MOBILE}>
                             <div className={styles.navbar__extra_labels}>
