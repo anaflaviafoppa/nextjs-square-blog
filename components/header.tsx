@@ -63,6 +63,10 @@ export default function Header({labels, searchKey = ''}: Props) {
     }
 
     const getSelectedTags = (id: string) => {
+        if(!id) {
+            return;
+        }
+
         if (categories[id]) {
             setTags(categories[id]);
         }
@@ -241,7 +245,7 @@ export default function Header({labels, searchKey = ''}: Props) {
                         </div>
 
                         <div className={'container-x ' + styles.navbar__extra_second_menu} data-active={openMenu === MenuName.CATEGORIES_MENU_MOBILE}>
-                            <div className={styles.navbar__back}>
+                            <div className={styles.navbar__back} onClick={() => handleClickCategoriesMobile('')}>
                                 <div>
                                     <Image
                                         width={15.83}
