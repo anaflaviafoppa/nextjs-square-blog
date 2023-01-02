@@ -1,4 +1,5 @@
 @import '../styles/variables.module';
+@import '../styles/media-queries';
 
 
 .carousel__slide {
@@ -6,17 +7,30 @@
   grid-template-columns: 1fr 1fr;
   min-height: 65rem;
 
+  @include for_breakpoint(tablet) {
+    grid-template-columns: 1fr;
+  }
+
   &_title {
     color: $color-yellow;
   }
 
   &__container {
-    padding-left: calc(($size-80 * 2) + $size-32);
+    padding-left: calc((8rem * 2) + 3.2rem);
     padding-right: $size-120;
+
+    @include for_breakpoint(tablet) {
+      padding: 0 3rem;
+      text-align: center;
+    }
   }
 
   &__container_button {
     padding-right: $size-100;
+
+    @include for_breakpoint(tablet) {
+      padding-right:0rem;
+    }
   }
 
 }

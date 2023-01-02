@@ -97,6 +97,10 @@ span {
   width: 11rem;
   justify-content: flex-end;
 
+  @include for_breakpoint(tablet) {
+    width: 6rem;
+  }
+
   span {
     background-color: $color-black-transparent;
     border-radius: 50%;
