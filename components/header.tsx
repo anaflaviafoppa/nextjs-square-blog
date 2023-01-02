@@ -18,17 +18,16 @@ export default function Header({labels, searchKey = ''}) {
     const backgroundConsistent = '#2A2A2A';
 
     const styleTop = {
-        background: backgroundGradient,
         position: 'fixed',
     };
 
     const styleConsistent = {
-        background: backgroundConsistent,
         position: 'sticky',
         top: 0
     };
 
     const [styleHeader, setStyleHeader] = useState<any>(styleConsistent);
+    const [backgroundColor, setBackgroundColor] = useState<string>(backgroundConsistent);
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [openFilter, setOpenFilter] = useState<boolean>(false);
     const [tags, setTags] = useState<Array<TagsModel>>();
@@ -46,15 +45,13 @@ export default function Header({labels, searchKey = ''}) {
 
     }, [labels])
 
-    const isVisibleTags = () => {
-        return !!openMenu && tags;
-    }
-
     const changeBackground = () => {
         if (window.scrollY <= 600) {
             setStyleHeader(styleTop)
+            setBackgroundColor(backgroundGradient);
         } else {
-            setStyleHeader(styleConsistent)
+            setStyleHeader(styleConsistent);
+            setBackgroundColor(backgroundConsistent)
         }
     }
 
@@ -104,8 +101,8 @@ export default function Header({labels, searchKey = ''}) {
 
     return (
         <>
-            <nav className={styles.navbar}>
-                <div className={styles.navbar__fixed} style={styleHeader}>
+            <nav className={styles.navbar}  style={styleHeader}>
+                <div className={styles.navbar__fixed} style={{background: backgroundColor}}>
                     <Container>
                         <div className={styles.navbar__container}>
                             <Link href='/'>
