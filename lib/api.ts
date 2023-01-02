@@ -47,7 +47,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
 export async function getAllPostsWithSlug() {
     const data = await fetchAPI(`
     {
-      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
+      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=, dGVybTo2NDU=]" }) {
         edges {
           node {
             slug
@@ -59,12 +59,62 @@ export async function getAllPostsWithSlug() {
     return data?.posts
 }
 
+export async function getCategories(slug: string, preview) {
+    const data = await fetchAPI(`
+     query AllPosts {
+      posts(
+        first: 20
+        where: {orderby: {field: DATE, order: DESC}, categoryName: "${slug}"}
+      ) {
+        edges {
+          node {
+            title
+            excerpt
+            slug
+            date
+            uri
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+            }
+            categories(first: 10) {
+              nodes {
+                name
+                parentId
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+        {
+            variables: {
+                onlyEnabled: !preview,
+                preview,
+            },
+        });
+
+    return data?.posts
+}
+
 export async function getAllPostsForHome(preview) {
     const data = await fetchAPI(
         `
     query AllPosts {
       posts(first: 20,
-       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
+       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=, dGVybTo2NDU=]" }) {
         edges {
           node {
             title

@@ -5,7 +5,6 @@
 .carousel__slide {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 65rem;
 
   @include for_breakpoint(tablet) {
     grid-template-columns: 1fr;
@@ -17,7 +16,6 @@
 
   &__container {
     padding-left: calc((8rem * 2) + 3.2rem);
-    padding-right: $size-120;
 
     @include for_breakpoint(tablet) {
       padding: 0 3rem;
@@ -29,7 +27,7 @@
     padding-right: $size-100;
 
     @include for_breakpoint(tablet) {
-      padding-right:0rem;
+      padding-right: 0;
     }
   }
 

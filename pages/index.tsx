@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {GetStaticProps} from 'next'
 import Container from '../components/containers/container/container'
 import Layout from '../components/layout'
-import {getAllPostsForHome} from '../lib/api'
+import {getAllPostsForHome, getCategories} from '../lib/api'
 import {CarouselUnit} from '../components/widgets/carousel/carousel-unit';
 import {useState} from 'react';
 import Tag from '../components/components/tag/tag';
@@ -13,9 +13,9 @@ import Cards from '../components/widgets/cards/cards';
 import ImageSection from '../components/components/image-section/image-section';
 import {getHeaderCTA, getLabels} from '../lib/services/header';
 
-export default function Index({allPosts: {edges},labels, CTAHeader, preview}) {
+export default function Index({allPosts: {edges},labels, CTAHeader, carouselPosts, preview}) {
     const heroPost = edges[0]?.node
-    const carouselPost = edges.slice(0, 3);
+    const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
     const morePosts = edges.slice(2);
     const tags = ['mostrar todos', 'aves', 'bom de assistir', 'BOM DE FAZER', 'BOM SABER', 'DOCES E SOBREMESAS', 'CARNES', 'CURIOSIDADES'];
@@ -68,11 +68,12 @@ export default function Index({allPosts: {edges},labels, CTAHeader, preview}) {
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
     const allPosts = await getAllPostsForHome(preview);
+    const carouselPosts = await getCategories('carousel', preview);
 
     const labels = await getLabels();
     const CTAHeader = await getHeaderCTA();
     return {
-        props: {allPosts, labels, preview, CTAHeader},
+        props: {allPosts, labels, preview, CTAHeader, carouselPosts},
         revalidate: 10,
     }
 }

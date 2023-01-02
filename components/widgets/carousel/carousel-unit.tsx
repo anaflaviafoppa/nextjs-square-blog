@@ -12,6 +12,7 @@ interface Props {
 export const CarouselUnit = ({posts, id}: Props) => {
     return (
         <div className={styles.carousel} id={id}>
+            { posts &&
             <Carousel>
                 {posts.map(({node}, index) => (
                     <Carousel.Item
@@ -29,6 +30,7 @@ export const CarouselUnit = ({posts, id}: Props) => {
                 ))}
 
             </Carousel>
+            }
         </div>
     );
 };
