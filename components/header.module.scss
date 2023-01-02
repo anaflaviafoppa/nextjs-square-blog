@@ -92,9 +92,6 @@ $grid-column-gap: 12rem;
         background-color: $color-white;
     }
 
-    &__logo {
-    }
-
 
     &__list {
         display: flex;
@@ -155,6 +152,82 @@ $grid-column-gap: 12rem;
 
         @include for_breakpoint(tablet) {
             display: block;
+        }
+    }
+
+    &__extra_mobile {
+        background: $color-brown;
+        height:0;
+        width: 100vw;
+        transition: $transition;
+        padding-top: 7rem;
+
+    }
+
+    &__extra_mobile[data-active=true] {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    &__extra_mobile &__extra_labels, &__extra_mobile &__extra_button {
+        display: none;
+    }
+
+    &__extra_mobile[data-active=true]  &__extra_labels,
+    &__extra_mobile[data-active=true]  &__extra_button,
+    {
+        display: block;
+    }
+
+    &__extra_mobile[data-active=true] &__text {
+        margin-bottom: 4rem;
+    }
+
+    &__extra_first_menu,
+    &__extra_second_menu {
+        width: 0;
+    }
+
+    &__extra_first_menu[data-active=false] &__extra_labels,
+    &__extra_first_menu[data-active=false] &__extra_button,
+    {
+        display: none;
+    }
+
+    &__extra_first_menu[data-active=true]{
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: inherit;
+    }
+
+    &__extra_second_menu[data-active=true] {
+        width: auto;
+        height: inherit;
+    }
+
+
+    &__extra_mobile[data-active=true] &__text {
+        img {
+            transform: rotate(270deg);
+        }
+    }
+
+    &__extra_second_menu &__back {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4rem;
+
+
+        span {
+            margin-left: 1rem;
+            color: $color-balance-gray;
+            font-size: 1.6rem;
+        }
+
+        img {
+            transform: rotate(90deg);
         }
     }
 }

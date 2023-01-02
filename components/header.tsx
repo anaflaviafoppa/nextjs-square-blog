@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import Container from './containers/container/container';
 import styles from './header.module.scss';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {IdsName, Pages} from './utils/constants';
+import {IdsName, MenuName, Pages} from './utils/constants';
+import ListCategories from './components/list-categories/list-categories';
+import ListLabels from './components/list-labels/list-labels';
+import {Dropdown} from '@restart/ui';
+import Menu = Dropdown.Menu;
 
 interface Props {
     labels: any,
@@ -28,7 +32,7 @@ export default function Header({labels, searchKey = ''}: Props) {
 
     const [styleHeader, setStyleHeader] = useState<any>(styleConsistent);
     const [backgroundColor, setBackgroundColor] = useState<string>(backgroundConsistent);
-    const [openMenu, setOpenMenu] = useState<boolean>(false);
+    const [openMenu, setOpenMenu] = useState<string>('');
     const [openFilter, setOpenFilter] = useState<boolean>(false);
     const [tags, setTags] = useState<Array<TagsModel>>();
     const [selectedLabelId, setSelectedLabelId] = useState<string>();
@@ -67,15 +71,16 @@ export default function Header({labels, searchKey = ''}: Props) {
     }
 
     const handleClickCategories = (id: string): void => {
-        if (id === selectedLabelId && openMenu) {
-            setOpenMenu(!openMenu);
-        } else if (id !== selectedLabelId && openMenu) {
+        const isOpenedMenu = openMenu === MenuName.CATEGORIES_MENU;
+        if (id === selectedLabelId && isOpenedMenu) {
+            setOpenMenu('');
+        } else if (id !== selectedLabelId && isOpenedMenu) {
             getSelectedTags(id);
-        } else if (id !== selectedLabelId && !openMenu) {
+        } else if (id !== selectedLabelId && !isOpenedMenu) {
             getSelectedTags(id);
-            setOpenMenu(!openMenu);
-        } else if (id === selectedLabelId && !openMenu) {
-            setOpenMenu(!openMenu);
+            setOpenMenu(MenuName.CATEGORIES_MENU);
+        } else if (id === selectedLabelId && !isOpenedMenu) {
+            setOpenMenu(MenuName.CATEGORIES_MENU);
         }
 
         setSelectedLabelId(id);
@@ -84,14 +89,14 @@ export default function Header({labels, searchKey = ''}: Props) {
     const verifyRouter = () => {
         const isSearchPath = router.pathname === Pages.SEARCH;
         if(isSearchPath) {
-            setOpenMenu(false);
+            setOpenMenu('');
             setOpenFilter(true);
             setFindKey(searchKey);
         }
     }
 
     const handleOpenFilter = (): void => {
-        setOpenMenu(false);
+        setOpenMenu('');
         setOpenFilter(!openFilter)
     }
 
@@ -100,6 +105,25 @@ export default function Header({labels, searchKey = ''}: Props) {
         router.push(`/search/${findKey}`)
             .then(() => {})
 
+    }
+
+    const handleOpenMobileMenu = () => {
+        const isMobileMenuOpen = openMenu === MenuName.MOBILE_MENU;
+        if(isMobileMenuOpen) {
+            setOpenMenu('')
+        } else {
+            setOpenMenu(MenuName.MOBILE_MENU);
+        }
+    }
+
+    const handleClickCategoriesMobile = (id: string): void => {
+        const isMobileCategoriesMenuOpen = openMenu === MenuName.CATEGORIES_MENU_MOBILE;
+        if(isMobileCategoriesMenuOpen) {
+            setOpenMenu('')
+        } else {
+            getSelectedTags(id);
+            setOpenMenu(MenuName.CATEGORIES_MENU_MOBILE);
+        }
     }
 
     return (
@@ -113,6 +137,7 @@ export default function Header({labels, searchKey = ''}: Props) {
                                        alt={'Click to Open the menu'}
                                        width={32}
                                        height={32}
+                                       onClick={() => handleOpenMobileMenu()}
                                 />
                             </div>
                             <Link href='/'>
@@ -127,30 +152,10 @@ export default function Header({labels, searchKey = ''}: Props) {
                             <div className={styles.navbar__container_links_search}>
 
                             <div className={styles.navbar__links}>
-                                {
-                                    labels?.map((label) => {
-                                        return (
-                                            <div className={styles.navbar__text} key={label.id}
-                                                 selected-label={(label.id === selectedLabelId && openMenu).toString()}>
-                                                                            <Link href={`/categorias${label.path}`}>
-                                                    <p className="header-labels"
-                                                   selected-label={(label.id === selectedLabelId && openMenu).toString()}>{label.label}</p>
-                                                                            </Link>
-                                                {
-                                                    !!label.children.length &&
-                                                    <div onClick={() => handleClickCategories(label.id)}>
-                                                        <Image
-                                                            width={15.83}
-                                                            height={9.17}
-                                                            alt={`Arrow`}
-                                                            src={label.id === selectedLabelId && openMenu ? '/images/arrow_yellow.png' : '/images/arrow.png'}
-                                                        />
-                                                    </div>
-                                                }
-                                            </div>
-                                        )
-                                    })
-                                }
+                                <ListLabels labels={labels}
+                                            selectedLabelId={selectedLabelId}
+                                            isOpenedMenu={openMenu === MenuName.CATEGORIES_MENU}
+                                            handleClickCategories={handleClickCategories} />
                             </div>
 
                             <div className={styles.navbar__search}>
@@ -182,14 +187,8 @@ export default function Header({labels, searchKey = ''}: Props) {
                 <div className={styles.navbar__extra}>
                     <Container>
                         {
-                            tags && <div className={!!openMenu ? 'padding-3-y ' + styles.navbar__list  : styles.navbar__list} data-active={!!openMenu}>
-                                {tags.map((tag, index) => (
-                                    <Link href={`/categorias${tag.path}/${tag.slug}`} key={index}>
-                                            <p className="header-list "
-                                               >{tag.label}</p>
-                                    </Link>
-                                    )
-                                )}
+                            tags && <div className={openMenu === MenuName.CATEGORIES_MENU ? 'padding-3-y ' + styles.navbar__list  : styles.navbar__list} data-active={openMenu === MenuName.CATEGORIES_MENU}>
+                                <ListCategories tags={tags} />
                             </div>
                         }
 
@@ -214,6 +213,50 @@ export default function Header({labels, searchKey = ''}: Props) {
                             </div>
                         }
                     </Container>
+                </div>
+
+                <div className={styles.navbar__extra_mobile} data-active={openMenu === MenuName.MOBILE_MENU || openMenu === MenuName.CATEGORIES_MENU_MOBILE}>
+                        <div className={'container-x ' + styles.navbar__extra_first_menu}
+                             data-active={openMenu === MenuName.MOBILE_MENU}>
+                            <div className={styles.navbar__extra_labels}>
+                                <ListLabels labels={labels}
+                                            selectedLabelId={selectedLabelId}
+                                            isOpenedMenu={false}
+                                            handleClickCategories={handleClickCategoriesMobile} />
+                            </div>
+
+                            <div className={styles.navbar__extra_button}>
+                                <button className='text-base button__primary button__primary-rounded'>
+                                    <div className="button__icon">
+                                        <Image
+                                            width={21.65}
+                                            height={18.81}
+                                            alt={`House icon`}
+                                            src='/images/house.png'
+                                        />
+                                    </div>
+                                    Loja Virtual
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={'container-x ' + styles.navbar__extra_second_menu} data-active={openMenu === MenuName.CATEGORIES_MENU_MOBILE}>
+                            <div className={styles.navbar__back}>
+                                <div>
+                                    <Image
+                                        width={15.83}
+                                        height={9.17}
+                                        alt={`Arrow`}
+                                        src={'/images/arrow.png'}
+                                    />
+                                </div>
+
+                                <span>Voltar</span>
+                            </div>
+                                <ListCategories color={'lighter'} tags={tags} />
+
+                        </div>
+
                 </div>
 
             </nav>

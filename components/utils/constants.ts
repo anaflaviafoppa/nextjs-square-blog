@@ -26,3 +26,9 @@ export enum TagsLabels {
 export enum IdsName {
     CAROUSEL = 'carousel'
 }
+
+export enum MenuName {
+    MOBILE_MENU = 'MOBILE_MENU',
+    CATEGORIES_MENU = 'CATEGORIES_MENU',
+    CATEGORIES_MENU_MOBILE = 'CATEGORIES_MENU_MOBILE'
+}

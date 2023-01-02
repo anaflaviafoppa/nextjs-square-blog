@@ -1,4 +1,5 @@
 @import "variables.module";
+@import "media-queries";
 
 /*********SPECIAL TITLES******************/
 //Big titles
@@ -22,6 +23,20 @@
 
 .header-list {
   @apply text-base text-[#2A2A2A] font-[300] leading-large capitalize mr-14
+}
+
+.header-list-lighter {
+  font-size: 1.6rem;
+  color: $color-white;
+  font-weight: 300;
+  text-transform: capitalize;
+  margin-right: 3.5rem;
+  line-height: 1.5;
+
+  @include for_breakpoint(tablet) {
+   text-transform: uppercase;
+    margin-bottom: 4rem;
+  }
 }
 
 /**************TAGS**********/
