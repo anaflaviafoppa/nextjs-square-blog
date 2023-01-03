@@ -5,11 +5,24 @@
 //Big titles
 //Yellow
 .big-title {
-  @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-8 uppercase
+  @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-8 uppercase;
+  @include for_breakpoint(tablet) {
+    font-size: 3rem;
+  }
 }
 
 .big-subtitle {
-  @apply text-2xl text-[#FEBD1D] font-bold leading-[large] uppercase
+  @apply text-2xl text-[#FEBD1D] font-bold leading-[large] uppercase;
+
+  p{
+    @apply text-2xl text-[#FEBD1D] font-bold leading-[large] uppercase;
+    @include for_breakpoint(tablet) {
+      font-size: 1.4rem;
+    }
+  }
+  @include for_breakpoint(tablet) {
+    font-size: 1.4rem;
+  }
 }
 
 //NavBar Fonts:

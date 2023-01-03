@@ -1,8 +1,11 @@
 @import "../styles/variables.module";
+@import "../styles/spaces.module";
+@import "../styles/media-queries";
 
 
 .layout {
   &__title {
+    @apply container-large;
     background: $color-brown;
     display: flex;
     align-items: center;

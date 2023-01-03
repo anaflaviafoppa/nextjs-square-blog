@@ -9,7 +9,7 @@ import Tag from '../components/tag/tag';
 import MainPosts from '../widgets/main-posts/main-posts';
 import {useRouter} from 'next/router';
 
-function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, preview}) {
+function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, preview}) {
     const router = useRouter();
     const mainTest = title?.[0]?.node?.title;
     const content = title?.[0]?.node?.content;
@@ -17,7 +17,7 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, pr
 
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
-            <div className={'container-large ' + styles.layout__title}>
+            <div className={styles.layout__title}>
                 <div>
                     <h1 className="big-title">{mainTest}</h1>
                     <div
@@ -39,17 +39,18 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, pr
                             {tagsList?.map((tag, index) => {
                                 return (
                                     <Link href={'/categorias/' + router.query.label + '/' + tag.slug} key={index}>
-                                        <Tag clickable={true}  text={tag.name} type={Priority.SECONDARY}
-                                         isSelected={selectedLabel === tag.slug}
-                                         slug={tag.slug}/>
+                                        <Tag clickable={true} text={tag.name} type={Priority.SECONDARY}
+                                             isSelected={selectedLabel === tag.slug}
+                                             slug={tag.slug}/>
                                     </Link>
                                 )
                             })}
                         </TagContainer>
                     </div>
                 }
-                <MainPosts items={posts}/>
             </Container>
+            <MainPosts items={posts}/>
+
         </Layout>
     )
 }

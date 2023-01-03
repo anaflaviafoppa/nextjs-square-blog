@@ -27,7 +27,11 @@
 }
 
 .container-large {
-  @apply p-32
+  @apply p-32;
+
+  @include for_breakpoint(tablet) {
+    @apply p-16;
+  }
 }
 
 //MARGIN
