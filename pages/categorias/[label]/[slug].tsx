@@ -4,7 +4,6 @@ import {getHeaderCTA, getLabels} from '../../../lib/services/header';
 import {getChildrenCategories, getPostsByCategories, getTitlesFromPage} from '../../../lib/services/category';
 import {TagsLabels} from '../../../components/utils/constants';
 import LayoutCategory from '../../../components/layouts/layout-category';
-import {getHeaderContent} from '../../../lib/controllers/header';
 
 export default function SubCategory({labels, posts, title, tags, selectedLabel,CTAHeader, preview}) {
     return (

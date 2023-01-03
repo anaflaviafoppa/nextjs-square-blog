@@ -3,7 +3,7 @@ import {getChildrenCategories, getPostsByCategories, getTitlesFromPage} from '..
 import {getHeaderCTA, getLabels} from '../../lib/services/header';
 import {TagsLabels} from '../../components/utils/constants';
 import LayoutCategory from '../../components/layouts/layout-category';
-import {getHeaderContent} from '../../lib/controllers/header';
+
 
 interface Props {
     labels: any,

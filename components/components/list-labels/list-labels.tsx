@@ -7,10 +7,10 @@ function ListLabels({labels, selectedLabelId, isOpenedMenu, handleClickCategorie
     const realPath = (label):string => {
       const isExternalLink = label.isExternalLink;
       if(isExternalLink) {
-          return label.path;
+          return label?.path;
       }
 
-      return `/categorias${label.path}`;
+      return `/categorias${label?.path}`;
     }
 
     return (
