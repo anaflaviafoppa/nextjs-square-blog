@@ -1,12 +1,16 @@
+@import "./../styles/media-queries";
+
 .images {
  &__container {
    padding: 0 2rem;
-   display: grid;
-   grid-template-columns: repeat(9,1fr);
-   grid-gap: 4.3rem;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 4.3rem;
+   justify-content: center;
 
    img {
      max-height: 10rem;
+     width: auto;
    }
 
  }
