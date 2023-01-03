@@ -191,7 +191,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                 </div>
                             </div>
                             <div className={styles.navbar__button}>
-                                <Link href={CTAHeader.path || '/'} target="_blank">
+                                {CTAHeader && <Link href={CTAHeader?.path || '/'} target="_blank">
                                     <button className='text-base button__primary button__primary-rounded'>
                                         <div className="button__icon">
                                             <Image
@@ -201,9 +201,9 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                                 src='/images/house.png'
                                             />
                                         </div>
-                                        {CTAHeader.label}
+                                        {CTAHeader?.label}
                                     </button>
-                                </Link>
+                                </Link>}
                             </div>
                         </div>
                     </Container>
@@ -256,7 +256,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                         </div>
 
                         <div className={styles.navbar__extra_button}>
-                            <Link href={CTAHeader?.path || '/'} target="_blank">
+                            {CTAHeader && <Link href={CTAHeader?.path || '/'} target="_blank">
                                 <button className='text-base button__primary button__primary-rounded'>
                                     <div className="button__icon">
                                         <Image
@@ -268,7 +268,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                     </div>
                                     {CTAHeader.label}
                                 </button>
-                            </Link>
+                            </Link>}
                         </div>
                     </div>
 

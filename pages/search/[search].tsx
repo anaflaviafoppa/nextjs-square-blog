@@ -3,7 +3,7 @@ import Layout from '../../components/layout';
 import Container from '../../components/containers/container/container';
 import Cards from '../../components/widgets/cards/cards';
 import {GetStaticPaths, GetStaticProps, NextPage} from 'next';
-import {getLabels} from '../../lib/services/header';
+import {getHeaderCTA, getLabels} from '../../lib/services/header';
 import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
 import {getHeaderContent} from '../../lib/controllers/header';
@@ -32,7 +32,7 @@ export default function Search ({labels, posts, searchKey, preview,CTAHeader }: 
                                     maxPosts={6}
                     />
                 }
-                <h1>No results</h1>
+                {!posts?.length && <h1>No results</h1>}
             </Container>
         </Layout>
     );
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({
                                                      }) => {
 
     const labels = await getLabels();
-    const CTAHeader = await getHeaderContent();
+    const CTAHeader = await getHeaderCTA();
     const posts = await getFilteredItems(params.search);
     return {
         props: {

@@ -10,12 +10,13 @@ import CoverImage from '../../cover-image';
 function CardItem({title, excerpt, date, slug, category, featuredImage}) {
     return (
         <div>
-            <div className={style.item__image}>
-                <TagContainer alignment='start'>
-                    <Tag text={category?.name} type={Priority.PRIMARY} clickable={false} isSelected={true}/>
-                </TagContainer>
+            <div className={style.item__image} data-background={!!featuredImage}>
+                <div className={style.item__tag_container}>
+                    <TagContainer alignment='start'>
+                        <Tag text={category?.name} type={Priority.PRIMARY} clickable={false} isSelected={true}/>
+                    </TagContainer>
+                </div>
                 {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
-
             </div>
             <div className={style.item__description}>
                 <h3>{title}</h3>
