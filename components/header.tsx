@@ -256,7 +256,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                         </div>
 
                         <div className={styles.navbar__extra_button}>
-                            <Link href={CTAHeader.path || '/'} target="_blank">
+                            <Link href={CTAHeader?.path || '/'} target="_blank">
                                 <button className='text-base button__primary button__primary-rounded'>
                                     <div className="button__icon">
                                         <Image

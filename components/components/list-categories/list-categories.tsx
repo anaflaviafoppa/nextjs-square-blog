@@ -12,7 +12,7 @@ function ListCategories({tags, color}: Props) {
     return (
         <>
             {tags?.map((tag, index) => (
-                    <Link href={`/categorias${tag.path}/${tag.slug}`} key={index}>
+                    <Link href={`/categorias${tag?.path}/${tag.slug}`} key={index}>
                         <p className={className}
                         >{tag.label}</p>
                     </Link>
