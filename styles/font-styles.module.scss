@@ -51,6 +51,49 @@ h2 {
 }
 
 h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 1.5;
 
+  @include for_breakpoint(tablet) {
+    font-size: 2rem;
+  }
+}
+
+h4 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 150%;
+}
+
+p{
+  font-size: $size-16;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+span {
+  font-size: $size-12;
+  font-weight: 300;
+  line-height: 150%;
+}
+
+.title__border {
+  border-bottom: $border;
+  padding-bottom: $size-8;
+  max-width: $size-560;
+  margin-bottom: $size-8;
+
+  h3 {
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &_container span {
+    font-size: $size-14;
+    color: $color-gray;
+    font-weight: bold;
+  }
 }
 

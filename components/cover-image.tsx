@@ -16,16 +16,28 @@ interface Props {
 
 export default function CoverImage({ title, coverImage, slug, width, height }: Props) {
   const isFill = !width || !height;
+  const url = coverImage?.node.sourceUrl;
+  const style = {
+      backgroundImage: `url(${url})`,
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      width: "100%",
+      height: "100%"
+  }
 
   const image = (
-    <Image
+    /*<Image
       fill={isFill}
       alt={`Cover Image for ${title}`}
       src={coverImage?.node.sourceUrl}
       className={cn('object-contain object-center w-auto h-auto', {
         'hover:shadow-medium transition-shadow duration-200': slug,
       })}
-    />
+    />*/
+      <div style={style}>
+
+      </div>
   )
 
   const exactImage = (
@@ -43,7 +55,7 @@ export default function CoverImage({ title, coverImage, slug, width, height }: P
   const imageChosen = isFill ? image : exactImage;
 
   return (
-    <div className="sm:mx-0 position-relative my-auto block">
+    <>
       {slug ? (
         <Link href={`/posts/${slug}`} aria-label={title}>
           {imageChosen}
@@ -51,6 +63,6 @@ export default function CoverImage({ title, coverImage, slug, width, height }: P
       ) : (
           imageChosen
       )}
-    </div>
+    </>
   )
 }

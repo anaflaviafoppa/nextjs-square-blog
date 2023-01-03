@@ -2,7 +2,6 @@
 @import "buttons.module";
 @import "inputs.module";
 @import "containers.module";
-@import "special-titles.module";
 @import "font-styles.module.scss";
 @import "spaces.module.scss";
 @import "media-queries.scss";
@@ -40,30 +39,9 @@ h1 {
 
 }
 
-h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.4rem;
-  line-height: 150%;
-}
 
-h4 {
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 150%;
-}
 
-p{
-  font-size: $size-16;
-  font-weight: 400;
-  line-height: 150%;
-}
 
-span {
-  font-size: $size-12;
-  font-weight: 300;
-  line-height: 150%;
-}
 
 @media (min-width: 576px) {
   /*.container {

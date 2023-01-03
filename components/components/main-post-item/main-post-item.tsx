@@ -12,8 +12,12 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order, featur
 
     return (
         <div className={`${style.item} ${className}`}>
-            <Container>
+            <div className={style.item__image} >
+                {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
+            </div>
+
             <div className={style.item__content}>
+                <Container>
                 <div>
                     <div className="title__border_container">
                         <div className="title__border">
@@ -35,11 +39,10 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order, featur
                         )
                     })}
                 </TagContainer>
+                </Container>
             </div>
-            </Container>
-            <div className={style.item__image}>
-                {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
-            </div>
+
+
         </div>
     );
 }

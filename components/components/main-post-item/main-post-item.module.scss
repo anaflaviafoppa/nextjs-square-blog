@@ -1,14 +1,18 @@
 @import "./../styles/variables.module";
-
+@import "./../styles/media-queries";
 
 .item {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: $size-560;
 
+  @include for_breakpoint(tablet) {
+    display: block;
+  }
+
 
   &__revert {
-    grid-row: 1;
+    grid-row: 2;
   }
 
   &__content {
@@ -25,9 +29,14 @@
 
   &__image {
     background-color: lightgoldenrodyellow;
+
+    @include for_breakpoint(tablet) {
+      width: inherit;
+      height: 37rem;
+    }
   }
 
-  &__revert &__image {
+  &__revert &__content {
     grid-row: 1;
   }
 

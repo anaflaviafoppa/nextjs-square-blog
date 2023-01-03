@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async ({params,
     const CTAHeader = await getHeaderCTA();
     const title = await getTitlesFromPage(params.label);
     const tags = await getChildrenCategories(params.label);
-    const selectedLabel = findKey || TagsLabels.ALL;
+    const selectedLabel = TagsLabels.ALL;
 
 
     return {

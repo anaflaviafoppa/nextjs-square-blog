@@ -38,8 +38,8 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel,CTAHeader, pr
                             </Link>
                             {tagsList?.map((tag, index) => {
                                 return (
-                                    <Link href={'/categorias/' + router.query.label + '/' + tag.slug}>
-                                        <Tag clickable={true} key={index} text={tag.name} type={Priority.SECONDARY}
+                                    <Link href={'/categorias/' + router.query.label + '/' + tag.slug} key={index}>
+                                        <Tag clickable={true}  text={tag.name} type={Priority.SECONDARY}
                                          isSelected={selectedLabel === tag.slug}
                                          slug={tag.slug}/>
                                     </Link>
