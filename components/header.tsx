@@ -58,8 +58,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
         if (isOpenedMenuMobile) {
             return;
-        }
-        ;
+        };
 
         const element = document.getElementById(IdsName.CAROUSEL);
         const positions = element?.getBoundingClientRect();

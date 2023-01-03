@@ -16,7 +16,9 @@ function CardItem({title, excerpt, date, slug, category, featuredImage}) {
                         <Tag text={category?.name} type={Priority.PRIMARY} clickable={false} isSelected={true}/>
                     </TagContainer>
                 </div>
+
                 {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
+
             </div>
             <div className={style.item__description}>
                 <h3>{title}</h3>

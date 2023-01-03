@@ -7,11 +7,25 @@ import HibridoLogo from '../../../public/images/hibrido.png';
 import Instagram from '../../../public/images/instagram.png';
 import Facebook from '../../../public/images/facebook.png';
 import Image from 'next/image';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 export default function Footer() {
     const tags = ['mostrar todos', 'aves', 'bom de assistir', 'BOM DE FAZER', 'BOM SABER', 'DOCES E SOBREMESAS', 'CARNES', 'CURIOSIDADES'];
+    const [alignment, setAlignment] = useState<string>(Alignment.START);
+
+    useEffect(() => {
+        verifyDimensions();
+    }, []);
+
+    const verifyDimensions = () => {
+        const width = window.innerWidth;
+        if(width < 1200) {
+            setAlignment(Alignment.CENTER);
+        } else {
+            setAlignment(Alignment.END);
+        }
+    }
 
     return (
         <footer className={styles.footer}>
@@ -60,7 +74,7 @@ export default function Footer() {
 
                 <div className={styles.footer__division}>
                     <h4>Tags</h4>
-                    <TagContainer alignment={Alignment.START}>
+                    <TagContainer alignment={alignment}>
                         {tags?.map((tag, index) => {
                             return (
                                 <Tag key={index} clickable={false} text={tag} type={Priority.SECONDARY}

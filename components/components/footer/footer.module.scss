@@ -1,4 +1,5 @@
 @import '../styles/variables.module';
+@import "./../styles/media-queries";
 
 .footer {
   background: $color-black;
@@ -6,15 +7,34 @@
   &__columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr) fit-content(100%);
+
+    @include for_breakpoint(tablet) {
+      display: block;
+    }
   }
 
   &__column {
     padding: 0 3.8rem;
     border-right: $border-gray-light;
+
+    @include for_breakpoint(tablet) {
+      text-align: center;
+      border-right: none;
+      border-top: $border-gray-light;
+      margin-bottom: 4rem;
+      padding-top: 4rem;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__column:first-of-type {
     padding-left: 0rem;
+
+    @include for_breakpoint(tablet) {
+      border-top: none;
+      padding-top: 0;
+    }
   }
 
   &__column:last-of-type {
@@ -85,9 +105,25 @@
     width: 100%;
     padding: 0 4rem;
 
+    @include for_breakpoint(tablet) {
+      padding: 0rem;
+      justify-content: center;
+    }
+
     img {
       height: 3.6rem;
       width: 3.6rem;
+
+      @include for_breakpoint(tablet) {
+        margin-left: 5rem;
+      }
+    }
+
+    img:first-of-type {
+      @include for_breakpoint(tablet) {
+        margin-left: 0rem;
+        margin-right: 5rem;
+      }
     }
 
     img:hover {
