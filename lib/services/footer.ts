@@ -23,6 +23,6 @@ export async function footerContent() {
         CacheData.set({key: CacheLabels.ABOUT_US, value: nodeAboutMe});
     }
 
-    CacheData.set({key: CacheLabels.FOOTER, value: {structureFooter, aboutUsContent: nodeAboutMe}});
-    return {structureFooter, aboutUsContent: nodeAboutMe}
+    CacheData.set({key: CacheLabels.FOOTER, value: {structureFooter, aboutUsContent: nodeAboutMe.excerpt}});
+    return {structureFooter, aboutUsContent: nodeAboutMe.excerpt}
 }

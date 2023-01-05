@@ -21,6 +21,7 @@ export async function getFooterContent() {
                     path
                     parentId
                     title
+                    label
                   }
                 }
               }

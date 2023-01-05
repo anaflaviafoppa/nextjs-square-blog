@@ -284,6 +284,7 @@ export async function getAboutUsContent() {
             date
             slug
             title
+            excerpt
             featuredImage {
               node {
                 sourceUrl

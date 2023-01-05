@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Layout from '../layout';
 import styles from './layout-category.module.scss';
-import {Alignment} from '../utils/constants';
+import {Alignment, Priority} from '../utils/constants';
 import Filter from '../../public/images/filter.png';
 import MainPosts from '../widgets/main-posts/main-posts';
 import Image from 'next/image';
@@ -52,7 +52,13 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, p
                 <p>Filtrar</p>
             </div>}
             <div className={styles.layout__list_tags} data-active={activeList}>
-                <TagsLists tagsList={tagsList} selectedLabel={selectedLabel} alignment={Alignment.CENTER}/>
+                <TagsLists
+                    tagsList={tagsList}
+                    selectedLabel={selectedLabel}
+                    alignment={Alignment.CENTER}
+                    allowShowAll={true}
+                    type={Priority.SECONDARY}
+                />
             </div>
             <MainPosts items={posts}/>
 
