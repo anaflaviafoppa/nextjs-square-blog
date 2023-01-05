@@ -28,6 +28,12 @@ export async function getPostsByCategory(slug) {
                 }
               }
             }
+            categories(first: 10) {
+              nodes {
+                name
+                parentId
+              }
+            }
           }
         }
       }

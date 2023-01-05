@@ -16,4 +16,49 @@
       font-size: 2rem;
     }
   }
+
+  &__filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $color-brown;
+    color: $color-yellow;
+    padding: 2.4rem 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    p {
+      margin-left: 1.9rem;
+    }
+  }
+
+  &__list_tags {
+    height: 0;
+    transition: $transition;
+
+  }
+
+  &__list_tags[data-active=true] {
+    height: auto;
+
+    div {
+      height: auto;
+    }
+  }
+
+  &__list_tags[data-active=false] {
+    height: 0;
+
+    div {
+      height: 0;
+
+      div {
+        display: none;
+      }
+    }
+
+
+  }
 }

@@ -1,19 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../layout';
 import styles from './layout-category.module.scss';
-import Container from '../containers/container/container';
-import TagContainer from '../containers/tag-container/tag-container';
-import {Alignment, Priority, TagsLabels} from '../utils/constants';
-import Link from 'next/link';
-import Tag from '../components/tag/tag';
+import {Alignment} from '../utils/constants';
+import Filter from '../../public/images/filter.png';
 import MainPosts from '../widgets/main-posts/main-posts';
-import {useRouter} from 'next/router';
+import Image from 'next/image';
+import {isMobileSize} from '../utils/functions';
+import TagsLists from '../widgets/tags-list/tags-lists';
 
 function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, preview}) {
-    const router = useRouter();
     const mainTest = title?.[0]?.node?.title;
     const content = title?.[0]?.node?.content;
     const tagsList = tags?.children?.nodes;
+
+    const [filterVisible, setFilterVisible] = useState<boolean>(false);
+    const [activeList, setActiveList] = useState<boolean>(true);
+
+    useEffect(() => {
+        verifyWidthMobile();
+    }, []);
+
+    const verifyWidthMobile = () => {
+        setFilterVisible(isMobileSize());
+        setActiveList(!isMobileSize());
+    }
+
+    const handleOnClickFilter = () => {
+        setActiveList(!activeList);
+    }
+
 
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
@@ -24,31 +39,21 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, p
                         className="big-subtitle"
                         dangerouslySetInnerHTML={{__html: content}}
                     />
+
                 </div>
             </div>
-            <Container>
-                {tagsList?.length > 1 &&
-                    <div className="container-y">
-                        <TagContainer alignment={Alignment.CENTER}>
-                            <Link href={'/categorias/' + router.query.label}>
-                                <Tag clickable={true} text={'Mostrar Todos'} type={Priority.PRIMARY}
-                                     isSelected={selectedLabel === TagsLabels.ALL}
-                                     slug={TagsLabels.ALL}
-                                />
-                            </Link>
-                            {tagsList?.map((tag, index) => {
-                                return (
-                                    <Link href={'/categorias/' + router.query.label + '/' + tag.slug} key={index}>
-                                        <Tag clickable={true} text={tag.name} type={Priority.SECONDARY}
-                                             isSelected={selectedLabel === tag.slug}
-                                             slug={tag.slug}/>
-                                    </Link>
-                                )
-                            })}
-                        </TagContainer>
-                    </div>
-                }
-            </Container>
+            {filterVisible && <div className={styles.layout__filter} onClick={() => handleOnClickFilter()}>
+                <Image
+                    src={Filter}
+                    height={18}
+                    width={19}
+                    alt='Filter Image'
+                />
+                <p>Filtrar</p>
+            </div>}
+            <div className={styles.layout__list_tags} data-active={activeList}>
+                <TagsLists tagsList={tagsList} selectedLabel={selectedLabel} alignment={Alignment.CENTER}/>
+            </div>
             <MainPosts items={posts}/>
 
         </Layout>

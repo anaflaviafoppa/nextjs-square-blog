@@ -8,6 +8,7 @@ import Instagram from '../../../public/images/instagram.png';
 import Facebook from '../../../public/images/facebook.png';
 import Image from 'next/image';
 import React, {useEffect, useState} from 'react';
+import {isMobileSize} from '../../utils/functions';
 
 
 export default function Footer() {
@@ -19,8 +20,7 @@ export default function Footer() {
     }, []);
 
     const verifyDimensions = () => {
-        const width = window.innerWidth;
-        if(width < 1200) {
+        if(isMobileSize()) {
             setAlignment(Alignment.CENTER);
         } else {
             setAlignment(Alignment.END);
@@ -34,7 +34,7 @@ export default function Footer() {
                     <div className={styles.footer__columns}>
                         <div className={styles.footer__column}>
                             <h4>Assine Nossa Newsletter</h4>
-                            <input  className="input__secondary"   type="email" placeholder="Seu E-mail"></input>
+                            <input  className="input__secondary"   type="email" placeholder="Seu E-mail" />
                             <button className="button__primary">Assinar</button>
                         </div>
                         <div className={styles.footer__column}>

@@ -34,3 +34,7 @@ export enum MenuName {
     CATEGORIES_MOBILE = 'CATEGORIES_MOBILE',
     MOBILE = 'MOBILE'
 }
+
+export abstract class BreakPoints {
+    static TABLET = 1200;
+}

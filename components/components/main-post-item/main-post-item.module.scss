@@ -7,7 +7,8 @@
   min-height: $size-560;
 
   @include for_breakpoint(tablet) {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
 
