@@ -55,43 +55,6 @@ export default function Footer({content, categories}) {
             <Container>
                 <div className={styles.footer__division}>
                     <div className={styles.footer__columns}>
-                        <div className={styles.footer__column}>
-                            <h4>Assine Nossa Newsletter</h4>
-                            <input  className="input__secondary"   type="email" placeholder="Seu E-mail" />
-                            <button className="button__primary">Assinar</button>
-                        </div>
-                        <div className={styles.footer__column}>
-                            <h4>Sobre o bom de beer</h4>
-                            <p>O Bom de Beer surgiu em 2016,
-                                como um espaço para conversar sobre cerveja.
-                                Aqui, nós mostramos que malte e lúpulo são muito mais do
-                                que meros ingredientes, e como a cultura cervejeira
-                                é gigante pelo mundo todo.
-
-                                Ler mais.
-                            </p>
-                        </div>
-                        <div className={styles.footer__column}>
-                            <h4>Nossa Loja Virtual</h4>
-                            <ul>
-                                <li>Cervejas Especiais</li>
-                                <li>Copos</li>
-                                <li>Presentes</li>
-                            </ul>
-                        </div>
-                        <div className={styles.footer__column}>
-                            <h4>Nossas Redes Sociais</h4>
-                            <div className={styles.footer__social}>
-                                <Image
-                                    alt={`Instagram Logo`}
-                                    src={Instagram}
-                                />
-                                <Image
-                                    alt={`Facebook Logo`}
-                                    src={Facebook}
-                                />
-                            </div>
-                        </div>
                         {
                             structureFooter.map(({node}) => {
                                 return (
@@ -109,9 +72,9 @@ export default function Footer({content, categories}) {
                                                 case ABOUT_US_MENU:
                                                     return (
                                                         <>
-                                                        <div dangerouslySetInnerHTML={{__html: aboutUsContent}} />
-                                                            <Link href='/sobre-nos'>
-                                                                Ler Mais
+                                                        <div className={styles.footer__about_us} dangerouslySetInnerHTML={{__html: aboutUsContent}} />
+                                                            <Link href='/sobre-nos' className={styles.footer__link}>
+                                                                <span>Ler Mais</span>
                                                             </Link>
                                                         </>
                                                     )

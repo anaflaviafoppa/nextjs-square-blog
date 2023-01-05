@@ -83,6 +83,7 @@
     }
   }
 
+
   &__division:last-of-type {
     border-bottom: none;
     display: flex;
@@ -113,13 +114,15 @@
     img {
       height: 3.6rem;
       width: 3.6rem;
+    }
 
+    a {
       @include for_breakpoint(tablet) {
         margin-left: 5rem;
       }
     }
 
-    img:first-of-type {
+    a:first-of-type {
       @include for_breakpoint(tablet) {
         margin-left: 0rem;
         margin-right: 5rem;
@@ -130,6 +133,18 @@
       cursor: pointer;
       filter: $hover-images-filter;
     }
+  }
+
+  &__link {
+    border-bottom: $border;
+
+    span {
+      color: $color-yellow;
+    }
+  }
+
+  &__about_us {
+    margin-bottom: 4rem;
   }
 }
 
