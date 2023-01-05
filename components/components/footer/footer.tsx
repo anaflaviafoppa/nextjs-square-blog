@@ -36,7 +36,7 @@ export default function Footer({content, categories}) {
         if(isMobileSize()) {
             setAlignment(Alignment.CENTER);
         } else {
-            setAlignment(Alignment.END);
+            setAlignment(Alignment.START);
         }
     }
 

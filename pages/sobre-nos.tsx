@@ -7,15 +7,14 @@ import styles from '../styles/pages/sobre-nos.module.scss'
 import {contentAllPages} from '../lib/services/allPages';
 import ErrorPage from 'next/error';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 
 export default function SobreNos({preview, content, title, image,footer, allCategories, labels, CTAHeader}) {
     const style = {
         backgroundImage: `url(${image.node.sourceUrl})`,
-        backgroundPosition: 'bottom 100% right 100%',
+        backgroundPosition: 'bottom right',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        width: "inherit",
-        height: "100%"
+        backgroundSize: 'contain',
     }
 
     return (
@@ -24,15 +23,23 @@ export default function SobreNos({preview, content, title, image,footer, allCate
                 allCategories={allCategories}
         >
             <section className={styles.about}>
-                <div className={'container-x-left padding-56-y ' + styles.about__content}>
+                <div className={styles.about__content}>
                     <Container>
                         <h1 className="big-title">{title}</h1>
                         <div className="margin-80-bottom" dangerouslySetInnerHTML={{ __html: content }} />
-                        <button className="button__primary">Confira nosso site</button>
+                        <Link href='https://www.bomdebeer.com.br/' target="_blank">
+                            <button className="button__primary">Confira nosso site</button>
+                        </Link>
                     </Container>
                 </div>
-                <div className={styles.about__circle} style={style}>
+
+                <div className={styles.about__circle_container}>
+                    <div className={styles.about__circle}>
+                    </div>
+                    <div className={styles.about__image}  style={style}>
+                    </div>
                 </div>
+
             </section>
         </Layout>
     );
