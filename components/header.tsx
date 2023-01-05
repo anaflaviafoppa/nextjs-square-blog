@@ -5,9 +5,10 @@ import React, {useEffect, useState} from 'react';
 import {TagsModel} from './models/tags';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {IdsName, MenuName, Pages} from './utils/constants';
+import {Alignment, IdsName, MenuName, Pages} from './utils/constants';
 import ListCategories from './components/list-categories/list-categories';
 import ListLabels from './components/list-labels/list-labels';
+import {isMobileSize} from './utils/functions';
 
 
 interface Props {
@@ -36,13 +37,15 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
     const [openMobileMenu, setOpenMobileMenu] = useState<string>('test');
     const [tags, setTags] = useState<Array<TagsModel>>();
     const [selectedLabelId, setSelectedLabelId] = useState<string>();
+    const [isMobile, setIsMobile] = useState<boolean>(false);
     const [findKey, setFindKey] = useState<string>(searchKey);
     const categories = {};
     useEffect(() => {
         verifyIsInitialPage();
-        verifyRouter();
+        verifySearchRouter();
+        verifyDimensions();
 
-    }, [openMobileMenu])
+    }, [])
 
     const verifyIsInitialPage = () => {
         const isInitialPage = router.pathname === Pages.INITIAL;
@@ -51,6 +54,10 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
             changeBackground();
             window.addEventListener("scroll", changeBackground)
         }
+    }
+
+    const verifyDimensions = () => {
+        setIsMobile(isMobileSize());
     }
 
     const changeBackground = () => {
@@ -101,7 +108,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
         setSelectedLabelId(id);
     };
 
-    const verifyRouter = () => {
+    const verifySearchRouter = () => {
         const isSearchPath = router.pathname === Pages.SEARCH;
         if (isSearchPath) {
             setOpenMenu(MenuName.SEARCH_FILTER);
@@ -129,6 +136,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
             setOpenMobileMenu('');
             setOpenMenu('');
             verifyIsInitialPage();
+            verifySearchRouter();
         } else {
             setOpenMobileMenu(MenuName.MOBILE);
             setOpenMenu(MenuName.LABELS_MOBILE);
@@ -220,7 +228,8 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
                         <div
                             className={openMenu === MenuName.SEARCH_FILTER ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}
-                            data-active={openMenu === MenuName.SEARCH_FILTER ? 'true' : 'false'}>
+                            data-active={openMenu === MenuName.SEARCH_FILTER}>
+
                             <form onSubmit={handleSubmit}>
                                 <input type="search" className="text-base input__primary"
                                        required
@@ -229,16 +238,17 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                        onChange={event => setFindKey(event.target.value)}
                                        placeholder="Encontre no blog"/>
                             </form>
+                            {!isMobile && router.pathname === Pages.SEARCH &&
+                                <div>
+                                    <h2 className={styles.navbar__results_title}>
+                                        Resultados para: {router.query.search}
+                                    </h2>
+                                </div>
+                            }
                         </div>
 
 
-                        {router.pathname === Pages.SEARCH &&
-                            <div>
-                                <h2>
-                                    Resultados para: {router.query.search}
-                                </h2>
-                            </div>
-                        }
+
                     </Container>
                 </div>
 

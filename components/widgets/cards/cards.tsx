@@ -5,7 +5,15 @@ import styles from './cards.module.scss';
 import UnderlinedTitle from '../../components/underlined-title/underlined-title';
 import Link from 'next/link';
 
-function Cards({items, title, maxPosts, isEnabledSeeMore}) {
+interface Props {
+    items: any,
+    title: string,
+    maxPosts: number,
+    isEnabledSeeMore: boolean,
+    enabledTitle?: boolean
+}
+
+function Cards({items, title, maxPosts, isEnabledSeeMore, enabledTitle = true}: Props) {
     const [countItems, setCountItems]  = useState(maxPosts);
 
     const addItems = (): void => {
@@ -15,9 +23,7 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
     return (
         <section className={'mt-16 mb-16 section ' + styles.cards}>
 
-            <Container>
-
-                <UnderlinedTitle title={title}  date={''}/>
+                {enabledTitle && <UnderlinedTitle title={title} date={''}/>}
                 {items && <div className={styles.cards__container}>
                     {items.map(({node}, index) => {
                         if (index + 1 > countItems) {
@@ -46,7 +52,6 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
                 { isEnabledSeeMore && countItems < items.length &&
                     (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
                 }
-            </Container>
 
 
         </section>
