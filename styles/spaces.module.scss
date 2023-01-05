@@ -1,0 +1,72 @@
+@import "variables.module";
+@import "media-queries";
+
+
+//CONTAINERS
+.container-x {
+  padding: 0 8rem;
+  @include for_breakpoint(tablet) {
+    padding: 0 3rem;
+  }
+}
+
+.container-y {
+  @apply py-16
+}
+
+.container {
+  @apply px-32 py-8
+}
+
+.container-x-left {
+  @apply pl-32
+}
+
+.container-x-right {
+  @apply pr-32
+}
+
+.container-large {
+  @apply p-32;
+
+  @include for_breakpoint(tablet) {
+    @apply p-16;
+  }
+}
+
+//MARGIN
+.margin-80-bottom {
+  @apply mb-32
+}
+
+//PADDING
+
+// PADDING VERTICAL
+.padding-56-y {
+  @apply py-24
+}
+
+.padding-4-y {
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+  @include for_breakpoint(tablet) {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
+}
+
+.padding-3-y {
+  @apply py-10
+}
+
+//PADDING HORIZONTAL
+.padding-24-x {
+  padding-right: 24rem;
+  padding-left: 24rem;
+
+  @include for_breakpoint(tablet) {
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+}
+

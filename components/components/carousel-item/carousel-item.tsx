@@ -8,8 +8,10 @@ function CarouselItem({
                           slug,
                           index
                       }) {
+    const backgroundImage = coverImage?.node?.sourceUrl || '';
+
     const styling = {
-        backgroundImage: `url('https://www.grupopetropolis.com.br/grpptrpls/wp-content/uploads/NISSAN_RJ-2-767x512.jpg')`,
+        backgroundImage: `url(${backgroundImage})`,
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

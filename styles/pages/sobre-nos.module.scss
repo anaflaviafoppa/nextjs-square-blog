@@ -1,0 +1,36 @@
+@import './styles/variables.module';
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: $color-brown;
+
+  &__circle {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    //-moz-border-radius: 50%;
+    //-webkit-border-radius: 50%;
+    // border-radius: 50%;
+   // background-position: 25% 70%;
+  /*  background: linear-gradient(315deg, red, red 50%, transparent 50%, transparent 100%),
+    radial-gradient(circle closest-side, red, transparent);*/
+    //background-image: -webkit-linear-gradient(45deg, red, red 70%, transparent 70%, transparent 100%)
+  }
+
+  &__content {
+    color: $color-white;
+    text-align: center;
+
+    strong {
+      color: $color-yellow;
+    }
+
+    p {
+      @apply mb-6;
+    }
+  }
+
+}

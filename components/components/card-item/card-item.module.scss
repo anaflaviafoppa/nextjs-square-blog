@@ -4,22 +4,36 @@
 .item {
 
   &__image {
-    background-color: lightgoldenrodyellow;
     height: $size-268;
+    width: auto;
+    position: relative;
+  }
+
+  &__image[data-background=false] {
+    background-color: lightgoldenrodyellow;
+  }
+
+  &__tag_container {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   &__description {
     padding: $size-24;
     min-height:  $size-268;
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
+    justify-content: space-between;
 
     p {
       color: $color-gray;
+      margin-bottom: 1.6rem;
     }
 
     span {
       color: $color-balance-gray;
+      font-weight: bold;
     }
   }
 

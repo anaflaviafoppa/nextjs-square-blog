@@ -1,0 +1,17 @@
+@import "./../styles/media-queries";
+
+.images {
+ &__container {
+   padding: 0 2rem;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 4.3rem;
+   justify-content: center;
+
+   img {
+     max-height: 10rem;
+     width: auto;
+   }
+
+ }
+}

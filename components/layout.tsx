@@ -3,16 +3,26 @@ import Footer from './components/footer/footer'
 import Meta from './meta'
 import Header from './header';
 
-export default function Layout({ preview, children }) {
+interface Props {
+    labels?: any,
+    preview?: any,
+    children: any,
+    searchKey?: string,
+    CTAHeader: any,
+    footer: any,
+    allCategories: any,
+}
+
+export default function Layout({ preview,searchKey, footer, allCategories,  children, CTAHeader, labels}: Props) {
   return (
     <>
       <Meta />
-        <Header />
-      <div className="min-h-screen">
+        <Header searchKey={searchKey} labels={labels} CTAHeader={CTAHeader} />
+      <div>
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>
       </div>
-      <Footer />
+      <Footer content={footer} categories={allCategories} />
     </>
   )
 }

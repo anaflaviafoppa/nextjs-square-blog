@@ -5,10 +5,14 @@ import Carousel from 'react-bootstrap/Carousel';
 import styles from './carousel.module.scss';
 
 
-type Props = {};
-export const CarouselUnit = ({posts}) => {
+interface Props {
+    posts: any,
+    id: string
+}
+export const CarouselUnit = ({posts, id}: Props) => {
     return (
-        <section className={styles.carousel}>
+        <div className={styles.carousel} id={id}>
+            { posts &&
             <Carousel>
                 {posts.map(({node}, index) => (
                     <Carousel.Item
@@ -26,6 +30,7 @@ export const CarouselUnit = ({posts}) => {
                 ))}
 
             </Carousel>
-        </section>
+            }
+        </div>
     );
 };

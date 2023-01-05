@@ -5,18 +5,23 @@ import TagContainer from '../../containers/tag-container/tag-container';
 import Tag from '../tag/tag';
 import Container from '../../containers/container/container';
 import Date from '../../date';
+import CoverImage from '../../cover-image';
 
-function MainPostItem({title, category, excerpt, slug, date, tags, order}) {
+function MainPostItem({title, category, excerpt, slug, date, tags, order, featuredImage}) {
     const className = order === Order.NORMAL ? '' : `${style.item__revert}`;
 
     return (
-        <section className={`${style.item} ${className}`}>
-            <Container>
+        <div className={`${style.item} ${className}`}>
+            <div className={style.item__image} >
+                {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
+            </div>
+
             <div className={style.item__content}>
+                <Container>
                 <div>
                     <div className="title__border_container">
                         <div className="title__border">
-                            <h3>{category}</h3>
+                            <h3>{category?.name}</h3>
                         </div>
                         <span>
                             <Date dateString={date} />
@@ -28,18 +33,17 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order}) {
                     <div dangerouslySetInnerHTML={{__html: excerpt}}/>
                 </div>
                 <TagContainer alignment="start">
-                    {tags.map((tag, index) => {
+                    {tags?.map((tag, index) => {
                         return (
-                            <Tag key={index} clickable={false} text={tag} type={Priority.PRIMARY} isSelected={false}/>
+                            <Tag key={index} clickable={false} text={tag.name} type={Priority.PRIMARY} isSelected={false}/>
                         )
                     })}
                 </TagContainer>
+                </Container>
             </div>
-            </Container>
-            <div className={style.item__image}>
 
-            </div>
-        </section>
+
+        </div>
     );
 }
 

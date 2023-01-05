@@ -6,6 +6,8 @@ input {
   outline: none;
   border: none;
   width: 100%;
+  font-size: 1.6rem;
+  font-weight: lighter;
 
 }
 
@@ -21,10 +23,17 @@ input {
   font-weight: 300;
 }
 
+.input__secondary {
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+}
+
+.input__secondary::placeholder {
+  color: $color-white;
+}
+
 .input__primary[type=search] {
-  /*
-  background: url('../public/images/search-icon-grey.png') top left no-repeat;
-  */
+  background: url('/images/search-icon-grey.png') top left no-repeat;
   background-size: 2rem;
   padding-left: 3.6rem;
 }
@@ -33,9 +42,7 @@ input {
   -webkit-appearance: none;
   height: 1em;
   width: 1em;
-  /*
-  background: url('../public/images/xbutton.png') no-repeat 50% 50%;
-  */
+  background: url('/images/xbutton.png') no-repeat 50% 50%;
   background-size: contain;
   opacity: 0;
   pointer-events: none;

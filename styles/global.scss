@@ -2,7 +2,9 @@
 @import "buttons.module";
 @import "inputs.module";
 @import "containers.module";
-@import "special-titles.module";
+@import "font-styles.module.scss";
+@import "spaces.module.scss";
+@import "media-queries.scss";
 
 html {
   font-size: 62.5%;
@@ -19,9 +21,16 @@ body::-webkit-scrollbar {
 }
 
 ol, li {
-  list-style: none;
   margin: 0;
   padding: 0;
+}
+
+* {
+
+}
+
+*:hover {
+  transition: $transition;
 }
 
 // Fonts:
@@ -30,34 +39,9 @@ h1 {
 
 }
 
-h2 {
-  font-size: 4rem;
-  line-height: 4.8rem;
-  font-weight: 600;
-}
 
-h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.4rem;
-  line-height: 2.9rem;
-}
 
-h4 {
 
-}
-
-p{
-  font-size: $size-16;
-  font-weight: 400;
-  line-height: 1.9rem;
-}
-
-span {
-  font-size: $size-12;
-  font-weight: bold;
-  line-height: calc($size-12 * $line-height-multiplier);
-}
 
 @media (min-width: 576px) {
   /*.container {
@@ -86,9 +70,14 @@ span {
   }*/
 }
 
+//CAROUSEL:
 .carousel-control-prev, .carousel-control-next {
   width: 11rem;
   justify-content: flex-end;
+
+  @include for_breakpoint(tablet) {
+    width: 6rem;
+  }
 
   span {
     background-color: $color-black-transparent;
@@ -133,7 +122,6 @@ span {
   height: 1.6rem;
 }
 
-.container__body {
-  position: absolute;
-  top: 0;
+.section {
+  margin-top: 4rem;
 }

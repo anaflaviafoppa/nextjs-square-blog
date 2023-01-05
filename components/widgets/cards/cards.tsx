@@ -2,46 +2,49 @@ import React, {useState} from 'react';
 import Container from '../../containers/container/container';
 import CardItem from '../../components/card-item/card-item';
 import styles from './cards.module.scss';
+import UnderlinedTitle from '../../components/underlined-title/underlined-title';
+import Link from 'next/link';
 
-function Cards({items}) {
-    const [countItems, setCountItems]  = useState(6);
+function Cards({items, title, maxPosts, isEnabledSeeMore}) {
+    const [countItems, setCountItems]  = useState(maxPosts);
 
     const addItems = (): void => {
         setCountItems(countItems + 3);
     }
 
     return (
-        <section className={'mt-16 mb-16' + styles.cards}>
+        <section className={'mt-16 mb-16 section ' + styles.cards}>
 
             <Container>
 
-                <div className="title__border_container mb-16">
-                    <div className="title__border">
-                        <h3>Veja Também</h3>
-                    </div>
-                </div>
-                <div className={styles.cards__container}>
+                <UnderlinedTitle title={title}  date={''}/>
+                {items && <div className={styles.cards__container}>
                     {items.map(({node}, index) => {
                         if (index + 1 > countItems) {
                             return;
                         }
 
-                        const category = 'BOM DE BEER';
+                        const tags = node?.categories?.nodes || node?.categories?.edges;
+                        const category = tags?.find(tag => !tag.parentId);
+
                         return (
-                            <CardItem
-                                key={index}
-                                title={node.title}
-                                excerpt={node.excerpt}
-                                date={node.date}
-                                slug={node.slug}
-                                category={category}
-                            />
+                            <Link key={index} href={`/posts/${node.slug}`}>
+                                <CardItem
+                                    key={index}
+                                    title={node.title}
+                                    excerpt={node.excerpt}
+                                    date={node.date}
+                                    slug={node.slug}
+                                    category={category}
+                                    featuredImage={node.featuredImage}
+                                />
+                            </Link>
                         )
                     })}
-                </div>
+                </div>}
 
-                { countItems < items.length &&
-                    (<button onClick={() => addItems()} className="button__primary-dark">Veja Mais</button>)
+                { isEnabledSeeMore && countItems < items.length &&
+                    (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
                 }
             </Container>
 

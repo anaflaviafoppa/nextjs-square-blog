@@ -11,9 +11,11 @@ $color-light-gray: #E4E4E4;
 $color-black: #2A2A2A;
 $color-white: #FFFFFF;
 $color-gray: #555555;
+$color-gray-light: #F1F1F1;
 $color-balance-gray: #898989;
 $color-transparent: rgba(0,0,0,0);
 $color-black-transparent: rgba(255, 255, 255, 0.5);
+$color-white-transparent: rgba(255, 255, 255, 0.1);
 
 $line-height-multiplier: 1.25;
 
@@ -41,6 +43,13 @@ $transition: all ease-in-out 0.3s;
 //border
 $border: solid 1px $color-yellow;
 $border-gray: solid 1px $color-light-gray;
+$border-gray-light: solid 1px $color-white-transparent;
 
 //Hover effect:
 $hover-effect: linear-gradient(rgb(0 0 0/20%) 0 0);
+$hover-images-filter: brightness(50%);
+@function hover-effect-font($color) {
+  @return darken($color, 30%)
+}
+
+
