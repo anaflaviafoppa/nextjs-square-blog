@@ -16,6 +16,7 @@ import TagContainer from '../../components/containers/tag-container/tag-containe
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
 import {getHeaderCTA, getLabels} from '../../lib/services/header';
+import Cards from '../../components/widgets/cards/cards';
 
 export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
     const router = useRouter()
@@ -44,13 +45,14 @@ export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
                             />
                         </Head>
                         <PostHeader
+                            displayImage={true}
                             title={post.title}
                             coverImage={post.featuredImage}
                             date={post.date}
                             author={post.author}
                             categories={post.categories}
                         />
-                        <Container>
+
                             <section className="section">
                                 <Container>
                                     <TagContainer alignment={Alignment.CENTER}>
@@ -66,13 +68,6 @@ export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
                             </section>
 
                             <PostBody banner={banner} category={'BOM DE BEER'} date={post.date}   content={post.content}/>
-
-
-                            <footer>
-                                {post.tags.edges.length > 0 && <Tags tags={post.tags}/>}
-                            </footer>
-
-                        </Container>
                     </article>
 
                     <SectionSeparator/>

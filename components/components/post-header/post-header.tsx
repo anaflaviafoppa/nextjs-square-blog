@@ -1,15 +1,14 @@
-import Avatar from '../../avatar'
-import Date from '../../date'
 import CoverImage from '../../cover-image'
 import PostTitle from '../post-title/post-title'
-import Categories from '../../categories'
 import styles from './post-header.module.scss';
 import Container from '../../containers/container/container';
+import Categories from '../../categories';
 
 
 export default function PostHeader({
                                        title,
                                        coverImage,
+                                       displayImage,
                                        date,
                                        author,
                                        categories,
@@ -18,11 +17,14 @@ export default function PostHeader({
         <>
             <div className={styles.header}>
                 <Container>
-                    <PostTitle>{title}</PostTitle>
+                    <div className='container-y'>
+                        <PostTitle>{title}</PostTitle>
+                    </div>
+
                 </Container>
-                <div>
+                {displayImage && <div className={styles.header__image_container}>
                     <CoverImage title={title} coverImage={coverImage}/>
-                </div>
+                </div>}
             </div>
 
             {/*<div className="max-w-2xl mx-auto">

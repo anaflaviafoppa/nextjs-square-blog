@@ -193,10 +193,15 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
           ...AuthorFields
         }
       }
-      categories {
+      categories(where: {exclude: "[dGVybTo2NDU=]"}) {
+        nodes {
+            name
+            parentId
+        }
         edges {
           node {
             name
+            parentId
           }
         }
       }

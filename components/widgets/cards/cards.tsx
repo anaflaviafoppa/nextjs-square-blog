@@ -18,13 +18,13 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
             <Container>
 
                 <UnderlinedTitle title={title}  date={''}/>
-                <div className={styles.cards__container}>
+                {items && <div className={styles.cards__container}>
                     {items.map(({node}, index) => {
                         if (index + 1 > countItems) {
                             return;
                         }
 
-                        const tags = node?.categories?.nodes;
+                        const tags = node?.categories?.nodes || node?.categories?.edges;
                         const category = tags?.find(tag => !tag.parentId);
 
                         return (
@@ -41,7 +41,7 @@ function Cards({items, title, maxPosts, isEnabledSeeMore}) {
                             </Link>
                         )
                     })}
-                </div>
+                </div>}
 
                 { isEnabledSeeMore && countItems < items.length &&
                     (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
