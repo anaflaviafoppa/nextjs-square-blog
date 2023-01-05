@@ -8,7 +8,7 @@ import Image from 'next/image';
 import {isMobileSize} from '../utils/functions';
 import TagsLists from '../widgets/tags-list/tags-lists';
 
-function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, preview}) {
+function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,footer, allCategories, preview}) {
     const mainTest = title?.[0]?.node?.title;
     const content = title?.[0]?.node?.content;
     const tagsList = tags?.children?.nodes;
@@ -31,7 +31,10 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader, p
 
 
     return (
-        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
+                footer={footer}
+                allCategories={allCategories}
+        >
             <div className={styles.layout__title}>
                 <div>
                     <h1 className="big-title">{mainTest}</h1>

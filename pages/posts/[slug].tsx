@@ -9,16 +9,14 @@ import PostHeader from '../../components/components/post-header/post-header'
 import SectionSeparator from '../../components/section-separator'
 import Layout from '../../components/layout'
 import PostTitle from '../../components/components/post-title/post-title'
-import Tags from '../../components/tags'
 import {getAllPostsWithSlug, getBannerSelected, getPostAndMorePosts} from '../../lib/api'
 import {CMS_NAME} from '../../lib/constants'
 import TagContainer from '../../components/containers/tag-container/tag-container';
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
-import {getHeaderCTA, getLabels} from '../../lib/services/header';
-import Cards from '../../components/widgets/cards/cards';
+import {contentAllPages} from '../../lib/services/allPages';
 
-export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
+export default function Post({post, posts, labels,banner,CTAHeader, footer, allCategories, preview}) {
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
@@ -29,7 +27,10 @@ export default function Post({post, posts, labels,banner,CTAHeader, preview}) {
     }
 
     return (
-        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
+                footer={footer}
+                allCategories={allCategories}
+        >
             {router.isFallback ? (
                 <PostTitle>Loading…</PostTitle>
             ) : (
@@ -85,9 +86,10 @@ export const getStaticProps: GetStaticProps = async ({
                                                          previewData,
                                                      }) => {
     const data = await getPostAndMorePosts(params?.slug, preview, previewData)
-    const labels = await getLabels();
-    const CTAHeader = await getHeaderCTA();
     const banner = await getBannerSelected(preview);
+
+    const globalContent = await contentAllPages();
+    const {labels, CTAHeader, footer, allCategories} = globalContent;
 
     return {
         props: {
@@ -96,7 +98,8 @@ export const getStaticProps: GetStaticProps = async ({
             posts: data.posts,
             labels,
             banner,
-            CTAHeader
+            CTAHeader,
+            footer, allCategories
         },
         revalidate: 10,
     }

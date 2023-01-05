@@ -26,7 +26,9 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,  caro
 
 
     return (
-        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader} footer={footer} allCategories={allCategories}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
+                footer={footer}
+                allCategories={allCategories}>
             <Head>
                 <title>Bom de Beer Blog</title>
             </Head>

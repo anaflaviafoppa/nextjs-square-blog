@@ -1,13 +1,15 @@
 import React from 'react';
 import Layout from '../components/layout';
 import {GetStaticProps} from 'next';
-import {getAboutUsContent, getAllPostsForHome} from '../lib/api';
+import {getAboutUsContent} from '../lib/api';
 import Container from '../components/containers/container/container';
-import CoverImage from '../components/cover-image';
 import styles from '../styles/pages/sobre-nos.module.scss'
 import {getHeaderCTA, getLabels} from '../lib/services/header';
+import {contentAllPages} from '../lib/services/allPages';
+import ErrorPage from 'next/error';
+import {useRouter} from 'next/router';
 
-export default function SobreNos({preview, content, title, image, labels, CTAHeader}) {
+export default function SobreNos({preview, content, title, image,footer, allCategories, labels, CTAHeader}) {
     const style = {
         backgroundImage: `url(${image.node.sourceUrl})`,
         backgroundPosition: 'bottom 100% right 100%',
@@ -18,7 +20,10 @@ export default function SobreNos({preview, content, title, image, labels, CTAHea
     }
 
     return (
-        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
+                footer={footer}
+                allCategories={allCategories}
+        >
             <section className={styles.about}>
                 <div className={'container-x-left padding-56-y ' + styles.about__content}>
                     <Container>
@@ -35,11 +40,17 @@ export default function SobreNos({preview, content, title, image, labels, CTAHea
 }
 
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
+    const router = useRouter();
     const data = await getAboutUsContent();
-    const labels = await getLabels();
-    const CTAHeader = await getHeaderCTA();
-
+    const globalContent = await contentAllPages();
+    const {labels, CTAHeader, footer, allCategories} = globalContent;
     const node = data?.edges[0].node;
+
+    if (!router.isFallback && !node) {
+        return <ErrorPage statusCode={404}/>
+    }
+
+
 
     return {
         props: {
@@ -48,7 +59,8 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
             title: node?.title,
             image: node?.featuredImage,
             labels,
-            CTAHeader
+            CTAHeader,
+            footer, allCategories
         },
         revalidate: 10,
     }

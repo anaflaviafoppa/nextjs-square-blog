@@ -6,8 +6,18 @@ import Tag from '../../components/tag/tag';
 import {useRouter} from 'next/router';
 import Container from '../../containers/container/container';
 
-function TagsLists({tagsList, selectedLabel, alignment, allowShowAll, type}) {
+interface Props {
+    tagsList: any,
+    selectedLabel: string,
+    alignment: string,
+    allowShowAll: boolean,
+    type: string,
+    allowRouter?: boolean
+}
+
+function TagsLists({tagsList, selectedLabel, alignment, allowShowAll, type, allowRouter = true}: Props) {
     const router = useRouter();
+
 
     return (
         <Container>
@@ -21,8 +31,10 @@ function TagsLists({tagsList, selectedLabel, alignment, allowShowAll, type}) {
                             />
                         </Link>}
                         {tagsList?.map((tag, index) => {
+                            const routerPath = '/categorias/' + router.query.label + '/' + tag.slug;
+                            const completeLink = allowRouter ? routerPath : tag.path;
                             return (
-                                <Link href={'/categorias/' + router.query.label + '/' + tag.slug} key={index}>
+                                <Link href={completeLink} key={index}>
                                     <Tag clickable={true} text={tag.name} type={type}
                                          isSelected={selectedLabel === tag.slug}
                                          slug={tag.slug}/>

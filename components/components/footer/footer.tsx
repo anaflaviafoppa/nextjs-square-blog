@@ -20,7 +20,8 @@ const FACEBOOK_MENU = process.env.NEXT_PUBLIC_FACEBOOK_MENU;
 
 
 export default function Footer({content, categories}) {
-    const {structureFooter, aboutUsContent} = content;
+    const structureFooter = content?.structureFooter;
+    const aboutUsContent = content?.aboutUsContent;
 
 
 
@@ -56,9 +57,9 @@ export default function Footer({content, categories}) {
                 <div className={styles.footer__division}>
                     <div className={styles.footer__columns}>
                         {
-                            structureFooter.map(({node}) => {
+                            structureFooter?.map(({node}, index) => {
                                 return (
-                                    <div className={styles.footer__column}>
+                                    <div className={styles.footer__column} key={index + node.label}>
                                         <h4>{node.label}</h4>
                                         {(() => {
                                             switch (node.id) {
@@ -82,8 +83,8 @@ export default function Footer({content, categories}) {
                                                     return (
                                                         <ul>
                                                             {
-                                                                 node?.childItems?.nodes.map(link => {
-                                                                   return( <li>
+                                                                 node?.childItems?.nodes.map((link, index) => {
+                                                                   return( <li key={index}>
                                                                         <Link href={link.path} target='_blank'>{link.label}</Link>
                                                                     </li>)
                                                                 })
@@ -93,9 +94,9 @@ export default function Footer({content, categories}) {
                                                 case REDES_SOCIAIS_MENU:
                                                     return  <div className={styles.footer__social}>
                                                         {
-                                                            node.childItems?.nodes.map(socialMedia => {
+                                                            node.childItems?.nodes.map((socialMedia, index) => {
                                                                 return (
-                                                                    <Link href={socialMedia.path} target='_blank'>
+                                                                    <Link href={socialMedia.path} target='_blank' key={index}>
                                                                         <Image
                                                                             alt={`${socialMedia.label} Logo`}
                                                                             src={verifyImage(socialMedia.id)}
@@ -124,6 +125,7 @@ export default function Footer({content, categories}) {
                         alignment={alignment}
                         allowShowAll={false}
                         type={Priority.SECONDARY}
+                        allowRouter={false}
                     />
                 </div>
                 <div className={styles.footer__division}>

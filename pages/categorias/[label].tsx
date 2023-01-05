@@ -3,6 +3,7 @@ import {getChildrenCategories, getPostsByCategories, getTitlesFromPage} from '..
 import {getHeaderCTA, getLabels} from '../../lib/services/header';
 import {TagsLabels} from '../../components/utils/constants';
 import LayoutCategory from '../../components/layouts/layout-category';
+import {contentAllPages} from '../../lib/services/allPages';
 
 
 interface Props {
@@ -12,10 +13,12 @@ interface Props {
     tags: any,
     preview: any,
     selectedLabel: string,
-    CTAHeader: any
+    CTAHeader: any,
+    footer: any,
+    allCategories: any
 }
 
-function Category({labels, posts,title, tags, selectedLabel, CTAHeader, preview}: Props) {
+function Category({labels, posts,title, tags, selectedLabel, CTAHeader, footer, allCategories, preview}: Props) {
     return(
        <LayoutCategory labels={labels}
                        posts={posts}
@@ -23,7 +26,10 @@ function Category({labels, posts,title, tags, selectedLabel, CTAHeader, preview}
                        tags={tags}
                        CTAHeader={CTAHeader}
                        selectedLabel={selectedLabel}
-                       preview={preview}/>
+                       preview={preview}
+                       footer={footer}
+                       allCategories={allCategories}
+       />
     )
 }
 
@@ -37,15 +43,15 @@ export const getStaticProps: GetStaticProps = async ({params,
 
     const findKey = params.label;
     const posts = await getPostsByCategories(findKey);
-    const labels = await getLabels();
-    const CTAHeader = await getHeaderCTA();
     const title = await getTitlesFromPage(params.label);
     const tags = await getChildrenCategories(params.label);
     const selectedLabel = TagsLabels.ALL;
+    const globalContent = await contentAllPages();
+    const {labels, CTAHeader, footer, allCategories} = globalContent;
 
 
     return {
-        props: {labels, preview, posts, title, tags, selectedLabel, CTAHeader},
+        props: {labels, preview, posts, title, tags, selectedLabel, CTAHeader, footer, allCategories},
         revalidate: 10,
     }
 }
