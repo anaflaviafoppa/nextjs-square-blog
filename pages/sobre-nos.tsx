@@ -4,7 +4,6 @@ import {GetStaticProps} from 'next';
 import {getAboutUsContent} from '../lib/api';
 import Container from '../components/containers/container/container';
 import styles from '../styles/pages/sobre-nos.module.scss'
-import {getHeaderCTA, getLabels} from '../lib/services/header';
 import {contentAllPages} from '../lib/services/allPages';
 import ErrorPage from 'next/error';
 import {useRouter} from 'next/router';
@@ -40,15 +39,11 @@ export default function SobreNos({preview, content, title, image,footer, allCate
 }
 
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
-    const router = useRouter();
+
     const data = await getAboutUsContent();
     const globalContent = await contentAllPages();
     const {labels, CTAHeader, footer, allCategories} = globalContent;
     const node = data?.edges[0].node;
-
-    if (!router.isFallback && !node) {
-        return <ErrorPage statusCode={404}/>
-    }
 
 
 
