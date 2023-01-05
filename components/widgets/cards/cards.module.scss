@@ -1,13 +1,17 @@
 @import "./../styles/media-queries";
+@import "./../styles/spaces.module";
 
 .cards {
   &__container {
+    @apply container-x;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 4rem;
 
     @include for_breakpoint(tablet) {
       display: block;
+      padding-left: 0rem;
+      padding-right: 0rem;
     }
   }
 
