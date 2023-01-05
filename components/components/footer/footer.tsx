@@ -11,7 +11,7 @@ import React, {useEffect, useState} from 'react';
 import {isMobileSize} from '../../utils/functions';
 
 
-export default function Footer() {
+export default function Footer({content, categories}) {
     const tags = ['mostrar todos', 'aves', 'bom de assistir', 'BOM DE FAZER', 'BOM SABER', 'DOCES E SOBREMESAS', 'CARNES', 'CURIOSIDADES'];
     const [alignment, setAlignment] = useState<string>(Alignment.START);
 

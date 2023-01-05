@@ -9,9 +9,11 @@ interface Props {
     children: any,
     searchKey?: string,
     CTAHeader: any,
+    footer: any,
+    allCategories: any,
 }
 
-export default function Layout({ preview,searchKey, children, CTAHeader, labels}: Props) {
+export default function Layout({ preview,searchKey, footer, allCategories,  children, CTAHeader, labels}: Props) {
   return (
     <>
       <Meta />
@@ -20,7 +22,7 @@ export default function Layout({ preview,searchKey, children, CTAHeader, labels}
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>
       </div>
-      <Footer />
+      <Footer content={footer} categories={allCategories} />
     </>
   )
 }

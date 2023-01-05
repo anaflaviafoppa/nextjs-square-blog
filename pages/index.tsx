@@ -14,8 +14,9 @@ import ImageSection from '../components/components/image-section/image-section';
 import {getHeaderCTA, getLabels} from '../lib/services/header';
 import {getAllCategories} from '../lib/services/category';
 import Link from 'next/link';
+import {contentAllPages} from '../lib/services/allPages';
 
-export default function Index({allPosts: {edges},labels, CTAHeader, carouselPosts, allCategories, preview}) {
+export default function Index({allPosts: {edges},labels, CTAHeader,footer,  carouselPosts, allCategories, preview}) {
     const heroPost = edges[0]?.node
     const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
@@ -25,7 +26,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader, carouselPost
 
 
     return (
-        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}>
+        <Layout preview={preview} labels={labels} CTAHeader={CTAHeader} footer={footer} allCategories={allCategories}>
             <Head>
                 <title>Bom de Beer Blog</title>
             </Head>
@@ -80,12 +81,12 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
     const allPosts = await getAllPostsForHome(preview);
     const carouselPosts = await getCategories('carousel', preview);
-    const allCategories = await getAllCategories();
 
-    const labels = await getLabels();
-    const CTAHeader = await getHeaderCTA();
+    const globalContent = await contentAllPages();
+    const {labels, CTAHeader, footer, allCategories} = globalContent;
+
     return {
-        props: {allPosts, labels, preview,allCategories, CTAHeader, carouselPosts},
+        props: {allPosts, labels, preview, allCategories, CTAHeader,footer, carouselPosts},
         revalidate: 10,
     }
 }

@@ -43,7 +43,6 @@ export async function getChildrenCategories(name: string | string[]) {
 
 export async function getAllCategories() {
     const categories =  CacheData.get(CacheLabels.ALL_TAGS_CATEGORY);
-    console.log('CATEGORIES', categories)
     if(categories) {
         return categories;
     }
