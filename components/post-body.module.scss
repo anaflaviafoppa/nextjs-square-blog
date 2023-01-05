@@ -22,8 +22,10 @@
 .content p:has(span), .content p:has(b),
 .content h5:has(b), .content h5:has(span),
 .content ol li:has(span), .content ol li,
+.content h2:has(strong),
 .content h3:has(strong), .content h4:has(span),
-.content h3:has(span), .content p:has(strong)
+.content h3:has(span), .content p:has(strong),
+.content p
 {
   @apply container-x;
   width: 79%;

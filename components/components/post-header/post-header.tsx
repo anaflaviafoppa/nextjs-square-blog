@@ -22,7 +22,7 @@ export default function PostHeader({
                     </div>
 
                 </Container>
-                {displayImage && <div className={styles.header__image_container}>
+                {displayImage && coverImage && <div className={styles.header__image_container}>
                     <CoverImage title={title} coverImage={coverImage}/>
                 </div>}
             </div>
