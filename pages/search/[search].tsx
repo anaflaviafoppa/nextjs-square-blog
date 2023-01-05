@@ -6,24 +6,30 @@ import {GetStaticPaths, GetStaticProps, NextPage} from 'next';
 import {getHeaderCTA, getLabels} from '../../lib/services/header';
 import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
-import {getHeaderContent} from '../../lib/controllers/header';
+import {contentAllPages} from '../../lib/services/allPages';
 
 interface Props {
     labels: any,
     posts: any,
     searchKey: string,
     preview: any,
-    CTAHeader: any
+    CTAHeader: any,
+    footer: any,
+    allCategories: any
 }
 
-export default function Search ({labels, posts, searchKey, preview,CTAHeader }: Props) {
+export default function Search ({labels, posts, searchKey,footer, allCategories, preview,CTAHeader }: Props) {
     const router = useRouter()
 
     useEffect(() => {
     }, [router.query.key]);
 
     return (
-        <Layout labels={labels} searchKey={searchKey} preview={preview} CTAHeader={CTAHeader}>
+        <Layout labels={labels} searchKey={searchKey}
+                preview={preview} CTAHeader={CTAHeader}
+                footer={footer}
+                allCategories={allCategories}
+        >
             <Container>
                 {
                     !!posts?.length && <Cards items={posts}
@@ -52,16 +58,18 @@ export const getStaticProps: GetStaticProps = async ({
                                                          previewData,
                                                      }) => {
 
-    const labels = await getLabels();
-    const CTAHeader = await getHeaderCTA();
     const posts = await getFilteredItems(params.search);
+    const globalContent = await contentAllPages();
+    const {labels, CTAHeader, footer, allCategories} = globalContent;
+
     return {
         props: {
             preview,
             labels,
             posts,
             searchKey: params.search,
-            CTAHeader
+            CTAHeader,
+            footer, allCategories
         },
         revalidate: 10,
     }
