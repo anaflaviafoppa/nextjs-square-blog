@@ -1,9 +1,15 @@
 @import "../styles/variables.module.scss";
+@import "../styles/media-queries";
+@import "../styles/spaces.module";
 
 .content {
   @apply text-lg leading-relaxed;
   max-width: 78%;
   margin: 0 auto;
+
+  @include for_breakpoint(tablet) {
+    max-width:100%;
+  }
 }
 
 .content p,
@@ -19,25 +25,25 @@
 .content h3:has(strong), .content h4:has(span),
 .content h3:has(span), .content p:has(strong)
 {
+  @apply container-x;
   width: 79%;
   margin-inline: auto;
+
+
+  @include for_breakpoint(tablet) {
+    width: 100%;
+  }
 }
 
 .content p:has(img) {
   width: 100%;
-  height: 54.8rem;
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
+  height: content-box;
 
   img {
     display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-height: 100%;
+    height: auto;
     min-width: 100%;
-    transform: translate(-50%, -50%);
+
   }
 }
 
@@ -143,6 +149,10 @@
 
 .post__body {
   padding: 4rem;
+
+  @include for_breakpoint(tablet) {
+    padding: 0;
+  }
 }
 
 .content p {

@@ -5,9 +5,11 @@
 //Big titles
 //Yellow
 .big-title {
-  @apply text-9xl text-[#FEBD1D] font-bold leading-[large] mb-8 uppercase;
+  @apply text-9xl text-[#FEBD1D] leading-[large] mb-8 uppercase;
+  font-weight: 600;
   @include for_breakpoint(tablet) {
     font-size: 3rem;
+    text-align: center;
   }
 }
 

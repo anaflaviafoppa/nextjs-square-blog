@@ -1,10 +1,18 @@
 @import "./../styles/variables.module";
+@import "./../styles/media-queries";
 
 .header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: $color-brown;
   align-items: center;
+
+  @include for_breakpoint(tablet) {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
 
   &__title {
     color: $color-yellow;
@@ -13,5 +21,12 @@
     line-height: 7.3rem;
     letter-spacing: 0em;
     margin: 0 auto;
+  }
+
+  &__image_container {
+    @include for_breakpoint(tablet) {
+      width: 100vw;
+      height: 73vw;
+    }
   }
 }
