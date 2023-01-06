@@ -332,6 +332,7 @@ export async function getBannerSelected(preview) {
                     id
                   }
                 }
+                excerpt
               }
             }
           }

@@ -1,4 +1,5 @@
 @import "styles/media-queries";
+@import "styles/variables.module";
 
 .banner {
   &__container {
@@ -9,5 +10,14 @@
       height: auto;
       min-width: 100%;
     }
+  }
+
+  &__text {
+    margin: 3.2rem 0;
+
+    p {
+      color: $color-gray
+    }
+
   }
 }
