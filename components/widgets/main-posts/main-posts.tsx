@@ -32,7 +32,6 @@ function MainPosts({items}) {
                                 date={node.date}
                                 excerpt={node.excerpt}
                                 tags={tags}
-                                slug={node.slug}
                                 order={order}
                                 featuredImage={node.featuredImage}
                             />
