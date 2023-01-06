@@ -1,5 +1,12 @@
 const API_URL = process.env.WORDPRESS_API_URL
 
+//IDS:
+const BANNER_SELECTED_CATEGORY_ID = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_ID;
+const BANNER_SELECTED_CATEGORY_MOBILE = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_MOBILE_ID;
+const BANNER_SELECTED_CATEGORY_DESKTOP = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_DESKTOP_ID;
+const BANNER_CATEGORY_ID = process.env.NEXT_PUBLIC_BANNER_CATEGORY_ID;
+const CAROUSEL_CATEGORY_ID = process.env.NEXT_PUBLIC_CAROUSEL_CATEGORY_ID;
+
 export async function fetchAPI(query = '', {variables}: Record<string, any> = {}) {
     const headers = {'Content-Type': 'application/json', 'Cache-Control': 's-maxage=86400'}
 
@@ -47,7 +54,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
 export async function getAllPostsWithSlug() {
     const data = await fetchAPI(`
     {
-      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=, dGVybTo2NDU=]" }) {
+      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[${BANNER_SELECTED_CATEGORY_ID},${BANNER_SELECTED_CATEGORY_MOBILE},${BANNER_SELECTED_CATEGORY_DESKTOP},${BANNER_CATEGORY_ID},${CAROUSEL_CATEGORY_ID}]" }) {
         edges {
           node {
             slug
@@ -114,7 +121,7 @@ export async function getAllPostsForHome(preview) {
         `
     query AllPosts {
       posts(first: 20,
-       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=, dGVybTo2NDU=]" }) {
+       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[${BANNER_SELECTED_CATEGORY_ID},${BANNER_SELECTED_CATEGORY_MOBILE},${BANNER_SELECTED_CATEGORY_DESKTOP}]" }) {
         edges {
           node {
             title
@@ -193,7 +200,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
           ...AuthorFields
         }
       }
-      categories(where: {exclude: "[dGVybTo2NDU=]"}) {
+      categories(where: {exclude: "[${CAROUSEL_CATEGORY_ID}]"}) {
         nodes {
             name
             parentId
@@ -239,7 +246,8 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
                 : ''
         }
       }
-      posts(first: 3, where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[dGVybTo2NDM=]" }) {
+      posts(first: 3, where: { orderby: { field: DATE, order: DESC },
+       categoryNotIn: "[${BANNER_CATEGORY_ID}]" }) {
         edges {
           node {
             ...PostFields
@@ -304,7 +312,8 @@ export async function getBannerSelected(preview) {
         query AllPosts {
           posts(
             first: 20
-            where: {orderby: {field: DATE, order: DESC}, categoryIn: "[dGVybTo2NDQ=]"}
+            where: {orderby: {field: DATE, order: DESC},
+             categoryIn: "[${BANNER_SELECTED_CATEGORY_ID}]"}
           ) {
             edges {
               node {
@@ -315,6 +324,12 @@ export async function getBannerSelected(preview) {
                 featuredImage {
                   node {
                     sourceUrl
+                  }
+                }
+                categories {
+                  nodes {
+                    name
+                    id
                   }
                 }
               }

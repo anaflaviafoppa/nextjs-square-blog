@@ -69,6 +69,7 @@ export async function getAllValidCategories() {
           id
           name
           uri
+          parentId
           children {
             nodes {
               name

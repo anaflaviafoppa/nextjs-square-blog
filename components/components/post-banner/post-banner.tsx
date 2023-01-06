@@ -1,24 +1,56 @@
-import React from 'react';
-import CoverImage from '../../cover-image';
+import React, {useEffect, useState} from 'react';
 import styles from './post-banner.module.scss';
 import Container from '../../containers/container/container';
+import {isMobileSize} from '../../utils/functions';
+import {NodeModel} from '../../models/general';
+import {Categories, FeatureImage} from '../../models/posts';
+import UnderlinedTitle from '../underlined-title/underlined-title';
+
+const BANNER_SELECTED_CATEGORY_MOBILE = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_MOBILE_ID;
+const BANNER_SELECTED_CATEGORY_DESKTOP = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_DESKTOP_ID;
 
 function PostBanner({banner: {edges}}) {
-    const title = edges[0].node.title;
-    const featuredImage = edges[0].node.featuredImage;
+    const [featuredImage, setFeatureImage] = useState<NodeModel<FeatureImage>>();
+    const [title, setTitle] = useState<string>('');
+
+
+    useEffect(() => {
+        verifyDimensions();
+    }, []);
+
+    const verifyDimensions = () => {
+        const selectedPostId = isMobileSize() ? BANNER_SELECTED_CATEGORY_MOBILE : BANNER_SELECTED_CATEGORY_DESKTOP;
+        const nodeSelected = edges.find(({node}) => {
+            return findSelectedCategory(node.categories.nodes, selectedPostId)
+        });
+        if (!nodeSelected) {
+            return;
+        }
+        const node = nodeSelected.node;
+        setTitle(node.title);
+        setFeatureImage(node.featuredImage);
+    }
+
+    const findSelectedCategory = (categories: Categories[], selectedPostId: string): boolean => {
+        return categories.findIndex(category => category.id === selectedPostId) >= 0
+    }
+
 
     return (
         <section className="section">
-            <Container>
-                <div className="title__border_container mb-16">
-                    <div className="title__border">
-                        <h3>{title}</h3>
+            {title && featuredImage &&
+                <>
+                    <Container>
+                        <UnderlinedTitle title={title} date={''} />
+                    </Container>
+                    <div className={styles.banner__container}>
+                        <img
+                            alt={`Cover Image for ${title}`}
+                            src={featuredImage?.node.sourceUrl}
+                            loading="lazy"
+                        />
                     </div>
-                </div>
-            </Container>
-            <div className={styles.banner__container}>
-                <CoverImage coverImage={featuredImage} title={'Banner'} />
-            </div>
+                </>}
         </section>
     );
 }

@@ -19,17 +19,14 @@ import Nordka from '../../../public/images/brands/nordka.png';
 import Petra from '../../../public/images/brands/petra.png';
 import Tnt from '../../../public/images/brands/tnt.png';
 import Weltenburger from '../../../public/images/brands/weltenburger.png';
+import UnderlinedTitle from '../underlined-title/underlined-title';
 
 
 function ImageSection() {
     return (
         <section className={'section ' + styles.images}>
             <Container>
-                <div className="title__border_container mb-16">
-                    <div className="title__border">
-                        <h3>Conheça as nossas marcas</h3>
-                    </div>
-                </div>
+                <UnderlinedTitle title={'Conheça as nossas marcas'} date={''} />
                 <div className={styles.images__container}>
                     <Image
                         alt={`Ampolis Logo`}

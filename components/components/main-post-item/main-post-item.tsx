@@ -4,10 +4,10 @@ import style from './main-post-item.module.scss';
 import TagContainer from '../../containers/tag-container/tag-container';
 import Tag from '../tag/tag';
 import Container from '../../containers/container/container';
-import Date from '../../date';
 import CoverImage from '../../cover-image';
+import UnderlinedTitle from '../underlined-title/underlined-title';
 
-function MainPostItem({title, category, excerpt, slug, date, tags, order, featuredImage}) {
+function MainPostItem({title, category, excerpt, date, tags, order, featuredImage}) {
     const className = order === Order.NORMAL ? '' : `${style.item__revert}`;
 
     return (
@@ -19,14 +19,7 @@ function MainPostItem({title, category, excerpt, slug, date, tags, order, featur
             <div className={style.item__content}>
                 <Container>
                 <div>
-                    <div className="title__border_container">
-                        <div className="title__border">
-                            <h3>{category?.name}</h3>
-                        </div>
-                        <span>
-                            <Date dateString={date} />
-                        </span>
-                    </div>
+                    <UnderlinedTitle title={category?.name} date={date} />
                 </div>
                 <div className={style.item__description}>
                     <h2>{title}</h2>
