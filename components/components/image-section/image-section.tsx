@@ -22,81 +22,23 @@ import Weltenburger from '../../../public/images/brands/weltenburger.png';
 import UnderlinedTitle from '../underlined-title/underlined-title';
 
 
-function ImageSection() {
+function ImageSection({listImages}) {
     return (
         <section className={'section ' + styles.images}>
             <Container>
                 <UnderlinedTitle title={'Conheça as nossas marcas'} date={''} />
                 <div className={styles.images__container}>
-                    <Image
-                        alt={`Ampolis Logo`}
-                        src={Ampolis}
-                    />
-                    <Image
-                        alt={`Black Princess Logo`}
-                        src={BlackPrincess}
-                    />
-                    <Image
-                        alt={`Petra Logo`}
-                        src={Petra}
-                    />
-                    <Image
-                        alt={`Weltenburger Kloster Logo`}
-                        src={Weltenburger}
-                    />
-                    <Image
-                        alt={`Itaipava Logo`}
-                        src={Itaipava}
-                    />
-                    <Image
-                        alt={`Itaipava Zero Logo`}
-                        src={ItaipavaZero}
-                    />
-                    <Image
-                        alt={`Itaipava Malte Logo`}
-                        src={ItaipavaMalte}
-                    />
-                    <Image
-                        alt={`BlueSpirit Logo`}
-                        src={BlueSpirit}
-                    />
-                    <Image
-                        alt={`Nordka Logo`}
-                        src={Nordka}
-                    />
-                    <Image
-                        alt={`Tnt Logo`}
-                        src={Tnt}
-                    />
-                    <Image
-                        alt={`Cabare Ice Logo`}
-                        src={CabareIce}
-                    />
-                    <Image
-                        alt={`Cachaca Cabare Logo`}
-                        src={CachacaCabare}
-                    />
-                    <Image
-                        alt={`Cabare Logo`}
-                        src={Cabare}
-                    />
-                    <Image
-                        alt={`Crystal Logo`}
-                        src={Crystal}
-                    />
-                    <Image
-                        alt={`Lokal Logo`}
-                        src={Lokal}
-                    />
-                    <Image
-                        alt={`It Logo`}
-                        src={It}
-                    />
-                    <Image
-                        alt={`Cacildis Logo`}
-                        src={Cacildis}
-                    />
-
+                    {
+                        listImages?.map((image, index) => {
+                            return (
+                                    <img
+                                        key={index}
+                                        alt={image.slug}
+                                        src={image.sourceUrl}
+                                    />
+                            )
+                        })
+                    }
 
                 </div>
 

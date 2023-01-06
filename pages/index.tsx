@@ -15,8 +15,9 @@ import {getHeaderCTA, getLabels} from '../lib/services/header';
 import {getAllCategories} from '../lib/services/category';
 import Link from 'next/link';
 import {contentAllPages} from '../lib/services/allPages';
+import {listOfImages} from '../lib/services/gallery';
 
-export default function Index({allPosts: {edges},labels, CTAHeader,footer,  carouselPosts, allCategories, preview}) {
+export default function Index({allPosts: {edges},labels, CTAHeader,footer,listImages,  carouselPosts, allCategories, preview}) {
     const heroPost = edges[0]?.node
     const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
@@ -69,7 +70,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,  caro
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
             </Container>
             <MainPosts items={mainPosts}/>
-            <ImageSection/>
+            <ImageSection listImages={listImages}/>
             <Cards items={morePosts}
                    title={'Veja Também'}
                    isEnabledSeeMore={true}
@@ -84,11 +85,12 @@ export const getStaticProps: GetStaticProps = async ({preview = false}) => {
     const allPosts = await getAllPostsForHome(preview);
     const carouselPosts = await getCategories('carousel', preview);
 
+    const listImages = await listOfImages();
     const globalContent = await contentAllPages();
     const {labels, CTAHeader, footer, allCategories} = globalContent;
 
     return {
-        props: {allPosts, labels, preview, allCategories, CTAHeader,footer, carouselPosts},
+        props: {allPosts,listImages, labels, preview, allCategories, CTAHeader,footer, carouselPosts},
         revalidate: 10,
     }
 }

@@ -7,11 +7,14 @@
    flex-wrap: wrap;
    gap: 4.3rem;
    justify-content: center;
+   position: relative;
 
    img {
      max-height: 10rem;
      width: auto;
    }
+
+
 
  }
 }
