@@ -19,7 +19,7 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
-    const category = allCategories.find((category) => {
+    const category = allCategories?.find((category) => {
         return category.parentId === null;
     })?.name || allCategories?.[0]?.name;
 
