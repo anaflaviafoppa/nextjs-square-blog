@@ -23,7 +23,9 @@ function Cards({items, title, maxPosts, isEnabledSeeMore, enabledTitle = true}: 
     return (
         <section className={'mt-16 mb-16 section ' + styles.cards}>
 
-                {enabledTitle && <UnderlinedTitle title={title} date={''}/>}
+                <Container>
+                    {enabledTitle && <UnderlinedTitle title={title} date={''}/>}
+                </Container>
                 {items && <div className={styles.cards__container}>
                     {items.map(({node}, index) => {
                         if (index + 1 > countItems) {

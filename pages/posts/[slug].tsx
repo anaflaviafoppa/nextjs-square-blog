@@ -6,7 +6,6 @@ import Container from '../../components/containers/container/container'
 import PostBody from '../../components/post-body'
 import MoreStories from '../../components/more-stories'
 import PostHeader from '../../components/components/post-header/post-header'
-import SectionSeparator from '../../components/section-separator'
 import Layout from '../../components/layout'
 import PostTitle from '../../components/components/post-title/post-title'
 import {getAllPostsWithSlug, getBannerSelected, getPostAndMorePosts} from '../../lib/api'
@@ -20,6 +19,9 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
+    const category = allCategories.find((category) => {
+        return category.parentId === null;
+    })?.name || allCategories?.[0]?.name;
 
 
     if (!router.isFallback && !post?.slug) {
@@ -68,10 +70,10 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                                 </Container>
                             </section>
 
-                            <PostBody banner={banner} category={'BOM DE BEER'} date={post.date}   content={post.content}/>
+                            <PostBody banner={banner} category={category} date={post.date}   content={post.content}/>
                     </article>
 
-                    <SectionSeparator/>
+
                     {morePosts.length > 0 && <MoreStories posts={morePosts}/>}
                 </>
             )}

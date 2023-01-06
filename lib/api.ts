@@ -247,7 +247,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         }
       }
       posts(first: 3, where: { orderby: { field: DATE, order: DESC },
-       categoryNotIn: "[${BANNER_SELECTED_CATEGORY_ID},${BANNER_SELECTED_CATEGORY_MOBILE},${BANNER_SELECTED_CATEGORY_DESKTOP}]" }) {
+       categoryNotIn: "[${BANNER_CATEGORY_ID}]" }) {
         edges {
           node {
             ...PostFields
