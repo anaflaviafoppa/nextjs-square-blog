@@ -54,12 +54,7 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
 export async function getAllPostsWithSlug() {
     const data = await fetchAPI(`
     {
-      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[
-      ${BANNER_SELECTED_CATEGORY_ID},
-      ${BANNER_SELECTED_CATEGORY_MOBILE},
-      ${BANNER_SELECTED_CATEGORY_DESKTOP},
-      ${BANNER_CATEGORY_ID},
-      ${CAROUSEL_CATEGORY_ID}]" }) {
+      posts(first: 10000,  where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[${BANNER_SELECTED_CATEGORY_ID},${BANNER_SELECTED_CATEGORY_MOBILE},${BANNER_SELECTED_CATEGORY_DESKTOP},${BANNER_CATEGORY_ID},${CAROUSEL_CATEGORY_ID}]" }) {
         edges {
           node {
             slug
@@ -290,7 +285,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
 export async function getAboutUsContent() {
     const data = await fetchAPI(`
     {
-      page(where: {name: "quem-somos"}) {
+      pages(where: {name: "quem-somos"}) {
         edges {
           node {
             content
