@@ -5,5 +5,6 @@ export enum CacheLabels {
     TAGS_CATEGORY = 'tags_category',
     ALL_TAGS_CATEGORY = 'all_tags_category',
     FOOTER = 'footer',
-    ABOUT_US = 'about_us'
+    ABOUT_US = 'about_us',
+    GALLERY = 'gallery',
 }

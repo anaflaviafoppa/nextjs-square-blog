@@ -1,6 +1,16 @@
 @import "variables.module";
 
-button {
+button a {
+  text-decoration: none;
+}
+
+button:hover {
+  border: none;
+  cursor: pointer;
+  transition: $transition;
+}
+
+.button__primary,.button__secondary, .button__primary-dark, .button__primary-rounded {
   outline: none;
   border: none;
   height: $size-52;
@@ -19,15 +29,6 @@ button {
   font-weight: 300;
 }
 
-button a {
-  text-decoration: none;
-}
-
-button:hover {
-  border: none;
-  cursor: pointer;
-  transition: $transition;
-}
 
 .button__primary,.button__secondary:hover {
   padding-left: $size-16;

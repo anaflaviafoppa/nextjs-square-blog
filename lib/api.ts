@@ -121,7 +121,7 @@ export async function getAllPostsForHome(preview) {
         `
     query AllPosts {
       posts(first: 20,
-       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[${BANNER_SELECTED_CATEGORY_ID},${BANNER_SELECTED_CATEGORY_MOBILE},${BANNER_SELECTED_CATEGORY_DESKTOP}]" }) {
+       where: { orderby: { field: DATE, order: DESC }, categoryNotIn: "[${BANNER_CATEGORY_ID}]" }) {
         edges {
           node {
             title
@@ -332,6 +332,7 @@ export async function getBannerSelected(preview) {
                     id
                   }
                 }
+                excerpt
               }
             }
           }

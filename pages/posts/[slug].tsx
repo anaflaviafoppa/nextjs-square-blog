@@ -14,6 +14,8 @@ import TagContainer from '../../components/containers/tag-container/tag-containe
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
 import {contentAllPages} from '../../lib/services/allPages';
+import React, {useEffect, useState} from "react";
+
 
 export default function Post({post, posts, labels,banner,CTAHeader, footer, allCategories, preview}) {
     const router = useRouter()
@@ -22,11 +24,16 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
     const category = allCategories?.find((category) => {
         return category.parentId === null;
     })?.name || allCategories?.[0]?.name;
+    const [pathName, setPathName] = useState('')
 
 
     if (!router.isFallback && !post?.slug) {
         return <ErrorPage statusCode={404}/>
     }
+
+    useEffect(() => {
+        setPathName(window.location.href);
+    }, [])
 
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
@@ -40,12 +47,13 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                     <article>
                         <Head>
                             <title>
-                                {post.title} | Next.js Blog Example with {CMS_NAME}
+                                {post.title}
                             </title>
                             <meta
                                 property="og:image"
                                 content={post.featuredImage?.node.sourceUrl}
                             />
+                            <meta name="description" content={post.excerpt  || post.title} />
                         </Head>
                         <PostHeader
                             displayImage={true}
@@ -70,7 +78,9 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                                 </Container>
                             </section>
 
-                            <PostBody banner={banner} category={category} date={post.date}   content={post.content}/>
+
+                            <PostBody path={pathName} banner={banner} title={post.title} category={category} date={post.date}   content={post.content}/>
+
                     </article>
 
 

@@ -9,6 +9,8 @@ import {Alignment, IdsName, MenuName, Pages} from './utils/constants';
 import ListCategories from './components/list-categories/list-categories';
 import ListLabels from './components/list-labels/list-labels';
 import {isMobileSize} from './utils/functions';
+import {useSwipeable} from "react-swipeable";
+import {config} from "react-transition-group";
 
 
 interface Props {
@@ -228,7 +230,9 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
                         <div
                             className={openMenu === MenuName.SEARCH_FILTER ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}
-                            data-active={openMenu === MenuName.SEARCH_FILTER}>
+                            data-active={openMenu === MenuName.SEARCH_FILTER}
+                            onTouchMove={() => handleOpenFilter()}
+                        >
 
                             <form onSubmit={handleSubmit}>
                                 <input type="search" className="text-base input__primary"

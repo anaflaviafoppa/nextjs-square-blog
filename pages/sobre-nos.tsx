@@ -5,9 +5,8 @@ import {getAboutUsContent} from '../lib/api';
 import Container from '../components/containers/container/container';
 import styles from '../styles/pages/sobre-nos.module.scss'
 import {contentAllPages} from '../lib/services/allPages';
-import ErrorPage from 'next/error';
-import {useRouter} from 'next/router';
 import Link from 'next/link';
+import Head from "next/head";
 
 export default function SobreNos({preview, content, title, image,footer, allCategories, labels, CTAHeader}) {
     const style = {
@@ -22,6 +21,11 @@ export default function SobreNos({preview, content, title, image,footer, allCate
                 footer={footer}
                 allCategories={allCategories}
         >
+            <Head>
+                <title>Bom de Beer Blog - About Us</title>
+                <meta name="description" content='O Bom de Beer surgiu em 2016, como um espaço para conversar sobre cerveja. Aqui, nós mostramos que malte e lúpulo são muito mais do que meros ingredientes, e como a cultura cervejeira é gigante pelo mundo todo.' />
+            </Head>
+
             <section className={styles.about}>
                 <div className={styles.about__content}>
                     <Container>
@@ -47,10 +51,9 @@ export default function SobreNos({preview, content, title, image,footer, allCate
 
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
-    const data = await getAboutUsContent();
     const globalContent = await contentAllPages();
     const {labels, CTAHeader, footer, allCategories} = globalContent;
-    const node = data?.edges[0].node;
+    const node = footer.aboutUsContent?.edges[0].node;
 
 
 

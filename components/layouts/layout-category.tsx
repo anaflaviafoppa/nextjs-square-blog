@@ -7,6 +7,7 @@ import MainPosts from '../widgets/main-posts/main-posts';
 import Image from 'next/image';
 import {isMobileSize} from '../utils/functions';
 import TagsLists from '../widgets/tags-list/tags-lists';
+import Head from "next/head";
 
 function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,footer, allCategories, preview}) {
     const mainTest = title?.[0]?.node?.title;
@@ -35,6 +36,10 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,fo
                 footer={footer}
                 allCategories={allCategories}
         >
+            <Head>
+                <title>Bom de Beer Blog - Categories Page</title>
+                <meta name="description" content={mainTest} />
+            </Head>
             <div className={styles.layout__title}>
                 <div>
                     <h1 className="big-title">{mainTest}</h1>

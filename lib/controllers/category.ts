@@ -1,5 +1,7 @@
 import {fetchAPI} from '../api';
 
+const BOM_DE_ASSISTIR = process.env.NEXT_PUBLIC_BOM_DE_ASSISTIR_ID;
+
 export async function getPostsByCategory(slug) {
     const data = await fetchAPI(`
     {
@@ -64,7 +66,7 @@ export async function getTitleFromPage(name: string | string[]) {
 export async function getAllValidCategories() {
     const data = await fetchAPI(`
     {
-      categories(first: 10, where: {nameLike: "bom", exclude: "[dGVybToy]"}) {
+      categories(first: 10, where: {nameLike: "bom", exclude: "[${BOM_DE_ASSISTIR}]"}) {
         nodes {
           id
           name
