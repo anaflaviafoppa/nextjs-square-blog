@@ -51,9 +51,11 @@ export default function SobreNos({preview, content, title, image,footer, allCate
 
 export const getStaticProps: GetStaticProps = async ({preview = false}) => {
 
+
+    const data = await getAboutUsContent();
     const globalContent = await contentAllPages();
     const {labels, CTAHeader, footer, allCategories} = globalContent;
-    const node = footer.aboutUsContent?.edges[0].node;
+    const node = data?.edges[0].node;
 
 
 
