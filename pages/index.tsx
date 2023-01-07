@@ -68,6 +68,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,listIm
         )}
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
             </Container>
+            {/*{formNewsLetterContent && <div dangerouslySetInnerHTML={{__html: formNewsLetterContent}}/>}*/}
             <MainPosts items={mainPosts}/>
             <ImageSection listImages={listImages}/>
             <Cards items={morePosts}
