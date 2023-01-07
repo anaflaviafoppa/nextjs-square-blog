@@ -6,6 +6,9 @@ import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
 import {contentAllPages} from '../../lib/services/allPages';
 import Head from "next/head";
+import Container from "../../components/containers/container/container";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
     labels: any,
@@ -42,19 +45,23 @@ export default function Search({labels, posts, searchKey, footer, allCategories,
                                           maxPosts={6}
                 />
             }
-            {!posts?.length && <h1>No results</h1>}
+            {!posts?.length &&
+                <div className="py-24">
+                    <Container>
+                        <h2>Nenhum resultado:</h2>
+                        <p className='mb-16'>Desculpe, mas nada corresponde aos seus termos de pesquisa de {searchKey}.
+                            Por favor, tente novamente com algumas palavras-chave diferentes.</p>
+                        <Link href='/' className='mb-10'>
+                            <button className='text-base button__primary button__primary-rounded'>
+                                Voltar para Home
+                            </button>
+                        </Link>
+                    </Container>
+                </div>}
 
         </Layout>
     );
 }
-
-/*
-Search.getInitialProps = async ({query, pathname}) => {
-    const labels = await getLabels();
-    const posts = await getFilteredItems(query.key);
-    return {labels, posts}
-}
-*/
 
 export const getStaticProps: GetStaticProps = async ({
                                                          params,
