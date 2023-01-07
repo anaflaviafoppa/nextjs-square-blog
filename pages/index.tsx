@@ -22,9 +22,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,listIm
     const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
     const morePosts = edges.slice(2);
-    const tags = ['mostrar todos', 'aves', 'bom de assistir', 'BOM DE FAZER', 'BOM SABER', 'DOCES E SOBREMESAS', 'CARNES', 'CURIOSIDADES'];
-    const [tagSelected, setTagSelected] = useState('mostrar todos');
-
+    const formNewsLetterContent = formNewsletter?.content;
 
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
@@ -32,6 +30,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,listIm
                 allCategories={allCategories}>
             <Head>
                 <title>Bom de Beer Blog</title>
+                <meta name="description" content="Bom de Beer Blog que traz receitas e dicas no mundo da cerveja" />
             </Head>
 
             <CarouselUnit id={IdsName.CAROUSEL} posts={carouselPost} />

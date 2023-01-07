@@ -5,6 +5,7 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {getFilteredItems} from '../../lib/services/search';
 import {useRouter} from 'next/router';
 import {contentAllPages} from '../../lib/services/allPages';
+import Head from "next/head";
 
 interface Props {
     labels: any,
@@ -28,6 +29,10 @@ export default function Search({labels, posts, searchKey, footer, allCategories,
                 footer={footer}
                 allCategories={allCategories}
         >
+            <Head>
+                <title>Bom de Beer Blog - Search Page</title>
+                <meta name="description" content={'Filtro de para todos os resultados de ' + searchKey} />
+            </Head>
 
             {
                 !!posts?.length && <Cards items={posts}

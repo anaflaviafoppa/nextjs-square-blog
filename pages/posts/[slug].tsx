@@ -14,7 +14,7 @@ import TagContainer from '../../components/containers/tag-container/tag-containe
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
 import {contentAllPages} from '../../lib/services/allPages';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 
 export default function Post({post, posts, labels,banner,CTAHeader, footer, allCategories, preview}) {
@@ -47,12 +47,13 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                     <article>
                         <Head>
                             <title>
-                                {post.title} | Next.js Blog Example with {CMS_NAME}
+                                {post.title}
                             </title>
                             <meta
                                 property="og:image"
                                 content={post.featuredImage?.node.sourceUrl}
                             />
+                            <meta name="description" content={post.excerpt  || post.title} />
                         </Head>
                         <PostHeader
                             displayImage={true}
