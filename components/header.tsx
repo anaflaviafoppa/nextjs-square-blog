@@ -41,6 +41,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
     const [selectedLabelId, setSelectedLabelId] = useState<string>();
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [findKey, setFindKey] = useState<string>(searchKey);
+    const [dimensions, setDimensions] = useState({width: 120, height: 50})
     const categories = {};
     useEffect(() => {
         verifyIsInitialPage();
@@ -60,6 +61,12 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
     const verifyDimensions = () => {
         setIsMobile(isMobileSize());
+
+        if(isMobileSize()) {
+            setDimensions({width: 75, height: 32})
+        } else {
+            setDimensions({width: 120, height: 50})
+        }
     }
 
     const changeBackground = () => {
@@ -166,15 +173,15 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                             <div className={styles.navbar__icon}>
                                 <Image src={'/images/three-lines.png'}
                                        alt={'Click to Open the menu'}
-                                       width={32}
-                                       height={32}
+                                       width={25}
+                                       height={25}
                                        onClick={() => handleOpenMobileMenu()}
                                 />
                             </div>
                             <Link href='/'>
                                 <Image
-                                    width={120}
-                                    height={52}
+                                    width={dimensions.width}
+                                    height={dimensions.height}
                                     alt={`Logo Bom de Beer`}
                                     src='/images/logo.png'
                                 />
@@ -259,7 +266,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
                 <div className={styles.navbar__extra_mobile} data-active={openMobileMenu === MenuName.MOBILE}>
 
-                    <div className={'container-x ' + styles.navbar__extra_first_menu}
+                    { openMenu === MenuName.LABELS_MOBILE && <div className={styles.navbar__extra_first_menu}
                          data-active={openMenu === MenuName.LABELS_MOBILE}>
                         <div className={styles.navbar__extra_labels}>
                             <ListLabels labels={labels}
@@ -283,10 +290,10 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                 </button>
                             </Link>}
                         </div>
-                    </div>
+                    </div>}
 
-                    <div className={'container-x ' + styles.navbar__extra_second_menu}
-                         data-active={openMenu === MenuName.CATEGORIES_MOBILE}>
+                    {openMenu === MenuName.CATEGORIES_MOBILE && <div className={styles.navbar__extra_second_menu}
+                          data-active={openMenu === MenuName.CATEGORIES_MOBILE}>
                         <div className={styles.navbar__back} onClick={() => handleClickCategoriesMobile('')}>
                             <div>
                                 <Image
@@ -303,7 +310,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                             <ListCategories color={'lighter'} tags={tags}/>
                         </div>
 
-                    </div>
+                    </div>}
 
                 </div>
 

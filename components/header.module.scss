@@ -1,5 +1,6 @@
 @import "../styles/variables.module";
 @import "../styles/media-queries";
+@import "../styles/spaces.module";
 $grid-gap: 4.2rem;
 $grid-column-gap: 12rem;
 $height-mobile:  calc(100vh - 94px);
@@ -161,6 +162,7 @@ $height-mobile-children: calc(100vh - 94px - 7rem - 5rem);
     }
 
     &__extra_mobile {
+        @apply container-x;
         background: $color-brown;
         height:0;
         width: 100vw;
@@ -170,7 +172,7 @@ $height-mobile-children: calc(100vh - 94px - 7rem - 5rem);
 
     &__extra_mobile[data-active=true] {
         overflow: hidden;
-        height: $height-mobile;
+        height: calc(100vh - 7.5rem);
         width: 100vw;
         padding-top: 7rem;
         padding-bottom: 5rem;
