@@ -22,7 +22,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,listIm
     const carouselPost = carouselPosts?.edges;
     const mainPosts = edges.slice(3, 5)
     const morePosts = edges.slice(2);
-    const formNewsLetterContent = formNewsletter?.content;
+    // const formNewsLetterContent = formNewsletter?.content;
 
     return (
         <Layout preview={preview} labels={labels} CTAHeader={CTAHeader}
@@ -68,6 +68,7 @@ export default function Index({allPosts: {edges},labels, CTAHeader,footer,listIm
         )}
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
             </Container>
+            {/*{formNewsLetterContent && <div dangerouslySetInnerHTML={{__html: formNewsLetterContent}}/>}*/}
             <MainPosts items={mainPosts}/>
             <ImageSection listImages={listImages}/>
             <Cards items={morePosts}
