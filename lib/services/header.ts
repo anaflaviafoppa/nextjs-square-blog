@@ -38,8 +38,8 @@ export async function getLabels() {
 
     const data = await getHeaderContent();
     const node = data?.nodes[0];
-    const structureNavbar = node.menuItems?.edges;
-    structureNavbar.forEach(({node}) => {
+    const structureNavbar = node?.menuItems?.edges;
+    structureNavbar?.forEach(({node}) => {
         const label = node.label;
         const id = node.id;
         const parentId = node.parentId;
@@ -58,6 +58,6 @@ export async function getLabels() {
 export async function getHeaderCTA() {
     const data = await getContentCTA();
     const node = data?.nodes[0];
-    const structureNavbar = node.menuItems?.edges;
-    return structureNavbar[0]?.node;
+    const structureNavbar = node?.menuItems?.edges;
+    return structureNavbar?.[0]?.node;
 }
