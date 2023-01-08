@@ -5,6 +5,7 @@ import {isMobileSize} from '../../utils/functions';
 import {NodeModel} from '../../models/general';
 import {Categories, FeatureImage} from '../../models/posts';
 import UnderlinedTitle from '../underlined-title/underlined-title';
+import {width} from "dom-helpers";
 
 const BANNER_SELECTED_CATEGORY_MOBILE = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_MOBILE_ID;
 const BANNER_SELECTED_CATEGORY_DESKTOP = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_DESKTOP_ID;
@@ -21,8 +22,10 @@ function PostBanner({banner: {edges}}) {
     }, []);
 
     const verifyDimensions = () => {
+        const mobile = isMobileSize();
         setMobileSize(isMobileSize());
-        const selectedPostId = mobileSize ? BANNER_SELECTED_CATEGORY_MOBILE : BANNER_SELECTED_CATEGORY_DESKTOP;
+
+        const selectedPostId = mobile ? BANNER_SELECTED_CATEGORY_MOBILE : BANNER_SELECTED_CATEGORY_DESKTOP;
 
         const nodeSelected = edges.find(({node}) => {
             return findSelectedCategory(node.categories.nodes, selectedPostId)
