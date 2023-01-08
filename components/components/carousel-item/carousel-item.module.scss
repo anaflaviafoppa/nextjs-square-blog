@@ -8,6 +8,7 @@
 
   @include for_breakpoint(tablet) {
     grid-template-columns: 1fr;
+    min-height: 61rem;
   }
 
   &_title {
