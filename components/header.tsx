@@ -29,6 +29,11 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
         onSwipedUp: () => handleOpenFilter(),
         ...config,
     });
+    const mainMenu = useSwipeable({
+        onSwipedUp: () => handleOpenMobileMenu(),
+        onSwipedRight: () => handleChangeMenuRight(),
+        onSwipedLeft: () => handleChangeMenuLeft()
+    })
 
     const styleTop = {
         position: 'fixed',
@@ -124,6 +129,20 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
         setSelectedLabelId(id);
     };
 
+    const handleChangeMenuRight = () => {
+        const isCategoriesMenu = openMenu === MenuName.CATEGORIES_MOBILE;
+        if(isCategoriesMenu) {
+            handleClickCategoriesMobile('')
+        }
+    }
+
+    const handleChangeMenuLeft = () => {
+        const isLabelsMenu = openMenu === MenuName.LABELS_MOBILE;
+        if(isLabelsMenu) {
+            handleClickCategoriesMobile('')
+        }
+    }
+
     const verifySearchRouter = () => {
         const isSearchPath = router.pathname === Pages.SEARCH;
         if (isSearchPath) {
@@ -171,8 +190,6 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
         }
     }
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <>
             <nav className={styles.navbar} style={styleHeader}>
@@ -271,7 +288,9 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                 </div>
 
 
-                <div className={styles.navbar__extra_mobile} data-active={openMobileMenu === MenuName.MOBILE}>
+                <div className={styles.navbar__extra_mobile}
+                     {...mainMenu}
+                     data-active={openMobileMenu === MenuName.MOBILE}>
 
                     {openMenu === MenuName.LABELS_MOBILE && <div className={styles.navbar__extra_first_menu}
                                                                  data-active={openMenu === MenuName.LABELS_MOBILE}>
