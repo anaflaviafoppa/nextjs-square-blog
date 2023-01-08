@@ -52,7 +52,9 @@ function Cards({items, title, maxPosts, isEnabledSeeMore, enabledTitle = true}: 
                 </div>}
 
                 { isEnabledSeeMore && countItems < items.length &&
-                    (<button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>)
+                    <div className={styles.cards__button_container}>
+                        <button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>
+                    </div>
                 }
 
 

@@ -1,11 +1,10 @@
 $breakpoints: (
-        'phone': 320px,
+        'phone': 900px,
         'tablet': 1200px,
         'desktop': 1240px
 ) !default;
 
-$phone: 420px;
-$tablet: 768px;
+$phone: 900px;
 $desktop: 1240px;
 
 $media_queries : (

@@ -9,6 +9,10 @@
     grid-gap: 4rem;
 
     @include for_breakpoint(tablet) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include for_breakpoint(mobile) {
       display: block;
       padding-left: 0rem;
       padding-right: 0rem;
@@ -17,5 +21,14 @@
 
   button {
     height: 6.7rem;
+  }
+
+  &__button_container {
+    @apply container-x;
+
+    @include for_breakpoint(mobile) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }

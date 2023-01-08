@@ -12,6 +12,8 @@ import {isMobileSize} from './utils/functions';
 import {useSwipeable} from "react-swipeable";
 import {config} from "react-transition-group";
 
+import Swipe from "react-easy-swipe";
+
 
 interface Props {
     labels: any,
@@ -235,10 +237,12 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                         }
 
 
+
+                        <Swipe onSwipeEnd={handleOpenFilter}
+                        >
                         <div
                             className={openMenu === MenuName.SEARCH_FILTER ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}
                             data-active={openMenu === MenuName.SEARCH_FILTER}
-                            onTouchMove={() => handleOpenFilter()}
                         >
 
                             <form onSubmit={handleSubmit}>
@@ -257,6 +261,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                 </div>
                             }
                         </div>
+                        </Swipe>
 
 
 

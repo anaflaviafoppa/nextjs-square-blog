@@ -11,8 +11,8 @@ export async function footerContent() {
 
     const data = await getFooterContent();
     const node = data?.nodes[0];
-    let structureFooter =  node.menuItems?.edges;
-    structureFooter = structureFooter.filter(({node}) => {
+    let structureFooter =  node?.menuItems?.edges;
+    structureFooter = structureFooter?.filter(({node}) => {
         return node.parentId === null;
     });
 
@@ -24,5 +24,5 @@ export async function footerContent() {
     }
 
     CacheData.set({key: CacheLabels.FOOTER, value: {structureFooter, aboutUsContent: nodeAboutMe.excerpt}});
-    return {structureFooter, aboutUsContent: nodeAboutMe.excerpt}
+    return {structureFooter, aboutUsContent: nodeAboutMe?.excerpt}
 }
