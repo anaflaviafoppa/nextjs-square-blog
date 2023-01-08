@@ -9,10 +9,10 @@ import {Alignment, IdsName, MenuName, Pages} from './utils/constants';
 import ListCategories from './components/list-categories/list-categories';
 import ListLabels from './components/list-labels/list-labels';
 import {isMobileSize} from './utils/functions';
-import {useSwipeable} from "react-swipeable";
+import {SwipeEventData, useSwipeable} from "react-swipeable";
 import {config} from "react-transition-group";
 
-import Swipe from "react-easy-swipe";
+import Swipe, {SwipeEvent} from "react-easy-swipe";
 
 
 interface Props {
@@ -25,6 +25,10 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
     const router = useRouter()
     const backgroundGradient = 'linear-gradient(180deg, #2A2A2A 19.79%, rgba(42, 42, 42, 0) 100%)';
     const backgroundConsistent = '#2A2A2A';
+    const handlers = useSwipeable({
+        onSwipedUp: () => handleOpenFilter(),
+        ...config,
+    });
 
     const styleTop = {
         position: 'fixed',
@@ -64,7 +68,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
     const verifyDimensions = () => {
         setIsMobile(isMobileSize());
 
-        if(isMobileSize()) {
+        if (isMobileSize()) {
             setDimensions({width: 75, height: 32})
         } else {
             setDimensions({width: 120, height: 50})
@@ -76,7 +80,8 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
         if (isOpenedMenuMobile) {
             return;
-        };
+        }
+        ;
 
         const element = document.getElementById(IdsName.CAROUSEL);
         const positions = element?.getBoundingClientRect();
@@ -166,6 +171,8 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
         }
     }
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <>
             <nav className={styles.navbar} style={styleHeader}>
@@ -236,11 +243,8 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                             </div>
                         }
 
-
-
-                        <Swipe onSwipeEnd={handleOpenFilter}
-                        >
                         <div
+                            {...handlers}
                             className={openMenu === MenuName.SEARCH_FILTER ? 'padding-4-y padding-24-x ' + styles.navbar__container_search : styles.navbar__container_search}
                             data-active={openMenu === MenuName.SEARCH_FILTER}
                         >
@@ -261,8 +265,6 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                                 </div>
                             }
                         </div>
-                        </Swipe>
-
 
 
                     </Container>
@@ -271,8 +273,8 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
 
                 <div className={styles.navbar__extra_mobile} data-active={openMobileMenu === MenuName.MOBILE}>
 
-                    { openMenu === MenuName.LABELS_MOBILE && <div className={styles.navbar__extra_first_menu}
-                         data-active={openMenu === MenuName.LABELS_MOBILE}>
+                    {openMenu === MenuName.LABELS_MOBILE && <div className={styles.navbar__extra_first_menu}
+                                                                 data-active={openMenu === MenuName.LABELS_MOBILE}>
                         <div className={styles.navbar__extra_labels}>
                             <ListLabels labels={labels}
                                         selectedLabelId={selectedLabelId}
@@ -298,7 +300,7 @@ export default function Header({labels, searchKey = '', CTAHeader}: Props) {
                     </div>}
 
                     {openMenu === MenuName.CATEGORIES_MOBILE && <div className={styles.navbar__extra_second_menu}
-                          data-active={openMenu === MenuName.CATEGORIES_MOBILE}>
+                                                                     data-active={openMenu === MenuName.CATEGORIES_MOBILE}>
                         <div className={styles.navbar__back} onClick={() => handleClickCategoriesMobile('')}>
                             <div>
                                 <Image
