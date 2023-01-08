@@ -5,6 +5,7 @@
 .carousel__slide {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  min-height: 66rem;
 
   @include for_breakpoint(tablet) {
     grid-template-columns: 1fr;
