@@ -1,12 +1,14 @@
 import {fetchAPI} from '../api';
 
 const BOM_DE_ASSISTIR = process.env.NEXT_PUBLIC_BOM_DE_ASSISTIR_ID;
+const BANNER_CATEGORY_ID = process.env.NEXT_PUBLIC_BANNER_CATEGORY_ID;
+
 
 export async function getPostsByCategory(slug) {
     const data = await fetchAPI(`
     {
       posts(
-        where: {categoryName: "${slug}", orderby: {field: DATE, order: DESC}}
+        where: {categoryName: "${slug}", orderby: {field: DATE, order: DESC}, categoryNotIn: "${BANNER_CATEGORY_ID}"}
         first: 10
       ) {
         edges {
