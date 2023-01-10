@@ -51,7 +51,7 @@ function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
                 })
             }
 
-            { isEnabledSeeMore && countItems < items.length &&
+            { isEnabledSeeMore && countItems < items?.length &&
                 <div className='container-y container-x'>
                     <button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>
                 </div>
