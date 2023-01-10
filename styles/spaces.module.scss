@@ -34,6 +34,15 @@
   }
 }
 
+.container-large-y {
+  padding-top: 12.8rem;
+  padding-bottom: 12.8rem;
+
+  @include for_breakpoint(tablet) {
+    @apply py-16;
+  }
+}
+
 //MARGIN
 .margin-80-bottom {
   @apply mb-32

@@ -204,6 +204,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         nodes {
             name
             parentId
+            id
         }
         edges {
           node {
@@ -304,47 +305,4 @@ export async function getAboutUsContent() {
     }
   `)
     return data?.pages
-}
-
-export async function getBannerSelected(preview) {
-    const data = await fetchAPI(
-        `
-        query AllPosts {
-          posts(
-            first: 20
-            where: {orderby: {field: DATE, order: DESC},
-             categoryIn: "[${BANNER_SELECTED_CATEGORY_ID}]"}
-          ) {
-            edges {
-              node {
-                title
-                slug
-                date
-                uri
-                featuredImage {
-                  node {
-                    sourceUrl
-                  }
-                }
-                categories {
-                  nodes {
-                    name
-                    id
-                  }
-                }
-                excerpt
-              }
-            }
-          }
-        }
-        `,
-        {
-            variables: {
-                onlyEnabled: !preview,
-                preview,
-            },
-        }
-    )
-
-    return data?.posts;
 }

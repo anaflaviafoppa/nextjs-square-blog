@@ -26,7 +26,9 @@ function CarouselItem({
         <div style={styling} className={styles.carousel__slide}>
             <div className="mb-48 mt-80">
                 <div className={styles.carousel__slide__container}>
-                    <h2 className={"mb-40 " + styles.carousel__slide_title}>{title}</h2>
+                    <Link href={`/posts/${slug}`}>
+                        <h2 className={"mb-40 " + styles.carousel__slide_title}>{title}</h2>
+                    </Link>
                     <div className={styles.carousel__slide__container_button}>
                         <Link href={`/posts/${slug}`}>
                             <button className="button__secondary">

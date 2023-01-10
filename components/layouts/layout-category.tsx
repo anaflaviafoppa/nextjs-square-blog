@@ -68,7 +68,7 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,fo
                     type={Priority.SECONDARY}
                 />
             </div>
-            <MainPosts items={posts}/>
+            <MainPosts items={posts} isEnabledSeeMore={true} maxPosts={4}/>
 
         </Layout>
     )

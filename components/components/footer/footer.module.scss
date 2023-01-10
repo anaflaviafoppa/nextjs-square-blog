@@ -146,5 +146,9 @@
   &__about_us {
     margin-bottom: 4rem;
   }
+
+  li a:hover{
+    color:$color-yellow;
+  }
 }
 

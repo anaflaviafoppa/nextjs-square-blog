@@ -187,6 +187,9 @@ $height-mobile-children: calc(100vh - 94px - 7rem - 5rem);
     {
         display: block;
     }
+    &__extra_labels {
+        margin-bottom: 8rem;
+    }
 
     &__extra_mobile[data-active=true] &__text {
         margin-bottom: 4rem;
@@ -205,9 +208,6 @@ $height-mobile-children: calc(100vh - 94px - 7rem - 5rem);
 
     &__extra_first_menu[data-active=true]{
         width: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         height: $height-mobile-children;
     }
 
