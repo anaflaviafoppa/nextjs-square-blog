@@ -22,7 +22,7 @@ import Twitter from '../public/images/social-media/twitter.png';
 
 
 
-export default function PostBody({content, path, title, date, category, banner}) {
+export default function PostBody({content, path, title, date, category}) {
     const [copied, setCopied] = useState<boolean>(false)
     const handleCopyURI = () => {
         const href = window.location.href;
@@ -101,7 +101,6 @@ export default function PostBody({content, path, title, date, category, banner})
                  </Container>
 
 
-            <PostBanner banner={banner}></PostBanner>
         </section>
     )
 }

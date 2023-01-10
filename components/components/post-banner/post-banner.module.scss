@@ -1,9 +1,16 @@
 @import "styles/media-queries";
 @import "styles/variables.module";
+@import 'styles/spaces.module';
 
 .banner {
   &__container {
     width: 100%;
+    @apply container-x;
+
+    @include for_breakpoint(tablet) {
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
 
     img {
       display: block;

@@ -17,9 +17,10 @@ import {contentAllPages} from '../../lib/services/allPages';
 import React, {useEffect, useState} from "react";
 import {getBannerSelectedForSomeCategories} from "../../lib/services/banner";
 import {getBannerSelected} from "../../lib/controllers/banner";
+import PostBanner from "../../components/components/post-banner/post-banner";
 
 
-export default function Post({post, posts, labels,banner,CTAHeader, footer, allCategories, preview}) {
+export default function Post({post, posts, labels, banner, CTAHeader, footer, allCategories, preview}) {
     const router = useRouter()
     const morePosts = posts?.edges;
     const tags = post?.categories?.edges;
@@ -55,7 +56,7 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                                 property="og:image"
                                 content={post.featuredImage?.node.sourceUrl}
                             />
-                            <meta name="description" content={post.excerpt  || post.title} />
+                            <meta name="description" content={post.excerpt || post.title}/>
                         </Head>
                         <PostHeader
                             displayImage={true}
@@ -66,23 +67,24 @@ export default function Post({post, posts, labels,banner,CTAHeader, footer, allC
                             categories={post.categories}
                         />
 
-                            <section className="section">
-                                <Container>
-                                    <TagContainer alignment={Alignment.CENTER}>
-                                        {tags.map(({node}, index) => {
-                                            return (
-                                                <Tag key={index} clickable={false} text={node.name}
-                                                     type={Priority.PRIMARY}
-                                                     isSelected={false}/>
-                                            )
-                                        })}
-                                    </TagContainer>
-                                </Container>
-                            </section>
+                        <section className="section">
+                            <Container>
+                                <TagContainer alignment={Alignment.CENTER}>
+                                    {tags.map(({node}, index) => {
+                                        return (
+                                            <Tag key={index} clickable={false} text={node.name}
+                                                 type={Priority.PRIMARY}
+                                                 isSelected={false}/>
+                                        )
+                                    })}
+                                </TagContainer>
+                            </Container>
+                        </section>
 
 
-                            <PostBody path={pathName} banner={banner} title={post.title} category={category} date={post.date}   content={post.content}/>
-
+                        <PostBody path={pathName} title={post.title} category={category} date={post.date}
+                                  content={post.content}/>
+                        <PostBanner banner={banner}></PostBanner>
                     </article>
 
 

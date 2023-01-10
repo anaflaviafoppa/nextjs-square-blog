@@ -20,7 +20,7 @@ function TagsLists({tagsList, selectedLabel, alignment, allowShowAll, type, allo
 
 
     return (
-        <Container>
+        <>
             {tagsList?.length > 1 &&
                 <div className="container-y">
                     <TagContainer alignment={alignment}>
@@ -44,7 +44,7 @@ function TagsLists({tagsList, selectedLabel, alignment, allowShowAll, type, allo
                     </TagContainer>
                 </div>
             }
-        </Container>
+        </>
     );
 }
 

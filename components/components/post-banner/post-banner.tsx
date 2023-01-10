@@ -33,10 +33,6 @@ function PostBanner({banner: {mobile, desktop}}) {
         setExcerpt(bannerSelected?.excerpt);
     }
 
-    const findSelectedCategory = (categories: Categories[], selectedPostId: string): boolean => {
-        return categories.findIndex(category => category.id === selectedPostId) >= 0
-    }
-
 
     return (
         <>
