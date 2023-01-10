@@ -24,6 +24,8 @@
   }
 
   &__image_container {
+    height: 100%;
+    width: 100%;
     @include for_breakpoint(tablet) {
       width: 100vw;
       height: 73vw;

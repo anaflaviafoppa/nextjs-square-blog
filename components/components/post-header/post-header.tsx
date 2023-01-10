@@ -17,7 +17,7 @@ export default function PostHeader({
         <>
             <div className={styles.header}>
                 <Container>
-                    <div className='container-y'>
+                    <div className='container-large-y'>
                         <PostTitle>{title}</PostTitle>
                     </div>
 
