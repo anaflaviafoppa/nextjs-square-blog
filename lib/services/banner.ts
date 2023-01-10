@@ -23,12 +23,12 @@ export async function getBannerSelectedForSomeCategories(preview, listOfCategori
     const mobile = filteredBanners.filter(({node}) => {
         const listIds = node.categories.nodes.map(category => category.id);
         return listIds.includes(BANNER_SELECTED_CATEGORY_MOBILE)
-    })?.[0]?.node;
+    })?.[0]?.node || '';
 
     const desktop = filteredBanners.filter(({node}) => {
         const listIds = node.categories.nodes.map(category => category.id);
         return listIds.includes(BANNER_SELECTED_CATEGORY_DESKTOP)
-    })?.[0]?.node;
+    })?.[0]?.node || '';
 
 
     return filteredBanners ? {mobile, desktop} : '';
