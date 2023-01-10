@@ -8,13 +8,15 @@ import MoreStories from '../../components/more-stories'
 import PostHeader from '../../components/components/post-header/post-header'
 import Layout from '../../components/layout'
 import PostTitle from '../../components/components/post-title/post-title'
-import {getAllPostsWithSlug, getBannerSelected, getPostAndMorePosts} from '../../lib/api'
+import {getAllPostsWithSlug, getPostAndMorePosts} from '../../lib/api'
 import {CMS_NAME} from '../../lib/constants'
 import TagContainer from '../../components/containers/tag-container/tag-container';
 import {Alignment, Priority} from '../../components/utils/constants';
 import Tag from '../../components/components/tag/tag';
 import {contentAllPages} from '../../lib/services/allPages';
 import React, {useEffect, useState} from "react";
+import {getBannerSelectedForSomeCategories} from "../../lib/services/banner";
+import {getBannerSelected} from "../../lib/controllers/banner";
 
 
 export default function Post({post, posts, labels,banner,CTAHeader, footer, allCategories, preview}) {
@@ -97,8 +99,9 @@ export const getStaticProps: GetStaticProps = async ({
                                                          preview = false,
                                                          previewData,
                                                      }) => {
-    const data = await getPostAndMorePosts(params?.slug, preview, previewData)
-    const banner = await getBannerSelected(preview);
+    const data = await getPostAndMorePosts(params?.slug, preview, previewData);
+    const listOfCategories = data.post.categories;
+    const banner = await getBannerSelectedForSomeCategories(preview, listOfCategories);
 
     const globalContent = await contentAllPages();
     const {labels, CTAHeader, footer, allCategories} = globalContent;

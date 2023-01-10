@@ -10,7 +10,7 @@ import {width} from "dom-helpers";
 const BANNER_SELECTED_CATEGORY_MOBILE = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_MOBILE_ID;
 const BANNER_SELECTED_CATEGORY_DESKTOP = process.env.NEXT_PUBLIC_BANNER_SELECTED_CATEGORY_DESKTOP_ID;
 
-function PostBanner({banner: {edges}}) {
+function PostBanner({banner: {mobile, desktop}}) {
     const [featuredImage, setFeatureImage] = useState<NodeModel<FeatureImage>>();
     const [title, setTitle] = useState<string>('');
     const [excerpt, setExcerpt] = useState<string>('');
@@ -22,21 +22,15 @@ function PostBanner({banner: {edges}}) {
     }, []);
 
     const verifyDimensions = () => {
-        const mobile = isMobileSize();
+        const isMobile = isMobileSize();
         setMobileSize(isMobileSize());
-
-        const selectedPostId = mobile ? BANNER_SELECTED_CATEGORY_MOBILE : BANNER_SELECTED_CATEGORY_DESKTOP;
-
-        const nodeSelected = edges.find(({node}) => {
-            return findSelectedCategory(node.categories.nodes, selectedPostId)
-        });
-        if (!nodeSelected) {
-            return;
+        let bannerSelected = !!desktop ? desktop : mobile;
+        if(isMobile && !!mobile) {
+            bannerSelected = mobile;
         }
-        const node = nodeSelected.node;
-        setTitle(node.title);
-        setFeatureImage(node.featuredImage);
-        setExcerpt(node.excerpt);
+        setTitle(bannerSelected?.title);
+        setFeatureImage(bannerSelected?.featuredImage);
+        setExcerpt(bannerSelected?.excerpt);
     }
 
     const findSelectedCategory = (categories: Categories[], selectedPostId: string): boolean => {
@@ -45,23 +39,28 @@ function PostBanner({banner: {edges}}) {
 
 
     return (
-        <section className="section">
-            {title && featuredImage &&
-                <>
-                    <Container>
-                        <UnderlinedTitle title={title} date={''} />
-                        {mobileSize && excerpt && <div className={styles.banner__text} dangerouslySetInnerHTML={{__html: excerpt}}/>}
-                    </Container>
-                    <div className={styles.banner__container}>
-                        <img
-                            alt={`Cover Image for ${title}`}
-                            src={featuredImage?.node.sourceUrl}
-                            loading="lazy"
-                        />
-                    </div>
-                </>}
-        </section>
-    );
+        <>
+          <section className="section">
+                {title && featuredImage &&
+                    <>
+                        <Container>
+                            <UnderlinedTitle title={title} date={''}/>
+                            {mobileSize && excerpt &&
+                                <div className={styles.banner__text} dangerouslySetInnerHTML={{__html: excerpt}}/>}
+                        </Container>
+                        <div className={styles.banner__container}>
+                            <img
+                                alt={`Cover Image for ${title}`}
+                                src={featuredImage?.node.sourceUrl}
+                                loading="lazy"
+                            />
+                        </div>
+                    </>}
+            </section>
+        </>
+    )
+        ;
+
 }
 
 export default PostBanner;
