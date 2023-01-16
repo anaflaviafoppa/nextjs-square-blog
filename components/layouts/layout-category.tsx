@@ -12,7 +12,7 @@ import Head from "next/head";
 function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,footer, allCategories, preview}) {
     const mainTest = title?.[0]?.node?.title;
     const content = title?.[0]?.node?.content;
-    const tagsList = tags?.children?.nodes;
+    const tagsList = tags?.children?.nodes || [];
 
     const [filterVisible, setFilterVisible] = useState<boolean>(false);
     const [activeList, setActiveList] = useState<boolean>(true);
@@ -50,7 +50,7 @@ function LayoutCategory({labels, posts, title, tags, selectedLabel, CTAHeader,fo
 
                 </div>
             </div>
-            {filterVisible && <div className={styles.layout__filter} onClick={() => handleOnClickFilter()}>
+            {filterVisible && !!tagsList.length && <div className={styles.layout__filter} onClick={() => handleOnClickFilter()}>
                 <Image
                     src={Filter}
                     height={18}

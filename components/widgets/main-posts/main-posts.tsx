@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import MainPostItem from '../../components/main-post-item/main-post-item';
 import {Order} from '../../utils/constants';
 import Link from 'next/link';
-import styles from "../cards/cards.module.scss";
+import styles from "./main-post.module.scss";
 
 function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
     const [countItems, setCountItems]  = useState(maxPosts);
@@ -52,7 +52,7 @@ function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
             }
 
             { isEnabledSeeMore && countItems < items?.length &&
-                <div className='container-y container-x'>
+                <div className={styles.main__container}>
                     <button onClick={() => addItems()} className="mt-11 button__primary-dark">Veja Mais</button>
                 </div>
             }
