@@ -4,6 +4,7 @@ import CardItem from '../../components/card-item/card-item';
 import styles from './cards.module.scss';
 import UnderlinedTitle from '../../components/underlined-title/underlined-title';
 import Link from 'next/link';
+import { motion } from "framer-motion";
 
 interface Props {
     items: any,
@@ -36,7 +37,11 @@ function Cards({items, title, maxPosts, isEnabledSeeMore, enabledTitle = true}: 
                         const category = tags?.find(tag => !tag.parentId);
 
                         return (
-                            <Link key={index} href={`/posts/${node.slug}`}>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                key={index}
+                            >
                                 <CardItem
                                     key={index}
                                     title={node.title}
@@ -44,11 +49,11 @@ function Cards({items, title, maxPosts, isEnabledSeeMore, enabledTitle = true}: 
                                     date={node.date}
                                     slug={node.slug}
                                     category={category}
+                                    link={`/posts/${node.slug}`}
                                     featuredImage={node.featuredImage}
                                 />
-                            </Link>
-                        )
-                    })}
+                            </motion.div>
+                    )})}
                 </div>}
 
                 { isEnabledSeeMore && countItems < items.length &&

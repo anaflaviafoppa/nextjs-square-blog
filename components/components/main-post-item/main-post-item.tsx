@@ -14,7 +14,10 @@ function MainPostItem({title, category,link, excerpt, date, tags, order, feature
     return (
         <div className={`${style.item} ${className}`}>
             <div className={style.item__image} >
-                {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
+                {featuredImage &&
+                    <Link  href={link}>
+                        <CoverImage title={title} coverImage={featuredImage}/>
+                    </Link>}
             </div>
 
             <div className={style.item__content}>
