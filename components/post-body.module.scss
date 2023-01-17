@@ -25,7 +25,7 @@
 .content h2:has(strong),
 .content h3:has(strong), .content h4:has(span),
 .content h3:has(span), .content p:has(strong),
-.content p
+.content p, .content ul:has(li)
 {
   @apply container-x;
   width: 79%;
@@ -59,7 +59,7 @@
 }
 
 .content ul {
-  @apply list-disc;
+  @apply list-none;
 }
 
 .content ol {
@@ -73,9 +73,9 @@
 
 .content li, .content li span {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height:150%;
-  color: $color-gray
+  color: $color-gray;
 }
 
 .content ul > li > ul {
@@ -84,12 +84,18 @@
 
 .content h2 {
   @apply text-3xl mt-12 mb-4 leading-snug;
+  font-size: 2.4rem;
+  font-weight: 700 !important;
+  line-height: 2.9rem;
+  letter-spacing: 0em;
+  text-align: center;
+
 }
 
 .content h3, .content h3 span {
   @apply text-2xl mt-16 mb-16 leading-snug;
   font-size: 2.4rem;
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 2.9rem;
   letter-spacing: 0em;
   text-align: center;
