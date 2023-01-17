@@ -3,6 +3,8 @@ import MainPostItem from '../../components/main-post-item/main-post-item';
 import {Order} from '../../utils/constants';
 import Link from 'next/link';
 import styles from "./main-post.module.scss";
+import { motion } from "framer-motion";
+
 
 function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
     const [countItems, setCountItems]  = useState(maxPosts);
@@ -36,7 +38,11 @@ function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
                     const category = tags?.find(tag => !tag.parentId);
 
                     return (
-                        <Link key={index} href={`/posts/${node.slug}`}>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            key={index}
+                        >
                             <MainPostItem
                                 title={node.title}
                                 category={category}
@@ -44,9 +50,11 @@ function MainPosts({items, isEnabledSeeMore = false, maxPosts = 3}) {
                                 excerpt={node.excerpt}
                                 tags={tags}
                                 order={order}
+
+                                link={`/posts/${node.slug}`}
                                 featuredImage={node.featuredImage}
                             />
-                        </Link>
+                        </motion.div>
                     )
                 })
             }
