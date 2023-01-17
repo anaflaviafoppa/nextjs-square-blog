@@ -2,6 +2,8 @@ import Alert from './alert'
 import Footer from './components/footer/footer'
 import Meta from './meta'
 import Header from './header';
+import { motion } from "framer-motion";
+
 
 interface Props {
     labels?: any,
@@ -18,10 +20,19 @@ export default function Layout({ preview,searchKey, footer, allCategories,  chil
     <>
       <Meta />
         <Header searchKey={searchKey} labels={labels} CTAHeader={CTAHeader} />
-      <div>
+      <motion.div
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 300, opacity: 0 }}
+          transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 20,
+          }}
+      >
         {/*<Alert preview={preview} />*/}
         <main>{children}</main>
-      </div>
+      </motion.div>
       <Footer content={footer} categories={allCategories} />
     </>
   )

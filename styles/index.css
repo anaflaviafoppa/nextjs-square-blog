@@ -106,3 +106,7 @@
 video, canvas, iframe, embed, object {
   max-width: 100vw;
 }
+
+video, iframe {
+  margin: 0 auto;
+}
