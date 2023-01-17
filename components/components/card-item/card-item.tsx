@@ -5,9 +5,10 @@ import Tag from '../tag/tag';
 import {Priority} from '../../utils/constants';
 import Date from '../../date';
 import CoverImage from '../../cover-image';
+import Link from 'next/link';
 
 
-function CardItem({title, excerpt, date, slug, category, featuredImage}) {
+function CardItem({title, excerpt, date,link, slug, category, featuredImage}) {
     return (
         <div>
             <div className={style.item__image} data-background={!!featuredImage}>
@@ -17,12 +18,17 @@ function CardItem({title, excerpt, date, slug, category, featuredImage}) {
                     </TagContainer>
                 </div>
 
-                {featuredImage && <CoverImage title={title} coverImage={featuredImage}/>}
+                {featuredImage &&
+                    <Link  href={link}>
+                        <CoverImage title={title} coverImage={featuredImage}/>
+                    </Link>}
 
             </div>
             <div className={style.item__description}>
-                <h3>{title}</h3>
-                <div dangerouslySetInnerHTML={{__html: excerpt}}/>
+                <Link href={link}>
+                    <h3>{title}</h3>
+                    <div dangerouslySetInnerHTML={{__html: excerpt}}/>
+                </Link>
                 <span>
                     <Date dateString={date}/>
                 </span>

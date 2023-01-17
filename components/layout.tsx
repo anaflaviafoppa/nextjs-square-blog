@@ -25,9 +25,7 @@ export default function Layout({ preview,searchKey, footer, allCategories,  chil
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 300, opacity: 0 }}
           transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 20,
+              ease: [0.17, 0.67, 0.83, 0.67]
           }}
       >
         {/*<Alert preview={preview} />*/}
