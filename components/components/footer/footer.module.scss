@@ -52,8 +52,8 @@
       margin-bottom: 5.6rem;
     }
 
-    input {
-      margin-bottom: 5.6rem;
+    button {
+      margin-top: 5.6rem;
     }
 
     p, li {
@@ -62,6 +62,10 @@
       font-weight: lighter;
       line-height: 1.7rem;
     }
+
+    span {
+      font-weight: 300;
+    };
 
     li {
       margin-bottom: $size-8;

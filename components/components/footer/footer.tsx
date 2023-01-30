@@ -9,6 +9,8 @@ import React, {useEffect, useState} from 'react';
 import {isMobileSize} from '../../utils/functions';
 import TagsLists from '../../widgets/tags-list/tags-lists';
 import Link from 'next/link';
+import {sendMail} from '../../../lib/api';
+import {router} from 'next/client';
 
 const NEWSLETTER_MENU = process.env.NEXT_PUBLIC_NEWSLETTER_MENU;
 const ABOUT_US_MENU = process.env.NEXT_PUBLIC_ABOUT_US_MENU;
@@ -26,6 +28,8 @@ export default function Footer({content, categories}) {
 
 
     const [alignment, setAlignment] = useState<string>(Alignment.START);
+    const [email, setEmail] = useState("");
+    const [emailFeedback, setEmailFeedback] = useState('');
 
 
     useEffect(() => {
@@ -51,6 +55,32 @@ export default function Footer({content, categories}) {
        }
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const res = await fetch("/api/sendgrid", {
+            body: JSON.stringify({
+                email: email,
+                fullname: 'NAME',
+                subject: 'Bom De Beer',
+                message: 'MESSAGE',
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+        });
+
+        const { error } = await res.json();
+        if (error) {
+            console.log(error);
+            setEmailFeedback('Ocorreu algum erro, por favor tente mais tarde.');
+            return;
+        }
+
+        setEmailFeedback('Seu email foi incluído na nossa newsletter!');
+    }
+
     return (
         <footer className={styles.footer}>
             <Container>
@@ -65,10 +95,19 @@ export default function Footer({content, categories}) {
                                             switch (node.id) {
                                                 case NEWSLETTER_MENU:
                                                     return (
-                                                        <>
-                                                            <input  className="input__secondary"   type="email" placeholder="Seu E-mail" />
-                                                            <button className="button__primary">Assinar</button>
-                                                        </>
+                                                        <form onSubmit={handleSubmit}>
+                                                            <input  className="input__secondary mb-3"   type="email"
+                                                                    placeholder="Seu E-mail"
+                                                                    value={email}
+                                                                    required
+                                                                    onChange={(e) => {
+                                                                        setEmail(e.target.value);
+                                                                        setEmailFeedback('');
+                                                                    }}
+                                                            />
+                                                            {!!emailFeedback && <span className="mt-5">{emailFeedback}</span>}
+                                                            <button className="button__primary" type="submit">Assinar</button>
+                                                        </form>
                                                     )
                                                 case ABOUT_US_MENU:
                                                     return (
