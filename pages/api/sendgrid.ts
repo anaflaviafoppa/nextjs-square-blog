@@ -1,5 +1,5 @@
-const sendgrid = require('@sendgrid/mail');
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+import mail from '@sendgrid/mail';
+mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL;
 const DESTINATION_EMAIL = process.env.DESTINATION_EMAIL;
@@ -7,7 +7,7 @@ const DESTINATION_EMAIL = process.env.DESTINATION_EMAIL;
 export default async function handler(req, res) {
     try {
         // console.log("REQ.BODY", req.body);
-        await sendgrid.send({
+        await mail.send({
             to: `${DESTINATION_EMAIL}`, // Your email where you'll receive emails
             from: `${SENDER_EMAIL}`, // your website email address here
             subject: `Novo cadastro newsletter home`,
