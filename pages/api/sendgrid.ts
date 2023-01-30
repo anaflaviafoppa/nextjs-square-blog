@@ -1,4 +1,4 @@
-import mail from '@sendgrid/mail';
+const mail = require('@sendgrid/mail');
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL;
