@@ -29,7 +29,7 @@ export default function Footer({content, categories}) {
 
     const [alignment, setAlignment] = useState<string>(Alignment.START);
     const [email, setEmail] = useState("");
-    const [emailFeedback, setEmailFeedback] = useState(false);
+    const [emailFeedback, setEmailFeedback] = useState('');
 
 
     useEffect(() => {
@@ -74,11 +74,11 @@ export default function Footer({content, categories}) {
         const { error } = await res.json();
         if (error) {
             console.log(error);
+            setEmailFeedback('Ocorreu algum erro, por favor tente mais tarde.');
             return;
         }
 
-        setEmailFeedback(true);
-        console.log(email);
+        setEmailFeedback('Seu email foi incluído na nossa newsletter!');
     }
 
     return (
@@ -102,10 +102,10 @@ export default function Footer({content, categories}) {
                                                                     required
                                                                     onChange={(e) => {
                                                                         setEmail(e.target.value);
-                                                                        setEmailFeedback(false);
+                                                                        setEmailFeedback('');
                                                                     }}
                                                             />
-                                                            {emailFeedback && <span className="mt-5">Seu email foi incluído na nossa newsletter!</span>}
+                                                            {!!emailFeedback && <span className="mt-5">{emailFeedback}</span>}
                                                             <button className="button__primary" type="submit">Assinar</button>
                                                         </form>
                                                     )
