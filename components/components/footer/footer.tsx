@@ -29,6 +29,7 @@ export default function Footer({content, categories}) {
 
     const [alignment, setAlignment] = useState<string>(Alignment.START);
     const [email, setEmail] = useState("");
+    const [emailFeedback, setEmailFeedback] = useState(false);
 
 
     useEffect(() => {
@@ -61,7 +62,7 @@ export default function Footer({content, categories}) {
             body: JSON.stringify({
                 email: email,
                 fullname: 'NAME',
-                subject: 'LEAD',
+                subject: 'Bom De Beer',
                 message: 'MESSAGE',
             }),
             headers: {
@@ -75,6 +76,8 @@ export default function Footer({content, categories}) {
             console.log(error);
             return;
         }
+
+        setEmailFeedback(true);
         console.log(email);
     }
 
@@ -93,13 +96,16 @@ export default function Footer({content, categories}) {
                                                 case NEWSLETTER_MENU:
                                                     return (
                                                         <form onSubmit={handleSubmit}>
-                                                            <input  className="input__secondary"   type="email"
+                                                            <input  className="input__secondary mb-3"   type="email"
                                                                     placeholder="Seu E-mail"
                                                                     value={email}
+                                                                    required
                                                                     onChange={(e) => {
                                                                         setEmail(e.target.value);
+                                                                        setEmailFeedback(false);
                                                                     }}
                                                             />
+                                                            {emailFeedback && <span className="mt-5">Seu email foi incluído na nossa newsletter!</span>}
                                                             <button className="button__primary" type="submit">Assinar</button>
                                                         </form>
                                                     )
